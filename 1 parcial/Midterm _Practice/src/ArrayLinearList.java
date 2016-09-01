@@ -50,12 +50,17 @@ public class ArrayLinearList <Item>{
 	}
 	
 	public void rightShift(int shift){
-		//AQUÍ VOY
 		if((this.size+shift)>this.maxSize){
-			this.resize();
+			this.resize();System.out.println("resize");
 		}
-		for(int i=this.size;i>0;i--){
-			this.element[i]=this.element[i-1];
+		for(int i=this.size-1+shift;i>0;i--){
+			if(i>this.size){
+				this.add(i,this.element[size]);
+				System.out.println("i");
+			}
+			else{
+				this.element[i]=this.element[i-1];
+			}
 		}
 	}
 	
@@ -67,5 +72,6 @@ public class ArrayLinearList <Item>{
 		System.out.println(lista);
 		lista.rightShift(1);
 		System.out.println(lista);
+		//lista.add(3,0);System.out.println(lista);
 	}
 }
