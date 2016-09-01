@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class ArrayLinearList <Item>{
 	protected Item[] element;
@@ -50,6 +51,9 @@ public class ArrayLinearList <Item>{
 	}
 	
 	public void rightShift(int shift){
+		/*Item[] array = Arrays.copyOf(this.element, maxSize);
+		System.out.println(array.toString());*/
+		
 		if(this.size==0){
 			throw new IndexOutOfBoundsException("there are no elements");
 		}
@@ -58,7 +62,9 @@ public class ArrayLinearList <Item>{
 		}
 		int s=this.size;
 		for(int i=s;i<s+shift;i++){
-			this.add(i, this.element[i-shift]);
+			if(i-size<=shift){
+				this.add(i, this.element[i-shift]);
+			}
 			//System.out.println("for");
 		}
 		System.out.println("done");
@@ -88,7 +94,7 @@ public class ArrayLinearList <Item>{
 		//lista.add(3, 8);
 		//System.out.println(lista);
 		
-		lista.rightShift(2);
+		lista.rightShift(3);
 		System.out.println(lista);
 			//lista.rightShift(1);
 			//System.out.println(lista);
