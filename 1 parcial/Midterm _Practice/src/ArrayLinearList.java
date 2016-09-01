@@ -50,18 +50,32 @@ public class ArrayLinearList <Item>{
 	}
 	
 	public void rightShift(int shift){
+		if(this.size==0){
+			throw new IndexOutOfBoundsException("there are no elements");
+		}
 		if((this.size+shift)>this.maxSize){
 			this.resize();System.out.println("resize");
 		}
-		for(int i=this.size-1+shift;i>0;i--){
+		int s=this.size;
+		for(int i=s;i<s+shift;i++){
+			this.add(i, this.element[i-shift]);
+			//System.out.println("for");
+		}
+		System.out.println("done");
+		
+		/*for(int i=this.size+shift;i>0;i--){
 			if(i>this.size){
-				this.add(i,this.element[size]);
-				System.out.println("i");
+				System.out.println("add");
+				this.add(i-shift,this.element[i-shift-1]);
 			}
 			else{
 				this.element[i]=this.element[i-1];
 			}
-		}
+		}*/
+		
+		/*for(int i=0;i<shift;i++){
+			this.add(0, (Item)0);System.out.println("add");
+		}*/
 	}
 	
 	public static void main(String[] args) {
@@ -70,8 +84,14 @@ public class ArrayLinearList <Item>{
 		lista.add(0, 3);
 		lista.add(1, 4);
 		System.out.println(lista);
-		lista.rightShift(1);
+		
+		//lista.add(3, 8);
+		//System.out.println(lista);
+		
+		lista.rightShift(2);
 		System.out.println(lista);
+			//lista.rightShift(1);
+			//System.out.println(lista);
 		//lista.add(3,0);System.out.println(lista);
 	}
 }
