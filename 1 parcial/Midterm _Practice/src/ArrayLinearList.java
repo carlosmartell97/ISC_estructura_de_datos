@@ -54,6 +54,9 @@ public class ArrayLinearList <Item>{
 		if((this.size+shift)>this.maxSize){
 			this.resize();
 		}
+		for(int i=this.size;i>0;i--){
+			this.element[i]=this.element[i-1];
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -61,6 +64,8 @@ public class ArrayLinearList <Item>{
 		lista.add(0, 5);
 		lista.add(0, 3);
 		lista.add(1, 4);
+		System.out.println(lista);
+		lista.rightShift(1);
 		System.out.println(lista);
 	}
 }
