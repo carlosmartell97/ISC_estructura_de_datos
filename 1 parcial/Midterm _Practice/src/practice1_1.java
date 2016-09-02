@@ -1,26 +1,27 @@
+import java.util.ArrayList;
 
-public class practice1_1<Item> extends ArrayLinearList<Item>{
-	private ArrayLinearList element;
-	private int size;
+public class practice1_1<Item> extends ArrayList<Item>{
+	private ArrayList element;
+	//private int size;
 	
 	public practice1_1(){
-		this.element=new ArrayLinearList<Item>();
+		this.element=new ArrayList<Item>();
 	}
 	
 	public void rightShift(int shift){
 		/*Item[] array = Arrays.copyOf(this.element, maxSize);
 		System.out.println(array.toString());*/
 		
-		if(this.size==0){
+		if(this.size()==0){
 			throw new IndexOutOfBoundsException("there are no elements");
 		}
-		if((this.size+shift)>this.maxSize){
+		/*if((this.size+shift)>this.maxSize){
 			this.resize();System.out.println("resize");
-		}
-		int s=this.size;
+		}*/
+		int s=this.size();
 		for(int i=s;i<s+shift;i++){
-			if(i-size<=shift){
-				this.add(i, this.element[i-shift]);
+			if(i-size()<=shift){
+				this.add(i, (Item) this.element.get(i-shift));
 			}
 			//System.out.println("for");
 		}
@@ -44,6 +45,9 @@ public class practice1_1<Item> extends ArrayLinearList<Item>{
 	public static void main(String[] args) {
 		practice1_1<Integer> lista= new practice1_1<Integer>();
 		lista.add(0, 5);
+		lista.add(1, 4);
+		System.out.println(lista);
+		lista.rightShift(1);
 		System.out.println(lista);
 	}
 }

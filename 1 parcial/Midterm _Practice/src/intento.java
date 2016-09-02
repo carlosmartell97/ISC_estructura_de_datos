@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 
-public class intento<Item> extends ArrayLinearList<Item>{
+public class intento<Item> extends ArrayList<Item>{
 	private int size;
-	private Item[] element;
+	private ArrayList element;
 	private int maxSize=100;
 	public intento(){
 		this.size=0;
-		this.element=(Item[]) new Object[maxSize];
+		this.element=new ArrayList<Item>();
 	}
 	
 	public static void main(String[] args) {
