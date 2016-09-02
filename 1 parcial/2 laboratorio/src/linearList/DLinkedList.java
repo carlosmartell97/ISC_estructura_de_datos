@@ -186,7 +186,25 @@ public class DLinkedList<Item> implements linearList<Item>{
 		@Override
 		public void set(Item arg0) {
 			// TODO Auto-generated method stub
-			
+		}
+	}
+	public static void main(String[] args) {
+		DLinkedList<Integer> dl = new DLinkedList<Integer>();
+		dl.addFirst(4);
+		dl.addFirst(3);
+		dl.addFirst(2);
+		dl.addFirst(1);
+		System.out.println(dl);
+		
+		ListIterator<Integer> iterator = dl.getIterator(2);
+		
+		while(iterator.hasNext()){
+			System.out.println(iterator.next());
+		}
+		
+		System.out.println();
+		while(iterator.hasPrevious()){
+			System.out.println(iterator.previous());
 		}
 	}
 }
