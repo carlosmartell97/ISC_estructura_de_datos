@@ -14,6 +14,17 @@ public class DLinkedList<Item> implements linearList<Item>{
 		this.size=0;
 	}
 	
+	public ListIterator<Item> getIterator(){
+		return new ListIterate();
+	}
+	
+	public ListIterator<Item> getIterator(int index){
+		if(index<0 || index>size){
+			throw new IndexOutOfBoundsException("that index is out of bounds");
+		}
+		return new ListIterate(index);
+	}
+	
 	public DNode<Item> getNode(int index){
 		DNode<Item> temp = this.firstNode;
 		for(int i=0;i<=index;i++){
@@ -69,29 +80,28 @@ public class DLinkedList<Item> implements linearList<Item>{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
 	public int indexOf(Item item) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
 	public Item remove(int index) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public void add(int index, Item item) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 	
 	private static class DNode<Item>{
@@ -167,8 +177,7 @@ public class DLinkedList<Item> implements linearList<Item>{
 		}
 		@Override
 		public int previousIndex() {
-			// TODO Auto-generated method stub
-			return 0;
+			return this.previousIndex()-1;
 		}
 		@Override
 		public void remove() {
