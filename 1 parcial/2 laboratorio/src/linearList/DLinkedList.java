@@ -105,15 +105,33 @@ public class DLinkedList<Item> implements linearList<Item>{
 		}
 	}
 	
-	private class ListIterate<Item> implements ListIterator<Item>{
+	private class ListIterate implements ListIterator<Item>{
+		DNode<Item> next;
+		DNode<Item> previous;
+		int nextIndex;
+		int previousIndex;
+		
+		public ListIterate(){
+			this.next=firstNode;
+			this.nextIndex=0;
+		}
+		public ListIterate(int index){
+			if(index==size){
+				this.next=null;
+			}
+			else{
+				this.next=getNode(index);
+			}
+			this.nextIndex=index;
+		}
+		
 		@Override
 		public void add(Item arg0) {
 			// TODO Auto-generated method stub
 		}
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
+			return this.next.next!=null;
 		}
 		@Override
 		public boolean hasPrevious() {
@@ -127,8 +145,7 @@ public class DLinkedList<Item> implements linearList<Item>{
 		}
 		@Override
 		public int nextIndex() {
-			// TODO Auto-generated method stub
-			return 0;
+			return this.nextIndex;
 		}
 		@Override
 		public Item previous() {
