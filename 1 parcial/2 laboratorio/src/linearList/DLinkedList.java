@@ -156,9 +156,14 @@ public class DLinkedList<Item> implements linearList<Item>{
 		public Item previous() {
 			if(!this.hasPrevious()){
 				throw new NoSuchElementException();
-				
 			}
-			return null;
+			if(this.next==null){
+				this.next=lastNode;
+			}else{
+				this.next=this.next.previous;
+			}
+			this.ultimoVisitado.content=this.next.content;
+			return ultimoVisitado.content;
 		}
 		@Override
 		public int previousIndex() {
