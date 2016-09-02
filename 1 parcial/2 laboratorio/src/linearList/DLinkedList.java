@@ -1,6 +1,7 @@
 package linearList;
 
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 public class DLinkedList<Item> implements linearList<Item>{
 	private DNode<Item> firstNode;
@@ -107,9 +108,8 @@ public class DLinkedList<Item> implements linearList<Item>{
 	
 	private class ListIterate implements ListIterator<Item>{
 		DNode<Item> next;
-		DNode<Item> previous;
+		DNode<Item> ultimoVisitado;
 		int nextIndex;
-		int previousIndex;
 		
 		public ListIterate(){
 			this.next=firstNode;
@@ -135,13 +135,18 @@ public class DLinkedList<Item> implements linearList<Item>{
 		}
 		@Override
 		public boolean hasPrevious() {
-			// TODO Auto-generated method stub
-			return false;
+			return this.nextIndex>0;
 		}
 		@Override
 		public Item next() {
-			// TODO Auto-generated method stub
-			return null;
+			if(this.hasNext()){
+				ultimoVisitado=this.next;
+				nextIndex++;
+				this.next=this.next.next;
+				return this.next.next.content;
+			}else{
+				throw new NoSuchElementException();
+			}
 		}
 		@Override
 		public int nextIndex() {
@@ -149,7 +154,10 @@ public class DLinkedList<Item> implements linearList<Item>{
 		}
 		@Override
 		public Item previous() {
-			// TODO Auto-generated method stub
+			if(!this.hasPrevious()){
+				throw new NoSuchElementException();
+				
+			}
 			return null;
 		}
 		@Override
