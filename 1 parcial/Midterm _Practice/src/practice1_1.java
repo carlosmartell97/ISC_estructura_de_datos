@@ -1,10 +1,10 @@
 import java.util.Arrays;
 
-public class practice1_1{
-	private int[] element={1,2,3,4};
+public class practice1_1<T>{
+	private T[] element;
 	
 	public void rightShift(int k){
-		int[] newElement = new int[this.element.length+k];
+		T[] newElement = (T[]) new Object[this.element.length+k];
 		/*for(int i=0;i<k;i++){
 			newElement[i]=0;
 		}*/
@@ -13,9 +13,6 @@ public class practice1_1{
 	}
 	
 	public static void main(String[] args) {
-		practice1_1 o = new practice1_1();
-		System.out.println(Arrays.toString(o.element));
-		o.rightShift(2);
-		System.out.println(Arrays.toString(o.element));
+		
 	}
 }
