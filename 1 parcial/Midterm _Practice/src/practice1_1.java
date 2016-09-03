@@ -1,13 +1,7 @@
+import java.util.Arrays;
+
 public class practice1_1{
-	private int[] element;
-	
-	public practice1_1(){
-		this.element=new int[4];
-		this.element[0]=1;
-		this.element[1]=2;
-		this.element[2]=3;
-		this.element[3]=4;
-	}
+	private int[] element={1,2,3,4};
 	
 	public void rightShift(int k){
 		int[] newElement = new int[this.element.length+k];
@@ -19,6 +13,8 @@ public class practice1_1{
 	
 	public static void main(String[] args) {
 		practice1_1 o = new practice1_1();
-		System.out.println(o.element.toString());
+		System.out.println(Arrays.toString(o.element));
+		int[] d = {3,2,1};
+		System.out.println(d.toString());
 	}
 }
