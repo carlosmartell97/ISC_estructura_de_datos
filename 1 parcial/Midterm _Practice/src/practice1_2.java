@@ -3,13 +3,14 @@ public class practice1_2<T extends Comparable>{
 	private int size;
 	
 	public boolean isSorted(){
+		ChainNode<T> temp = new ChainNode<T>();
 		for(int i=0;i<this.size;i++){
-			ChainNode<T> temp = new ChainNode<T>();
 			if((temp.element.compareTo(temp.next.element))>0){
 				return false;
 			}
-			return true;
+			temp=temp.next;
 		}
+		return true;
 	}
 	
 	private static class ChainNode<T>{
