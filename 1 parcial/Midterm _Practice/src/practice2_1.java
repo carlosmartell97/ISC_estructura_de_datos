@@ -1,4 +1,4 @@
-//ya funciona con Integers.
+//funciona con Integers.
 import java.util.Arrays;
 
 public class practice2_1<T>{
