@@ -1,3 +1,4 @@
+//no sé qué más hacer, después le sigo
 public class practice1_4<T> {
 	private Node<T> head;
 	private Node<T> tail;
