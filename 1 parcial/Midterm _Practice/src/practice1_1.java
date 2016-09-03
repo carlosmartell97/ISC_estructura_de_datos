@@ -11,8 +11,4 @@ public class practice1_1<T>{
 		System.arraycopy(this.element, 0, newElement, k, this.element.length);
 		this.element=newElement;
 	}
-	
-	public static void main(String[] args) {
-		
-	}
 }
