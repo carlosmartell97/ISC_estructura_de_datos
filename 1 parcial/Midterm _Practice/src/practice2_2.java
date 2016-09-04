@@ -1,3 +1,4 @@
+//todavía no lo termino, me falta hacer bien lo del Iterator
 public class practice2_2<T>{
 	private ChainNode<T> firstNode;
 	private ChainNode<T> lastNode;
@@ -18,16 +19,21 @@ public class practice2_2<T>{
 	
 	public void threeWaySplit(practice2_2 a,practice2_2 b,practice2_2 c,practice2_2 d){
 		ChainNode<T> temp=a.firstNode;
-		
+		int i=1;
+		while(i==1){
 			b.firstNode=temp;
-			c.firstNode=temp.next;
-			d.firstNode=temp.next.next;
+			//no sé cómo usar el hasNext() de Iterator, pero así lo voy a usar...
+			if(temp.hasNext()){
+				c.firstNode=temp.next;
+			}else{i=0;}
+			if(temp.next.hasNext()){
+				d.firstNode=temp.next.next;
+			}else{i=0;}
+			if(temp.next.next.hasNext()){
+				temp=temp.next.next.next;
+			}
 			
-			b.firstNode.next=temp.next.next.next;
-			c.firstNode.next=temp.next.next.next.next;
-			d.firstNode.next=temp.next.next.next.next.next;
-			
-			//y así se sigue... me falta hacer esto en un ciclo
+		}
 	}
 	
 	private static class ChainNode<T>{
