@@ -29,7 +29,7 @@ public class practice2_3 {
 				return this.compactSmatrix[i-1+(this.element.length*3)+j-2];
 			}
 			else{
-				return this.compactSmatrix[i-1+(this.element.length*3)];
+				return this.compactSmatrix[i-1+(this.element.length*3)+(this.element.length/2)];
 			}
 		}
 	}
