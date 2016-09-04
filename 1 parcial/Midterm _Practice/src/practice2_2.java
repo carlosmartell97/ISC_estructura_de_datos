@@ -23,15 +23,15 @@ public class practice2_2<T>{
 		while(i==1){
 			b.firstNode=temp;
 			//no sé cómo usar el hasNext() de Iterator, pero así lo voy a usar...
-			if(temp.hasNext()){
+			//if(temp.hasNext()){
 				c.firstNode=temp.next;
-			}else{i=0;}
-			if(temp.next.hasNext()){
+			//}else{i=0;}
+			//if(temp.next.hasNext()){
 				d.firstNode=temp.next.next;
-			}else{i=0;}
-			if(temp.next.next.hasNext()){
+			//}else{i=0;}
+			//if(temp.next.next.hasNext()){
 				temp=temp.next.next.next;
-			}
+			//}
 			
 		}
 	}
