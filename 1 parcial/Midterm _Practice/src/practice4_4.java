@@ -1,4 +1,4 @@
-// resuleto. Estoy usando el stack de la recursión de mi método test(int,String)
+// resuelto. Estoy usando el stack de la recursión de mi método test(int,String)
 public class practice4_4 {
 	private String s="";
 	
