@@ -29,7 +29,6 @@ public class practice2_3 {
 				return this.compactSmatrix[i-1+(this.element.length*3)+j-2];
 			}
 			else{
-				System.out.println(i-1+(this.element.length*3)+j-8);
 				return this.compactSmatrix[i-1+(this.element.length*3)+j-9];
 			}
 		}
