@@ -2,7 +2,7 @@
 import java.util.Arrays;
 
 public class practice1_3<T>{
-	private int[][] sampleElement={
+	private int[][] sampleCompactElement={
 			{1,0,0,0,6},
 			{2,11,0,0,7},
 			{3,0,12,0,8},
@@ -15,22 +15,25 @@ public class practice1_3<T>{
 	private T[] compactMatrix;
 	
 	public void set(int i,int j,T newValue){
-		if(i==0){
-			compactMatrix[j]=newValue;
+		if( (i<1 || j>this.element.length) || (j<1 || j>this.element.length) ){
+			throw new IndexOutOfBoundsException("that index is out of bounds");
+		}
+		if(i==1){
+			compactMatrix[j-1]=newValue;
 			System.out.println("change1");
 		}
-		else if(i==this.element.length-1){
-			compactMatrix[j+this.element.length]=newValue;
+		else if(i==this.element.length){
+			compactMatrix[j-1+this.element.length]=newValue;
 			System.out.println("change2");
 		}
 		else{
-			compactMatrix[j+(this.element.length*2)-1]=newValue;
+			compactMatrix[j-1+(this.element.length*2)-1]=newValue;
 			System.out.println("change3");
 		}
 	}
 	public static void main(String[] args) {
 		/*practice1_3 o = new practice1_3();
-		o.set(3, 3, 66);
+		o.set(5, 2, 66);
 		System.out.println(Arrays.toString(o.compactMatrix));*/
 	}
 }
