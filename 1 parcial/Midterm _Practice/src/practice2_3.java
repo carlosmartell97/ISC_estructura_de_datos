@@ -1,3 +1,7 @@
+// me falta:
+//		-ver en quién dependen el 2 y 5 que estoy restando en un punto
+//		-probarlo con matrices de diferentes tamaños
+//		-cambiar el tipo de dato int por un genérico <T>
 public class practice2_3 {	
 	private int[][] element={
 			{1,2,3,4,5,6,7},
