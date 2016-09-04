@@ -19,13 +19,23 @@ public class practice2_3 {
 			return this.compactSmatrix[i-1];
 		}
 		else if(j-1==this.element.length/2){
-			return 999;
+			return this.compactSmatrix[i-1+this.element.length];
 		}
-		return 666;
+		else if(j==this.element.length){
+			return this.compactSmatrix[i-1+(this.element.length)*2];
+		}
+		else{
+			if(i==1){
+				return this.compactSmatrix[i-1+(this.element.length*3)+j-2];
+			}
+			else{
+				return this.compactSmatrix[i-1+(this.element.length*3)];
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
 		practice2_3 o = new practice2_3();
-		System.out.println(o.get(2, 4));;
+		System.out.println(o.get(1, 4));
 	}
 }
