@@ -14,6 +14,7 @@ public class practice1_3<T>{
 	private T[][] element;
 	private T[] compactMatrix;
 	
+	//los índices comienzan en 1, no en 0
 	public void set(int i,int j,T newValue){
 		if( (i<1 || j>this.element.length) || (j<1 || j>this.element.length) ){
 			throw new IndexOutOfBoundsException("that index is out of bounds");
