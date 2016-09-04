@@ -29,13 +29,13 @@ public class practice2_3 {
 				return this.compactSmatrix[i-1+(this.element.length*3)+j-2];
 			}
 			else{
-				return this.compactSmatrix[i-1+(this.element.length*3)+(this.element.length/2)];
+				return this.compactSmatrix[i-1+(this.element.length*3)+(this.element.length/2)-1];
 			}
 		}
 	}
 	
 	public static void main(String[] args) {
 		practice2_3 o = new practice2_3();
-		System.out.println(o.get(1, 4));
+		System.out.println(o.get(1, 5));
 	}
 }
