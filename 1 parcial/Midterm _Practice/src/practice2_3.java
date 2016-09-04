@@ -12,12 +12,17 @@ public class practice2_3 {
 	private int size;
 	
 	public int get(int i,int j){
-		System.out.println(i);System.out.println(j);
-		return 1;
+		if( (i<1 || j>this.element.length) || (j<1 || j>this.element.length) ){
+			throw new IndexOutOfBoundsException("that index is out of bounds");
+		}
+		if(j==1){
+			return this.compactSmatrix[i-1];
+		}
+		return 666;
 	}
 	
 	public static void main(String[] args) {
 		practice2_3 o = new practice2_3();
-		o.get(1, 2);
+		System.out.println(o.get(4, 1));;
 	}
 }
