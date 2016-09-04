@@ -19,11 +19,15 @@ public class practice2_2<T>{
 	public void threeWaySplit(practice2_2 a,practice2_2 b,practice2_2 c,practice2_2 d){
 		ChainNode<T> temp=a.firstNode;
 		
-		b.firstNode=a.firstNode;
-		c.firstNode=a.firstNode.next;
-		d.firstNode=a.firstNode.next.next;
-		
-		b.firstNode.next=a.firstNode.next.next.next;
+			b.firstNode=temp;
+			c.firstNode=temp.next;
+			d.firstNode=temp.next.next;
+			
+			b.firstNode.next=temp.next.next.next;
+			c.firstNode.next=temp.next.next.next.next;
+			d.firstNode.next=temp.next.next.next.next.next;
+			
+			//y así se sigue... me falta hacer esto en un ciclo
 	}
 	
 	private static class ChainNode<T>{
