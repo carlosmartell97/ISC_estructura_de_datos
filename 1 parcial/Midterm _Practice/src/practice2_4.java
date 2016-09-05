@@ -29,6 +29,9 @@ public class practice2_4 {
 			queue.add(stack.pop());
 		}
 		for(int i=0;i<halfSize;i++){
+			queue.add(queue.remove());
+		}
+		for(int i=0;i<halfSize;i++){
 			stack.push(queue.remove());
 		}
 		while(!stack.isEmpty()){
