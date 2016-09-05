@@ -32,10 +32,6 @@ public class practice2_3 {
 				return this.compactSmatrix[(this.element.length*3)+j-1-1];
 			}
 			else{
-				// este 9 que le estoy restando abajo creo que debería de depender
-				// más bien de this.element.length, no creo que siempre
-				// vaya a ser 9
-				System.out.println("ch");
 				return this.compactSmatrix[(this.element.length*3)+j-1-1-1];
 			}
 		}
