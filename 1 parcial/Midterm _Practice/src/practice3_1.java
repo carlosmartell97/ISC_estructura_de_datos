@@ -15,7 +15,9 @@ public class practice3_1 {
 	}
 	
 	public static void split(practice3_1 a,practice3_1 b,practice3_1 c){
-		
+		b.clear();
+		c.clear();
+		//	y aquí va algo muy parecido a lo que hice en practice2_2
 	}
 	
 	private static class inner implements Iterator{
