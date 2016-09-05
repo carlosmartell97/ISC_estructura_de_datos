@@ -1,6 +1,4 @@
-//	me falta:
-//		-todo, básicamente. Tengo que volver a leer el problema y seguirle
-//		donde me quedé
+//	ya funciona todo.
 import java.util.Arrays;
 
 public class practice3_2<T>{
