@@ -21,15 +21,15 @@ public class practice1_3<T>{
 		}
 		if(i==1){
 			compactMatrix[j-1]=newValue;
-			System.out.println("change1");
+			//System.out.println("change1");
 		}
 		else if(i==this.element.length){
 			compactMatrix[j-1+this.element.length]=newValue;
-			System.out.println("change2");
+			//System.out.println("change2");
 		}
 		else{
 			compactMatrix[j-1+(this.element.length*2)-1]=newValue;
-			System.out.println("change3");
+			//System.out.println("change3");
 		}
 	}
 	public static void main(String[] args) {
