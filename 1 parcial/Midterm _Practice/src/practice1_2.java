@@ -5,11 +5,11 @@ public class practice1_2<T extends Comparable>{
 	
 	public boolean isSorted(){
 		ChainNode<T> temp = firstNode;
-		for(int i=0;i<this.size;i++){
-			if((temp.element.compareTo(temp.next.element))>0){
+		for(int i=0;i<this.size;i++){	// O(n)
+			if((temp.element.compareTo(temp.next.element))>0){	// O(n-1)
 				return false;
 			}
-			temp=temp.next;
+			temp=temp.next;	// O(1)
 		}
 		return true;
 	}
