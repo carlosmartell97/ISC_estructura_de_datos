@@ -1,5 +1,4 @@
 // me falta:
-//		-ver en quién dependen el 2 y 5 que estoy restando en un punto
 //		-probarlo con matrices de diferentes tamaños
 //		-cambiar el tipo de dato int por un genérico <T>
 public class practice2_3 {	
@@ -30,16 +29,14 @@ public class practice2_3 {
 		}
 		else{
 			if(i==1){
-				// este 2 que le estoy restando abajo creo que debería de depender
-				// más bien de this.element.length, no creo que siempre
-				// vaya a ser 2
-				return this.compactSmatrix[i-1+(this.element.length*3)+j-2];
+				return this.compactSmatrix[(this.element.length*3)+j-1-1];
 			}
 			else{
 				// este 9 que le estoy restando abajo creo que debería de depender
 				// más bien de this.element.length, no creo que siempre
 				// vaya a ser 9
-				return this.compactSmatrix[i-1+(this.element.length*3)+j-9];
+				System.out.println("ch");
+				return this.compactSmatrix[(this.element.length*3)+j-1-1-1];
 			}
 		}
 	}
