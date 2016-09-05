@@ -1,13 +1,17 @@
-//todavía no lo termino, me falta hacer bien lo del Iterator
+//	me falta:
+//		-confirmar que estén bien makeEmpty(), append() e iterator()
+//		-hacer bien next() y hasNext() de la clase Iterator
 public class practice2_2<T>{
 	private ChainNode<T> firstNode;
 	private ChainNode<T> lastNode;
 	private int size;
 	
+	//	no sé si esté bien
 	public void makeEmpty(){
 		this.firstNode=null;
 	}
 	
+	//	no sé si esté bien
 	public void append(ChainNode node){
 		this.lastNode.next=node;
 	}
@@ -18,21 +22,23 @@ public class practice2_2<T>{
 	}
 	
 	public void threeWaySplit(practice2_2 a,practice2_2 b,practice2_2 c,practice2_2 d){
-		ChainNode<T> temp=a.firstNode;
-		int i=1;
-		while(i==1){
-			b.firstNode=temp;
-			//no sé cómo usar el hasNext() de Iterator, pero así lo voy a usar...
-			//if(temp.hasNext()){
-				c.firstNode=temp.next;
-			//}else{i=0;}
-			//if(temp.next.hasNext()){
-				d.firstNode=temp.next.next;
-			//}else{i=0;}
-			//if(temp.next.next.hasNext()){
-				temp=temp.next.next.next;
-			//}
-			
+		b.makeEmpty();
+		c.makeEmpty();
+		d.makeEmpty();
+		Iterator iter=a.iterator();
+		while(iter.hasNext()){	//	O(size of a)
+			b.append(iter.next());
+			if(!iter.hasNext()){
+				break;
+			}
+			c.append(iter.next());
+			if(!iter.hasNext()){
+				break;
+			}
+			d.append(iter.next());
+			if(!iter.hasNext()){
+				break;
+			}
 		}
 	}
 	
@@ -43,11 +49,11 @@ public class practice2_2<T>{
 	
 	//no estoy seguro si así es como debo de hacer esta clase
 	private static class Iterator{
-		/*public boolean hasNext(){
-			
-		}*/
-		/*public ChainNode next(){
-			
-		}*/
+		public boolean hasNext(){
+			return false;
+		}
+		public ChainNode next(){
+			return null;
+		}
 	}
 }
