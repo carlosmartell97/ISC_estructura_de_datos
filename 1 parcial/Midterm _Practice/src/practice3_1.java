@@ -1,3 +1,7 @@
+//	me falta:
+//		-hacer algo muy parecido a lo que hice en practice2_2. Me va a faltar de ese
+//		también llenar bien los métodos de Iterator
+
 import java.util.Iterator;
 
 public class practice3_1 {
