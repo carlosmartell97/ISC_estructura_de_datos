@@ -1,4 +1,4 @@
-//no sé qué más hacer, después le sigo
+//	solo me falta el reverse(), que es para invertir los contenidos
 public class practice1_4<T> {
 	private Node<T> head;
 	private Node<T> tail;
@@ -9,7 +9,15 @@ public class practice1_4<T> {
 	}
 	
 	public void myQueueReverse(){
-		Node<T> temp;
+		tail=head;
+		Node<T> current = head;
+		head=null;
+		while(current!=null){
+			Node<T> next=current.next;
+			current.next=head;
+			head=current;
+			current=next;
+		}
 	}
 	
 	private static class Node<T>{
