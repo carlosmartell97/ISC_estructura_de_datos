@@ -1,6 +1,6 @@
 // funciona con Integers.
 // me falta:
-//		-entender la implementación en un Queue
+//		-entender la implementación (o intentar una que yo haga desde cero) del Queue
 import java.util.Queue;
 import java.util.Stack;
 
