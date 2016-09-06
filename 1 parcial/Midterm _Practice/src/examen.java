@@ -1,9 +1,8 @@
 // resuelto. Estoy usando el stack de la recursión de mi método test(int,String)
 public class examen {
 	private String s="";
-	
 	public boolean isReverse(String word,String word2){
-		this.s="";
+		s="";
 		/*word=word.replace(" ", "");
 		word=word.replace(",", "");
 		word=word.replace(".", "");
@@ -27,6 +26,6 @@ public class examen {
 	
 	public static void main(String[] args) {
 		examen o = new examen();
-		System.out.println(o.isReverse("hola.,a","a,alo.h"));
+		System.out.println(o.isReverse("hola","aloh"));
 	}
 }
