@@ -80,39 +80,87 @@ public class DLinkedList<Item> implements linearList<Item>{
 		return sb.toString();
 	}
 	
-	@Override
+	public ListIterate iterator(){
+		return new ListIterate();
+	}
+	
 	public boolean isEmpty() {
 		return size==0;
 	}
 	
-	@Override
 	public int size() {
 		return this.size;
 	}
 	
-	@Override
 	public int indexOf(Item item) {
-		// TODO Auto-generated method stub
-		return 0;
+		DNode<Item> temp = this.firstNode;
+		for(int i=0;i<this.size;i++){
+			if(temp.content.equals(item)){
+				return i;
+			}
+			temp=temp.next;
+		}
+		return -1;
 	}
 	
-	@Override
 	public Item remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if(index<0 || index>this.size-1){
+			throw new IndexOutOfBoundsException("That index is out of bounds.");
+		}
+		DNode<Item> prev = this.firstNode;
+		DNode<Item> toRemove;
+		if(index==0){
+			toRemove=this.firstNode;
+			this.firstNode=this.firstNode.next;
+			this.size--;
+			return toRemove.content;
+		}
+		DNode<Item> next;
+		prev=getNode(index-1);
+		toRemove=prev.next;
+		next=toRemove.next;
+		prev.next=next;
+		if(index==size-1){
+			this.lastNode=prev;
+		}
+		else{
+			next.previous=prev;
+		}
+		this.size--;
+		return toRemove.content;
 	}
 	
-	@Override
 	public void add(int index, Item item) {
-		// TODO Auto-generated method stub	
+		if(index<0 || index<this.size){
+			throw new IndexOutOfBoundsException("that index is out of bounds");
+		}
+		if(index==0){
+			this.addFirst(item);
+		}
+		else if(index==size){
+			this.addLast(item);
+		}
+		else{
+			DNode<Item> prev=this.firstNode;
+			prev=this.getNode(index-1);
+			DNode<Item> next = prev.next;
+			DNode<Item> toAdd = new DNode<Item>(prev,item,next);
+			prev.next=toAdd;
+			next.previous=toAdd;
+			this.size++;
+		}
 	}
 	
 	private static class DNode<Item>{
-		Item content;
-		DNode<Item> next;
-		DNode<Item> previous;
+		protected Item content;
+		protected DNode<Item> next,
+								previous;
 		
-		public DNode(DNode previous,Item content,DNode next){
+		public DNode(){
+			this(null,null,null);
+		}
+		
+		public DNode(DNode<Item> previous,Item content,DNode<Item> next){
 			this.previous=previous;
 			this.content=content;
 			this.next=next;
@@ -125,7 +173,7 @@ public class DLinkedList<Item> implements linearList<Item>{
 		int nextIndex;
 		
 		public ListIterate(){
-			this.next=firstNode;
+			this.next=DLinkedList.this.firstNode;
 			this.nextIndex=0;
 		}
 		public ListIterate(int index){
@@ -133,60 +181,65 @@ public class DLinkedList<Item> implements linearList<Item>{
 				this.next=null;
 			}
 			else{
-				this.next=getNode(index);
+				this.next=DLinkedList.this.getNode(index);
 			}
 			this.nextIndex=index;
 		}
 		
-		@Override
 		public void add(Item arg0) {
 			// TODO Auto-generated method stub
 		}
-		@Override
+
 		public boolean hasNext() {
-			return this.next.next!=null;
+			return this.nextIndex<DLinkedList.this.size;
 		}
-		@Override
+
 		public boolean hasPrevious() {
 			return this.nextIndex>0;
 		}
-		@Override
+
 		public Item next() {
-			if(this.hasNext()){
-				ultimoVisitado=this.next;
-				nextIndex++;
-				this.next=this.next.next;
-				return this.next.next.content;
-			}else{
-				throw new NoSuchElementException();
+			if(!this.hasNext()){
+				throw new NoSuchElementException("There are no elements");
 			}
+			ultimoVisitado=this.next;
+			nextIndex++;
+			this.next=this.next.next;
+			return ultimoVisitado.content;
 		}
-		@Override
+
 		public int nextIndex() {
+			if(!this.hasNext()){
+				return DLinkedList.this.size;
+			}
 			return this.nextIndex;
 		}
-		@Override
+
 		public Item previous() {
 			if(!this.hasPrevious()){
-				throw new NoSuchElementException();
+				throw new NoSuchElementException("There are no elements");
 			}
 			if(this.next==null){
-				this.next=lastNode;
+				this.next=this.ultimoVisitado;
 			}else{
 				this.next=this.next.previous;
 			}
-			this.ultimoVisitado.content=this.next.content;
+			this.ultimoVisitado=this.next;
+			this.nextIndex--;
 			return ultimoVisitado.content;
 		}
-		@Override
+
 		public int previousIndex() {
-			return this.previousIndex()-1;
+			if(!this.hasPrevious()){
+				return -1;
+			}
+			return this.nextIndex-1;
 		}
-		@Override
+
 		public void remove() {
 			// TODO Auto-generated method stub
 		}
-		@Override
+
 		public void set(Item arg0) {
 			// TODO Auto-generated method stub
 		}
