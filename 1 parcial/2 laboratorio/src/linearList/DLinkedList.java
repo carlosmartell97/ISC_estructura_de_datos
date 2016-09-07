@@ -248,8 +248,7 @@ public class DLinkedList<Item> implements linearList<Item>{
 		DLinkedList<Integer> dl = new DLinkedList<Integer>();
 		dl.addFirst(4);
 		dl.addFirst(3);
-		dl.addFirst(2);
-		dl.addFirst(1);
+		dl.addFirst(5);
 		System.out.println(dl);
 		
 		ListIterator<Integer> iterator = dl.getIterator(2);
@@ -258,9 +257,10 @@ public class DLinkedList<Item> implements linearList<Item>{
 			System.out.println(iterator.next());
 		}
 		
+		/*
 		System.out.println();
 		while(iterator.hasPrevious()){
 			System.out.println(iterator.previous());
-		}
+		}*/
 	}
 }
