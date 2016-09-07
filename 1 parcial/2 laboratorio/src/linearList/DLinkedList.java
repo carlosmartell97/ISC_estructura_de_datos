@@ -185,10 +185,6 @@ public class DLinkedList<Item> implements linearList<Item>{
 			}
 			this.nextIndex=index;
 		}
-		
-		public void add(Item arg0) {
-			// TODO Auto-generated method stub
-		}
 
 		public boolean hasNext() {
 			return this.nextIndex<DLinkedList.this.size;
@@ -241,6 +237,10 @@ public class DLinkedList<Item> implements linearList<Item>{
 		}
 
 		public void set(Item arg0) {
+			// TODO Auto-generated method stub
+		}
+		
+		public void add(Item arg0) {
 			// TODO Auto-generated method stub
 		}
 	}
