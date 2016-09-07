@@ -4,8 +4,8 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class DLinkedList<Item> implements linearList<Item>{
-	private DNode<Item> firstNode;
-	private DNode<Item> lastNode;
+	private DNode<Item> firstNode,
+						lastNode;
 	private int size;
 	
 	public DLinkedList(){
@@ -35,19 +35,22 @@ public class DLinkedList<Item> implements linearList<Item>{
 	
 	@Override
 	public Item get(int index){
-		if(index<0 || index>this.size){
+		if(index<0 || index>this.size-1){
 			throw new IndexOutOfBoundsException("that index is out of bounds");
 		}
-		return this.getNode(index).content;
+		DNode<Item> temp=getNode(index);
+		return temp.content;
 	}
 	
 	public void addFirst(Item value){
+		DNode<Item> temp = this.firstNode;
 		DNode<Item> newNode = new DNode<Item>(null,value,this.firstNode);
-		if(this.size!=0){
-			this.firstNode.previous=newNode;
+		this.firstNode=newNode;
+		if(this.size==0){
+			this.lastNode = newNode;
 		}
 		else{
-			this.lastNode=newNode;
+			temp.previous=newNode;
 		}
 		this.size++;
 	}
@@ -60,6 +63,8 @@ public class DLinkedList<Item> implements linearList<Item>{
 		else{
 			this.lastNode.next=newNode;
 		}
+		this.lastNode=newNode;
+		this.size++;
 	}
 	
 	public String toString(){
@@ -77,14 +82,12 @@ public class DLinkedList<Item> implements linearList<Item>{
 	
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return size==0;
 	}
 	
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.size;
 	}
 	
 	@Override
@@ -118,7 +121,7 @@ public class DLinkedList<Item> implements linearList<Item>{
 	
 	private class ListIterate implements ListIterator<Item>{
 		DNode<Item> next;
-		DNode<Item> ultimoVisitado;
+		DNode<Item> ultimoVisitado=null;
 		int nextIndex;
 		
 		public ListIterate(){
