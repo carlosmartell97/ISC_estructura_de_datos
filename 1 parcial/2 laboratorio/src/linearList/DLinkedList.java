@@ -26,32 +26,38 @@ public class DLinkedList<Item> implements linearList<Item>{
 	}
 	
 	public DNode<Item> getNode(int index){
-		DNode<Item> temp = this.firstNode;
-		for(int i=0;i<=index;i++){
-			temp=temp.next;
+		if(index>size/2){
+			DNode<Item> temp=this.lastNode;
+			for(int i=size-1;i>index;i--){
+				temp=temp.previous;
+			}
+			return temp;
+		}else{
+			DNode<Item> temp=this.firstNode;
+			for(int i=0;i<index;i++){
+				temp=temp.next;
+			}
+			return temp;
 		}
-		return temp;
 	}
 	
-	@Override
 	public Item get(int index){
 		if(index<0 || index>this.size-1){
 			throw new IndexOutOfBoundsException("that index is out of bounds");
 		}
-		DNode<Item> temp=getNode(index);
-		return temp.content;
+		return this.getNode(index).content;
 	}
 	
 	public void addFirst(Item value){
 		DNode<Item> temp = this.firstNode;
 		DNode<Item> newNode = new DNode<Item>(null,value,this.firstNode);
-		this.firstNode=newNode;
 		if(this.size==0){
 			this.lastNode = newNode;
 		}
 		else{
 			temp.previous=newNode;
 		}
+		this.firstNode=newNode;
 		this.size++;
 	}
 	
@@ -80,7 +86,7 @@ public class DLinkedList<Item> implements linearList<Item>{
 		return sb.toString();
 	}
 	
-	public ListIterate iterator(){
+	public ListIterator<Item> iterator(){
 		return new ListIterate();
 	}
 	
@@ -246,16 +252,17 @@ public class DLinkedList<Item> implements linearList<Item>{
 	}
 	public static void main(String[] args) {
 		DLinkedList<Integer> dl = new DLinkedList<Integer>();
-		dl.addFirst(4);
+		dl.addFirst(2);
 		dl.addFirst(3);
-		dl.addFirst(5);
+		dl.addFirst(8);
+		//dl.remove(1);
 		System.out.println(dl);
 		
 		ListIterator<Integer> iterator = dl.getIterator(2);
 		
-		while(iterator.hasNext()){
+		/*while(iterator.hasNext()){
 			System.out.println(iterator.next());
-		}
+		}*/
 		
 		/*
 		System.out.println();
