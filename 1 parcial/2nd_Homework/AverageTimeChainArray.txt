@@ -1,0 +1,4 @@
+nanoTime in array add: 42453
+nanoTime in chain add: 797266
+nanoTime in array remove: 19127
+nanoTime in chain remove: 16328
