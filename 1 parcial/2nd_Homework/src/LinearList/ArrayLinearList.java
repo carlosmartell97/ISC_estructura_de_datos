@@ -1,5 +1,7 @@
 package LinearList;
 
+import java.util.Iterator;
+
 public class ArrayLinearList<Item> implements LinearList<Item>{
 	protected int size;
 	protected Item[] element;
@@ -61,7 +63,7 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 	@Override
 	public void add(int index, Item item) {
 		if(this.size==initialMaxSize){
-			//this.resize();
+			this.resize();
 		}
 		if(index<0 || index>this.size){
 			throw new IndexOutOfBoundsException("that index is out of bounds");
@@ -77,7 +79,68 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 		this.size++;
 	}
 	
-	public class IteratorArray{
+	public String toString(){
+		String output="[";
+		for(int i=0;i<this.size;i++){
+			output+="["+this.element[i].toString()+"]";
+			if(i!=this.size-1){
+				output+=",";
+			}
+		}
+		return output+"]";
+	}
+	
+	private void resize(){
+		this.initialMaxSize*=2;
+		Item[] newArray=(Item[]) new Object[initialMaxSize];
+		System.arraycopy(this.element, 0, newArray, 0, this.size);
+		this.element=newArray;
+	}
+	
+	protected class IteratorArray implements Iterator<Item>{
+		private int nextIndex;
+		private boolean nextCalled;
 		
+		protected IteratorArray(){
+			this.nextIndex=0;
+			this.nextCalled=false;
+		}
+		
+		public boolean hasNext() {
+			return this.nextIndex!=ArrayLinearList.this.size-1;
+		}
+
+		public Item next() {
+			this.nextIndex++;
+			this.nextCalled=true;
+			return ArrayLinearList.this.element[nextIndex-1];
+		}
+		public void remove(){
+			if(this.nextCalled){
+				this.nextIndex--;
+				ArrayLinearList.this.remove(nextIndex);
+			}else{
+				throw new IllegalStateException();
+			}
+			this.nextCalled=false;
+		}
+	}
+	
+	public static void main(String[] args) {
+		ArrayLinearList<Integer> o=new ArrayLinearList();
+		ArrayLinearList.IteratorArray itr = o.new IteratorArray();
+		try{
+			System.out.println(o.size);
+			o.add(0, 3);o.add(0, 2);
+			System.out.println(o.size);
+			System.out.println(o);
+			
+			System.out.println(itr.hasNext());
+			System.out.println(itr.next());
+			System.out.println(itr.hasNext());
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
 }
