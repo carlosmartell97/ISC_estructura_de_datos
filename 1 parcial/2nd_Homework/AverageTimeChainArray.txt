@@ -1,4 +1,4 @@
-nanoTime in array add: 42453
-nanoTime in chain add: 797266
-nanoTime in array remove: 19127
-nanoTime in chain remove: 16328
+average nanoTime in array add: 9073
+average nanoTime in array remove: 4618
+average nanoTime in chain add: 38417
+average nanoTime in chain remove: 1492
