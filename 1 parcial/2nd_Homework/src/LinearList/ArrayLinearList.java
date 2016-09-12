@@ -27,7 +27,6 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 		return this.size;
 	}
 
-	@Override
 	public Item get(int index) {
 		if(index<0 || index>=this.size){
 			throw new IndexOutOfBoundsException("that index is out of bounds");
@@ -60,7 +59,6 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 		return itemRemoved;
 	}
 
-	@Override
 	public void add(int index, Item item) {
 		if(this.size==initialMaxSize){
 			this.resize();
