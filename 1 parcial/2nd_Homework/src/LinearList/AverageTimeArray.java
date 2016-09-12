@@ -5,8 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
-import org.omg.Messaging.SyncScopeHelper;
-
 public class AverageTimeArray {
 	
 	public static void main(String[] args) {
