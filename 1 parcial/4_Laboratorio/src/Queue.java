@@ -75,7 +75,7 @@ public class Queue<T> {
 	}
 	
 	/**
-	 * removes an object from the front of the Queue. If max capacity is reached, resize()
+	 * removes an object from the front of the Queue. Queue is empty, throw an exception.
 	 * is called.
 	 * @return the object that was removed
 	 */
