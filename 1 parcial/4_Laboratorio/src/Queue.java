@@ -80,8 +80,8 @@ public class Queue<T> {
 	 * @return the object that was removed
 	 */
 	public T dequeue(){
-		if(this.size==this.element.length){
-			this.resize();
+		if(this.size==0){
+			throw new NoSuchElementException("Queue is empty.");
 		}
 		T toBeDequeued = this.element[this.front];
 		this.front=(this.front+1)%this.element.length;
