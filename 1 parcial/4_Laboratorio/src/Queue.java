@@ -95,7 +95,7 @@ public class Queue<T> {
 	public void resize(){
 		this.maxSize*=2;
 		T[] newElement=(T[]) new Object[this.maxSize];
-		System.arraycopy(this.element, 0, newElement, 0, newElement.length);
+		System.arraycopy(this.element, 0, newElement, 0, this.element.length);
 		this.front=0;
 		this.rear=this.element.length;
 		this.element=newElement;
