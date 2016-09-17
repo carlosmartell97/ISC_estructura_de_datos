@@ -83,7 +83,7 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 	}
 
 	@Override
-	public String output() {
+	public String toString() {
 		String s="";
 		for(int i=0; i<this.size; i++){
 			s+="["+this.element[i].toString()+"]";
@@ -96,5 +96,13 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 		Item[] newArray=(Item[]) new Object[this.initialMaxSize];
 		System.arraycopy(this.element, 0, newArray, 0, this.size);
 		this.element=newArray;
+	}
+	
+	public static void main(String[] args) {
+		ArrayLinearList<Integer> o = new ArrayLinearList<Integer>();
+		o.add(0, 5); 
+		o.add(0, 4);
+		System.out.println(o);
+		System.out.println(o.get(0));
 	}
 }
