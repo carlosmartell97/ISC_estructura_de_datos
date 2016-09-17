@@ -9,7 +9,7 @@ public class prueba {
 			lista.add(0, 8);System.out.println("size:"+lista.size);
 			lista.add(0, 9);System.out.println("size:"+lista.size);
 			System.out.println("get:"+lista.get(0));
-			System.out.println("output:"+lista.output());
+			System.out.println("output:"+lista.toString());
 			System.out.println(lista.remove(9));
 		}
 		catch(Exception e){
