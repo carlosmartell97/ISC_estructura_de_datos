@@ -1,15 +1,26 @@
 package Utilities;
 
 public class Evaluation {
-	public static ChainLinearList<Character> Recursive(ChainLinearList<Character> chain){
+	private static int result;
+	private static ChainLinearList<Character> chainOperators;
+	private static ChainLinearList<Character> chainOperands;
+	
+	public static int Recursive(ChainLinearList<Character> chain){
+		result=0;
+		chainOperators=new ChainLinearList<Character>();
+		chainOperands=new ChainLinearList<Character>();
 		Recursive(0,chain);
-		return null;
+		return result;
 	}
 	
-	private static void Recursive(int position,ChainLinearList<Character> chain){
-		if(position<chain.size){
+	private static void Recursive(int position,ChainLinearList<Character> chain2){
+		if(position<chain2.size){
 			System.out.println("CALL");
-			Recursive(position+1,chain);
+			
+			if(position<chain2.size/2){
+				System.out.println(position);
+			}
+			Recursive(position+1,chain2);
 		}
 	}
 	
@@ -21,6 +32,7 @@ public class Evaluation {
 		chain.add(0, '-');
 		chain.add(0, '+');
 		System.out.println(chain);
+		
 		Recursive(chain);
 	}
 }
