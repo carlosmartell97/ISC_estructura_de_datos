@@ -1,3 +1,7 @@
+//	me falta:
+//		- deshacerme de los CastException
+//		- comparar la complejidad de Recursive() vs Iterative() y poner los resultados
+//		- en un "Readme1.txt"
 package Utilities;
 
 public class Conversion {
@@ -57,13 +61,14 @@ public class Conversion {
 	
 	public static void main(String[] args) {
 		ArrayLinearList<Character> lista=new ArrayLinearList<Character>();
-		lista.add(0, '5');
-		lista.add(0, '-');
 		lista.add(0, '3');
+		lista.add(0, '-');
+		lista.add(0, '2');
 		lista.add(0, '+');
 		lista.add(0, '1');
 		System.out.println(lista);
+		
 		//Recursive(lista);
-		Iterative(lista);
+		//Iterative(lista);
 	}
 }
