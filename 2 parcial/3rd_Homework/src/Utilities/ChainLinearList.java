@@ -26,7 +26,7 @@ public class ChainLinearList<Item> implements LinearList<Item>{
 			throw new IndexOutOfBoundsException("That index is out of bounds, dude...");
 		}
 		ChainNode<Item> temp = firstNode;
-		for(int i=0; i<index-1; i++){
+		for(int i=0; i<index; i++){
 			temp=temp.next;
 		}
 		return temp.element;
