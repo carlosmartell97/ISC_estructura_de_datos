@@ -11,27 +11,27 @@ public class Evaluation {
 		chainOperands=new ChainLinearList<Character>();
 		
 		Recursive(0,chain);
-		//result=Character.getNumericValue(chainOperands.remove(0));
+		result=Character.getNumericValue(chainOperands.remove(0));
 		//result=1;
 		
-		/*System.out.println("Operators:");
+		System.out.println("Operators:");
 		for(int i=0;i<chainOperators.size;i++){
 			System.out.println(chainOperators.get(i));
 		}
-		System.out.println("Operands");
+		System.out.println("Operands:");
 		for(int i=0;i<chainOperands.size;i++){
 			System.out.println(chainOperands.get(i));
-		}*/
+		}
 		
-		System.out.println("res:"+result);
-		/*while(!chainOperators.isEmpty()){
-			System.out.println("NOT EMPTY");
+		//System.out.println("res:"+result);
+		while(!chainOperators.isEmpty()){
+			//System.out.println("NOT EMPTY");
 			if(chainOperators.remove(0)=='+'){
 				result+=Character.getNumericValue(chainOperands.remove(0));
 			}else{
 				result-=Character.getNumericValue(chainOperands.remove(0));
 			}
-		}*/
+		}
 		return result;
 	}
 	
@@ -42,13 +42,13 @@ public class Evaluation {
 			//System.out.print(position+" ");
 			//System.out.println(chain2.get(position));
 			
-			/*if(position<chain2.size/2){
+			if(position<chain2.size/2){
 				chainOperators.add(chainOperators.size, chain2.get(position));
-				System.out.println("add oprtr"+chain2.get(position));
+				//System.out.println("add oprtr"+chain2.get(position));
 			}else{
 				chainOperands.add(chainOperands.size, chain2.get(position));
-				System.out.println("add OPERAND"+chain2.get(position));
-			}*/
+				//System.out.println("add OPERAND"+chain2.get(position));
+			}
 			Recursive(position+1,chain2);
 		}
 	}
@@ -61,9 +61,6 @@ public class Evaluation {
 		chain.add(0, '-');
 		chain.add(0, '+');
 		System.out.println(chain);
-		for(int i=0;i<chain.size;i++){
-			System.out.println(chain.get(i));
-		}
 		
 		System.out.println(Recursive(chain));;
 	}
