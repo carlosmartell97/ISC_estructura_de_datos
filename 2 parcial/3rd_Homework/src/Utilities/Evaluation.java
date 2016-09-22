@@ -1,3 +1,6 @@
+//	ya funciona el Recursive(). me falta:
+//				-	use the Stack Class of Java to implement the iterative version
+//				-	y todo lo que sigue en Homework3...
 package Utilities;
 
 public class Evaluation {
@@ -55,13 +58,13 @@ public class Evaluation {
 	
 	public static void main(String[] args) {
 		ChainLinearList<Character> chain=new ChainLinearList<Character>();
-		chain.add(0, '3');
-		chain.add(0, '2');
-		chain.add(0, '1');
-		chain.add(0, '-');
+		chain.add(0, '7');
+		chain.add(0, '8');
+		chain.add(0, '9');
 		chain.add(0, '+');
+		chain.add(0, '-');
 		System.out.println(chain);
 		
-		System.out.println(Recursive(chain));;
+		System.out.println("result:"+Recursive(chain));;
 	}
 }
