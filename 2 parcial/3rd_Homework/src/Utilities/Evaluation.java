@@ -1,12 +1,15 @@
-//	ya funciona el Recursive(). me falta:
-//				-	use the Stack Class of Java to implement the iterative version
-//				-	y todo lo que sigue en Homework3...
+//	ya funciona el Recursive() e Iterative(). me falta:
+//				-	todo lo que sigue en Homework3...
 package Utilities;
+
+import java.util.Stack;
 
 public class Evaluation {
 	private static int result;
 	private static ChainLinearList<Character> chainOperators;
 	private static ChainLinearList<Character> chainOperands;
+	private static Stack<Character> stackOperators;
+	private static Stack<Character> stackOperands;
 	
 	public static int Recursive(ChainLinearList<Character> chain){
 		result=0;
@@ -56,15 +59,41 @@ public class Evaluation {
 		}
 	}
 	
+	public static int Iterative(ChainLinearList<Character> chain){
+		result=0;
+		stackOperands=new Stack<Character>();
+		stackOperators=new Stack<Character>();
+		for(int i=chain.size-1;i>=0;i--){
+			//System.out.println("i:"+i);
+			if(i>=chain.size/2){
+				stackOperands.push(chain.get(i));
+			}else{
+				stackOperators.push(chain.get(i));
+			}
+		}
+		
+		System.out.println("Operators: "+stackOperators);
+		System.out.println("Operands: "+stackOperands);
+		result=Character.getNumericValue((char) stackOperands.pop());
+		while(!stackOperators.isEmpty()){
+			if(stackOperators.pop()=='+'){
+				result+=Character.getNumericValue(stackOperands.pop());
+			}else{
+				result-=Character.getNumericValue(stackOperands.pop());
+			}
+		}
+		return result;
+	}
+	
 	public static void main(String[] args) {
 		ChainLinearList<Character> chain=new ChainLinearList<Character>();
-		chain.add(0, '7');
-		chain.add(0, '8');
-		chain.add(0, '9');
-		chain.add(0, '+');
+		chain.add(0, '1');
+		chain.add(0, '2');
+		chain.add(0, '3');
 		chain.add(0, '-');
+		chain.add(0, '+');
 		System.out.println(chain);
 		
-		System.out.println("result:"+Recursive(chain));;
+		System.out.println("result:"+Iterative(chain));;
 	}
 }
