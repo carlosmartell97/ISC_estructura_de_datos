@@ -1,17 +1,14 @@
 //	me falta:
-//		- leer bien las instrucciones. Input: prefix notation, output: postfix notation.
-//		- deshacerme de los CastException
+//		- deshacerme del CastException en Iterative()
 //		- comparar la complejidad de Recursive() vs Iterative() y poner los resultados
-//		- en un "Readme1.txt"
+//			en un "Readme1.txt"
 package Utilities;
 
 import java.util.Stack;
 
 public class Conversion {
 	protected static ArrayLinearList<Character> listReturned;
-	protected static ArrayLinearList<Character> listOperators;
-	protected static Stack<Character> stackOperands;
-	protected static Stack<Character> stackOperators;
+	protected static Stack<Character> stackFlip;
 	protected static char item;
 	
 	public static ArrayLinearList<Character> Recursive(ArrayLinearList<Character> list){
@@ -19,22 +16,13 @@ public class Conversion {
 			return null;
 		}
 		listReturned=new ArrayLinearList<Character>();
-		listOperators=new ArrayLinearList<Character>();
-		Recursive(list.size-1,list);
-		for(int i=0;i<listOperators.size;i++){
-			listReturned.add(listReturned.size, listOperators.get(i));
-		}
+		Recursive(0,list);
 		return listReturned;
 	}
 	private static void Recursive(int position,ArrayLinearList<Character> list){
-		if(position>=0){
-			//System.out.println("CALL");
-			if(position%2==0){
-				listReturned.add(listReturned.size, list.element[position]);
-			}else{
-				listOperators.add(listOperators.size, list.element[position]);
-			}
-			Recursive(position-1,list);
+		if(position<list.size){
+			Recursive(position+1,list);
+			listReturned.add(listReturned.size, list.get(position));
 		}
 	}
 	
@@ -42,22 +30,14 @@ public class Conversion {
 		if(list.isEmpty()){
 			return null;
 		}
+		
 		listReturned=new ArrayLinearList<Character>();
-		stackOperands=new Stack<Character>();
-		stackOperators=new Stack<Character>();
+		stackFlip=new Stack<Character>();
 		for(int i=0;i<list.size;i++){
-			if(i%2==0){
-				stackOperands.push(list.element[i]);
-			}
-			else{
-				stackOperators.push(list.element[i]);
-			}
+			stackFlip.push(list.element[i]);
 		}
-		while(!stackOperands.isEmpty()){
-			listReturned.add(listReturned.size, stackOperands.pop());
-		}
-		while(!stackOperators.isEmpty()){
-			listReturned.add(listReturned.size, stackOperators.pop());
+		while(!stackFlip.isEmpty()){
+			listReturned.add(listReturned.size, stackFlip.pop());
 		}
 		return listReturned;
 	}
@@ -65,13 +45,13 @@ public class Conversion {
 	public static void main(String[] args) {
 		ArrayLinearList<Character> lista=new ArrayLinearList<Character>();
 		lista.add(0, '3');
-		lista.add(0, '-');
 		lista.add(0, '2');
-		lista.add(0, '+');
 		lista.add(0, '1');
+		lista.add(0, '-');
+		lista.add(0, '+');
 		System.out.println(lista);
 		
-		Recursive(lista);
-		//Iterative(lista);
+		//System.out.println(Recursive(lista));;
+		System.out.println(Iterative(lista));;
 	}
 }
