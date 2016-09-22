@@ -9,16 +9,27 @@ public class Evaluation {
 		result=0;
 		chainOperators=new ChainLinearList<Character>();
 		chainOperands=new ChainLinearList<Character>();
+		
 		Recursive(0,chain);
+		result=Character.getNumericValue(chainOperands.remove(0));
+		while(!chainOperators.isEmpty()){
+			System.out.println("NOT EMPTY");
+			if(chainOperators.remove(0)=='+'){
+				result+=Character.getNumericValue(chainOperands.remove(0));
+			}else{
+				result-=Character.getNumericValue(chainOperands.remove(0));
+			}
+		}
 		return result;
 	}
 	
 	private static void Recursive(int position,ChainLinearList<Character> chain2){
 		if(position<chain2.size){
 			System.out.println("CALL");
-			
 			if(position<chain2.size/2){
-				System.out.println(position);
+				chainOperators.add(chainOperators.size, chain2.get(position));
+			}else{
+				chainOperands.add(chainOperands.size, chain2.get(position));
 			}
 			Recursive(position+1,chain2);
 		}
@@ -33,6 +44,6 @@ public class Evaluation {
 		chain.add(0, '+');
 		System.out.println(chain);
 		
-		Recursive(chain);
+		System.out.println(Recursive(chain));;
 	}
 }
