@@ -1,8 +1,11 @@
 //	me falta:
+//		- leer bien las instrucciones. Input: prefix notation, output: postfix notation.
 //		- deshacerme de los CastException
 //		- comparar la complejidad de Recursive() vs Iterative() y poner los resultados
 //		- en un "Readme1.txt"
 package Utilities;
+
+import java.util.Stack;
 
 public class Conversion {
 	protected static ArrayLinearList<Character> listReturned;
@@ -68,7 +71,7 @@ public class Conversion {
 		lista.add(0, '1');
 		System.out.println(lista);
 		
-		//Recursive(lista);
+		Recursive(lista);
 		//Iterative(lista);
 	}
 }
