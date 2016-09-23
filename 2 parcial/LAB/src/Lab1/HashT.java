@@ -1,4 +1,10 @@
+//	me falta:
+//		- terminar el remove()
+//		- el error que tengo en Iterable()
+
 package Lab1;
+
+import java.util.Queue;
 
 public class HashT<K,V> {
 	private int m;	// tamaño de la tabla
@@ -57,6 +63,22 @@ public class HashT<K,V> {
 		}
 		this.tabla[pos]=new Node<K,V>(key,value,null);
 		n++;
+	}
+	
+	public V remove(K key){
+		if(key==null){
+			throw new IllegalArgumentException("lalves nulas no se aceptan");
+		}
+		int pos=hash(key);
+	}
+	
+	public Iterable<K> keys(){
+		Queue<K> queue=newLinkedList<K>();
+		for(int i=0;i<m;i++){
+			for(Node<K,V> x=this.table[i];x!=null;x=x.next){
+				queue.add((K)x.key);
+			}
+		}
 	}
 	
 	private static class Node<K,V>{
