@@ -1,5 +1,4 @@
-//	ya funciona el Recursive() e Iterative(). me falta:
-//				-	todo lo que sigue en Homework3...
+//	ya funciona y ya quedó todo.
 package Utilities;
 
 import java.util.Stack;
