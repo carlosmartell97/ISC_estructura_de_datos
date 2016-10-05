@@ -30,6 +30,8 @@ public class AverageTime {
 				average=+totalTime;
 			}
 			System.out.println("avrg nanoTime Recursive: "+totalTime/20);
+			write.write("avrg nanoTime Recursive: "+totalTime/20+"\n");
+			write.newLine();
 			
 			average=0;
 			for(int i=0;i<20;i++){
@@ -39,7 +41,8 @@ public class AverageTime {
 				average=+totalTime;
 			}
 			System.out.println("avrg nanoTime Iterative: "+totalTime/20);
-			//write.write("average nanoTime in chain remove: "+timeSumRemove/20); write.newLine();
+			write.write("avrg nanoTime Iterative: "+totalTime/20);
+			
 			write.close();
 		} catch (IOException e) {
 			e.getMessage();
