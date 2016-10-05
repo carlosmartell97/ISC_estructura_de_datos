@@ -1,5 +1,4 @@
 //	me falta:
-//			- hacer bien Iterative() y sin Exceptions
 //			- comparar la complejidad de Recursive() vs Iterative() y poner los resultados
 //			en un "Readme1.txt"
 package Utilities;
@@ -8,9 +7,10 @@ import java.util.Stack;
 
 public class Conversion {
 	protected static ArrayLinearList<Character> listReturned;
-	protected static ArrayLinearList<Character> operators;
-	protected static ArrayLinearList<Character> operands;
-	protected static Stack<Character> stackFlip;
+	protected static ArrayLinearList<Character> operatorsList;
+	protected static ArrayLinearList<Character> operandsList;
+	protected static Stack<Character> operatorsStack;
+	protected static Stack<Character> operandsStack;
 	protected static char item;
 	
 	public static ArrayLinearList<Character> Recursive(ArrayLinearList<Character> list){
@@ -18,26 +18,26 @@ public class Conversion {
 			return null;
 		}
 		listReturned=new ArrayLinearList<Character>();
-		operators=new ArrayLinearList<Character>();
-		operands=new ArrayLinearList<Character>();
+		operatorsList=new ArrayLinearList<Character>();
+		operandsList=new ArrayLinearList<Character>();
 		Recursive(0,list);
 		
-		listReturned.add(0, operands.remove(0));
-		while(!operators.isEmpty()){
-			listReturned.add(listReturned.size, operands.remove(0));
-			listReturned.add(listReturned.size, operators.remove(0));
+		listReturned.add(0, operandsList.remove(0));
+		while(!operatorsList.isEmpty()){
+			listReturned.add(listReturned.size, operandsList.remove(0));
+			listReturned.add(listReturned.size, operatorsList.remove(0));
 		}
 		return listReturned;
 	}
 	private static void Recursive(int position,ArrayLinearList<Character> list){
 		if(position<list.size/2){
 			Recursive(position+1,list);
-			operators.add(listReturned.size, list.get(position));
+			operatorsList.add(listReturned.size, list.get(position));
 		}
 		else{
 			if(position<list.size){
 				Recursive(position+1,list);
-				operands.add(listReturned.size, list.get(position));
+				operandsList.add(listReturned.size, list.get(position));
 			}
 		}
 	}
@@ -46,14 +46,20 @@ public class Conversion {
 		if(list.isEmpty()){
 			return null;
 		}
-		
 		listReturned=new ArrayLinearList<Character>();
-		stackFlip=new Stack<Character>();
-		for(int i=0;i<list.size;i++){
-			stackFlip.push(list.element[i]);
+		operatorsStack=new Stack<Character>();
+		operandsStack=new Stack<Character>();
+		for(int i=list.size-1;i>=0;i--){
+			if(i>=list.size/2){
+				operandsStack.push(list.get(i));
+			}else{
+				operatorsStack.push(list.get(i));
+			}
 		}
-		while(!stackFlip.isEmpty()){
-			listReturned.add(listReturned.size, stackFlip.pop());
+		listReturned.add(0, operandsStack.pop());
+		while(!operatorsStack.isEmpty()){
+			listReturned.add(listReturned.size,operandsStack.pop());
+			listReturned.add(listReturned.size, operatorsStack.pop());
 		}
 		return listReturned;
 	}
@@ -69,7 +75,7 @@ public class Conversion {
 		lista.add(0, '+');
 		System.out.println(lista);
 		
-		//System.out.println("res: "+Recursive(lista));;
-		System.out.println(Iterative(lista));;
+		System.out.println("res: "+Recursive(lista));;
+		System.out.println("res: "+Iterative(lista));;
 	}
 }
