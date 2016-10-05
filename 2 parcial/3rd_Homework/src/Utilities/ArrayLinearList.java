@@ -57,8 +57,8 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 		for(int i=index; i<this.size-1; i++){
 			element[i]=element[i+1];
 		}
-		this.size--;
 		this.element[size-1]=null;
+		this.size--;
 		return itemRemoved;
 	}
 
