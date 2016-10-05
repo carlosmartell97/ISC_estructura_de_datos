@@ -31,6 +31,9 @@ public class AverageTime {
 			BufferedWriter write=new BufferedWriter(new FileWriter("Readme1.txt"));
 			
 			System.out.println("for the class Conversion...");
+			write.write("for the class Conversion...");
+			write.newLine();
+			
 			int average;
 			for(int i=0;i<20;i++){
 				startTime=System.nanoTime();
@@ -51,9 +54,15 @@ public class AverageTime {
 			}
 			System.out.println("avrg nanoTime Iterative: "+totalTime/20);
 			write.write("avrg nanoTime Iterative: "+totalTime/20);
+			System.out.println();
+			write.newLine();
+			write.newLine();
 			
 			////////////////////////////////////////////////////////////////////////////////////
 			System.out.println("for the class Evaluation...");
+			write.write("for the class Evaluation...");
+			write.newLine();
+			
 			average=0;
 			for(int i=0;i<20;i++){
 				startTime=System.nanoTime();
