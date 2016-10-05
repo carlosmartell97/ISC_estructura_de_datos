@@ -104,7 +104,7 @@ public class ChainLinearList<Item> implements LinearList<Item>{
 		return s;
 	}
 	
-	private static class ChainNode <Item>{
+	static class ChainNode <Item>{
 		Item element;
 		ChainNode<Item> next;
 		
