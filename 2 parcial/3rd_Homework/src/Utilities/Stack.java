@@ -31,6 +31,10 @@ public class Stack<T> {
 		return this.size==0;
 	}
 	
+	/**
+	 * 
+	 * @return size of Stack
+	 */
 	public int size(){
 		return this.size;
 	}
