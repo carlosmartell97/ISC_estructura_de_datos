@@ -1,19 +1,37 @@
-//		me falta:
-//				-	todo éste, el problema 3 (Chain), y el 4 (Hash Tables)
+//		ya quedó, y funciona todo.
 package Utilities;
 
+import Utilities.ChainLinearList.ChainNode;
+
 public class Check {
-	private Stack<Character> unos; 
-	public boolean Iterative(ChainLinearList<Character> list){
-		if(list.size%2!=0){
+	private static Stack<Character> unos; 
+	public static boolean Iterative(ChainLinearList<Character> chain){
+		if(chain.isEmpty()){
+			throw new IllegalArgumentException("chain is empty");
+		}
+		if(chain.size%2!=0){
 			return false;
 		}
 		unos=new Stack<Character>();
-		for(int i=0;i<list.size;i++){
-			if(list.get(i)=='1'){
-				unos.push(list.get(i));
+		ChainNode<Character> temp=chain.firstNode;
+		while(temp.next!=null){
+			if(temp.element=='1'){
+				unos.push(temp.element);
 			}
+			temp=temp.next;
 		}
-		return unos.size()==list.size/2;
+		return unos.size()==chain.size/2;
+	}
+	
+	public static void main(String[] args) {
+		ChainLinearList<Character> test=new ChainLinearList<Character>();
+		test.add(0, '1');
+		test.add(1, '0');
+		test.add(2, '1');
+		test.add(3, '0');
+		test.add(4, '0');
+		test.add(5, '1');
+		
+		System.out.println(Iterative(test));
 	}
 }
