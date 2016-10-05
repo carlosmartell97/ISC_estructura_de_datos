@@ -4,6 +4,7 @@
 
 package Lab1;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class HashT<K,V> {
@@ -73,12 +74,13 @@ public class HashT<K,V> {
 	}
 	
 	public Iterable<K> keys(){
-		Queue<K> queue=newLinkedList<K>();
+		Queue<K> queue=new LinkedList<K>();
 		for(int i=0;i<m;i++){
-			for(Node<K,V> x=this.table[i];x!=null;x=x.next){
+			for(Node<K,V> x=this.tabla[i];x!=null;x=x.next){
 				queue.add((K)x.key);
 			}
 		}
+		return queue;
 	}
 	
 	private static class Node<K,V>{
