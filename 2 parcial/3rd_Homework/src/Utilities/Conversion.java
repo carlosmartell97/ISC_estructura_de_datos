@@ -1,4 +1,5 @@
 //	me falta:
+//			- hacer bien Iterative() y sin Exceptions
 //			- comparar la complejidad de Recursive() vs Iterative() y poner los resultados
 //			en un "Readme1.txt"
 package Utilities;
@@ -68,7 +69,7 @@ public class Conversion {
 		lista.add(0, '+');
 		System.out.println(lista);
 		
-		System.out.println("res: "+Recursive(lista));;
-		//System.out.println(Iterative(lista));;
+		//System.out.println("res: "+Recursive(lista));;
+		System.out.println(Iterative(lista));;
 	}
 }
