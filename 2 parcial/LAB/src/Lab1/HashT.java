@@ -4,6 +4,7 @@
 
 package Lab1;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -18,6 +19,7 @@ public class HashT<K,V> {
 	}
 	public HashT(int newCapacity){
 		this.m=newCapacity;
+		//tabla=new Node<K,V>[50];
 	}
 	
 	public int hash(K key){
@@ -93,5 +95,36 @@ public class HashT<K,V> {
 			this.value=value;
 			this.next=next;
 		}
+	}
+	
+	private abstract class HashIterator<E> implements Iterator<E>{
+		Node<K,V> next;
+		int index;
+		
+		public HashIterator(){
+			if(n>0){
+				
+			}
+		}
+		
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		/*@Override
+		public E next() {
+			// TODO Auto-generated method stub
+			return null;
+		}*/
+		
+		public Node<K,V> nextNode(){
+			
+		}
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 }
