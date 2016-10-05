@@ -73,6 +73,14 @@ public class HashT<K,V> {
 			throw new IllegalArgumentException("lalves nulas no se aceptan");
 		}
 		int pos=hash(key);
+		V returnedValue=this.tabla[pos].value;
+		for(int i=pos;i<this.n;i++){
+			this.tabla[i]=this.tabla[i+1];
+		}
+		this.tabla[n]=null;
+		this.n--;
+		
+		return returnedValue;
 	}
 	
 	public Iterable<K> keys(){
@@ -109,8 +117,7 @@ public class HashT<K,V> {
 		
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
+			return this.next!=null;
 		}
 
 		/*@Override
@@ -120,7 +127,9 @@ public class HashT<K,V> {
 		}*/
 		
 		public Node<K,V> nextNode(){
-			
+			if(this.hasNext()){
+				
+			}
 		}
 	}
 	
