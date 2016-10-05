@@ -59,9 +59,10 @@ public class AverageTime {
 			write.newLine();
 			
 			////////////////////////////////////////////////////////////////////////////////////
+			BufferedWriter write2=new BufferedWriter(new FileWriter("Readme2.txt"));
 			System.out.println("for the class Evaluation...");
-			write.write("for the class Evaluation...");
-			write.newLine();
+			write2.write("for the class Evaluation...");
+			write2.newLine();
 			
 			average=0;
 			for(int i=0;i<20;i++){
@@ -71,8 +72,8 @@ public class AverageTime {
 				average=+totalTime;
 			}
 			System.out.println("avrg nanoTime Recursive: "+totalTime/20);
-			write.write("avrg nanoTime Recursive: "+totalTime/20);
-			write.newLine();
+			write2.write("avrg nanoTime Recursive: "+totalTime/20);
+			write2.newLine();
 			
 			average=0;
 			for(int i=0;i<20;i++){
@@ -82,9 +83,10 @@ public class AverageTime {
 				average=+totalTime;
 			}
 			System.out.println("avrg nanoTime Iterative: "+totalTime/20);
-			write.write("avrg nanoTime Iterative: "+totalTime/20);
+			write2.write("avrg nanoTime Iterative: "+totalTime/20);
 			
 			write.close();
+			write2.close();
 		} catch (IOException e) {
 			e.getMessage();
 		}
