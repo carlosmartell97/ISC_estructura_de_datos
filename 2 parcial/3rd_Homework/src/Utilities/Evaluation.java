@@ -20,14 +20,14 @@ public class Evaluation {
 		result=Character.getNumericValue(chainOperands.remove(0));
 		//result=1;
 		
-		System.out.println("Operators:");
-		for(int i=0;i<chainOperators.size;i++){
+		//System.out.println("Operators:");
+		/*for(int i=0;i<chainOperators.size;i++){
 			System.out.println(chainOperators.get(i));
-		}
-		System.out.println("Operands:");
-		for(int i=0;i<chainOperands.size;i++){
+		}*/
+		//System.out.println("Operands:");
+		/*for(int i=0;i<chainOperands.size;i++){
 			System.out.println(chainOperands.get(i));
-		}
+		}*/
 		
 		//System.out.println("res:"+result);
 		while(!chainOperators.isEmpty()){
@@ -72,8 +72,8 @@ public class Evaluation {
 			}
 		}
 		
-		System.out.println("Operators: "+stackOperators);
-		System.out.println("Operands: "+stackOperands);
+		//System.out.println("Operators: "+stackOperators);
+		//System.out.println("Operands: "+stackOperands);
 		result=Character.getNumericValue((char) stackOperands.pop());
 		while(!stackOperators.isEmpty()){
 			if(stackOperators.pop()=='+'){
@@ -94,6 +94,7 @@ public class Evaluation {
 		chain.add(0, '+');
 		System.out.println(chain);
 		
-		System.out.println("result:"+Iterative(chain));;
+		System.out.println("Recursive: "+Recursive(chain));
+		System.out.println("Iterative:"+Iterative(chain));;
 	}
 }
