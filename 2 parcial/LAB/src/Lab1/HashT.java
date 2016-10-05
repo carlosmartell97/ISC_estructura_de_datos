@@ -6,6 +6,7 @@ package Lab1;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 
 public class HashT<K,V> {
@@ -105,6 +106,11 @@ public class HashT<K,V> {
 		}
 	}
 	
+	private class ValueIterator extends HashIterator<K,V>{
+		Node<K,V> next;
+		//	...
+	}
+	
 	private abstract class HashIterator<E> implements Iterator<E>{
 		Node<K,V> next;
 		int index;
@@ -128,12 +134,14 @@ public class HashT<K,V> {
 		
 		public Node<K,V> nextNode(){
 			if(this.hasNext()){
-				
+				return this.next;
+				//	...
 			}
+			throw new NoSuchElementException("there's no nextNode");
 		}
 	}
 	
 	public static void main(String[] args) {
-		
+		//	...
 	}
 }
