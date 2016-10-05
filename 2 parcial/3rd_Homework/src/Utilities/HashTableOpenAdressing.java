@@ -19,7 +19,16 @@ public class HashTableOpenAdressing<K,V> {
 		return this.n;
 	}
 	
-	public boolean contains(K key){
+	public void resize(){
+		this.m*=2;
+		Entry<K,V>[] biggerTable=new Entry[m];
+		for(int i=0;i<this.size();i++){
+			biggerTable[hash(this.table[i].key)]=this.table[i];
+		}
+		this.table=biggerTable;
+	}
+	
+	/*public boolean contains(K key){
 		
 	}
 	
@@ -29,6 +38,10 @@ public class HashTableOpenAdressing<K,V> {
 	
 	public remove(K key){
 		
+	}*/
+	
+	public int hash(K key){
+		return (key.hashCode()&0x7FFFFFFF)%m;
 	}
 	
 	private static class Entry<K,V>{
