@@ -31,6 +31,10 @@ public class Stack<T> {
 		return this.size==0;
 	}
 	
+	public int size(){
+		return this.size;
+	}
+	
 	/**
 	 * adds a new item to the Stack. Increases size by 1
 	 * @param newItem: item to be added.
