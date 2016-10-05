@@ -1,6 +1,4 @@
-//	me falta:
-//			- comparar la complejidad de Recursive() vs Iterative() y poner los resultados
-//			en un "Readme1.txt"
+//	ya funciona y ya quedó todo.
 package Utilities;
 
 import java.util.Stack;
