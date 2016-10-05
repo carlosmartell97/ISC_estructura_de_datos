@@ -1,3 +1,7 @@
-avrg nanoTime Recursive: 349
-avrg nanoTime Iterative: 419avrg nanoTime Recursive: 233
-avrg nanoTime Iterative: 396
+for the class Conversion...
+avrg nanoTime Recursive: 536
+avrg nanoTime Iterative: 793
+
+for the class Evaluation...
+avrg nanoTime Recursive: 373
+avrg nanoTime Iterative: 956
