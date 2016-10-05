@@ -1,5 +1,7 @@
 //	me falta:
-//		- terminar el remove()
+//		- checar si funciona el remove()
+//		- "HashIterator: next -> referencia al siguiente a visitar"
+//		- que nextNode() actualice el next
 //		- el error que tengo en Iterable()
 
 package Lab1;
