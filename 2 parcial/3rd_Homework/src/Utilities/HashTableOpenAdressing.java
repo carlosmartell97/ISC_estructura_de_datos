@@ -5,6 +5,32 @@ public class HashTableOpenAdressing<K,V> {
 				m;
 	private Entry<K,V>[] table;
 	
+	public HashTableOpenAdressing(int capacity){
+		this.n=0;
+		this.m=capacity;
+		this.table=new Entry[m];
+	}
+	
+	public boolean isEmpty(){
+		return this.n==0;
+	}
+	
+	public int size(){
+		return this.n;
+	}
+	
+	public boolean contains(K key){
+		
+	}
+	
+	public V add(K key,V value){
+		
+	}
+	
+	public remove(K key){
+		
+	}
+	
 	private static class Entry<K,V>{
 		K key;
 		V value;
