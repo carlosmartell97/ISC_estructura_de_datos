@@ -24,7 +24,7 @@ public class Check {
 	}
 	
 	public static void main(String[] args) {
-		ChainLinearList<Character> test=new ChainLinearList<Character>();
+		/*ChainLinearList<Character> test=new ChainLinearList<Character>();
 		test.add(0, '1');
 		test.add(1, '0');
 		test.add(2, '1');
@@ -32,6 +32,6 @@ public class Check {
 		test.add(4, '0');
 		test.add(5, '1');
 		
-		System.out.println(Iterative(test));
+		System.out.println(Iterative(test));*/
 	}
 }
