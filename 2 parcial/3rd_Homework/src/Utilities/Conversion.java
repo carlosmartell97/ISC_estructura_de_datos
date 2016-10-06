@@ -63,7 +63,7 @@ public class Conversion {
 	}
 	
 	public static void main(String[] args) {
-		ArrayLinearList<Character> lista=new ArrayLinearList<Character>();
+		/*ArrayLinearList<Character> lista=new ArrayLinearList<Character>();
 		lista.add(0, 'D');
 		lista.add(0, 'Z');
 		lista.add(0, 'Y');
@@ -73,7 +73,7 @@ public class Conversion {
 		lista.add(0, '+');
 		System.out.println(lista);
 		
-		System.out.println("res: "+Recursive(lista));;
-		System.out.println("res: "+Iterative(lista));;
+		System.out.println("res: "+Recursive(lista));
+		System.out.println("res: "+Iterative(lista));*/
 	}
 }
