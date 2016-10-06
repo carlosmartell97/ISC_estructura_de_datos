@@ -1,8 +1,11 @@
 package Utilities;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class HashTableOpenAdressing<K,V> {
-	private int n,
-				m;
+	private int n,	// number of elements in table
+				m;	// size of table
 	private Entry<K,V>[] table;
 	
 	public HashTableOpenAdressing(){
@@ -98,5 +101,31 @@ public class HashTableOpenAdressing<K,V> {
 			this.key=key;
 			this.value=value;
 		}
+	}
+	
+	private class keyIterator<K> implements Iterator<K>{
+		int position;
+		
+		public keyIterator(){
+			for(int i=0;i<HashTableOpenAdressing.this.m;i++){
+				if(HashTableOpenAdressing.this.table[i]!=null){
+					this.position=i;
+					break;
+				}
+			}
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return this.position<HashTableOpenAdressing.this.m;
+		}
+
+		@Override
+		public K next() {
+			if(!this.hasNext()){
+				throw new NoSuchElementException("this is the last position of the table");
+			}
+		}
+		
 	}
 }
