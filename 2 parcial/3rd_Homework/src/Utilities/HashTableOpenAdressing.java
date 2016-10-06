@@ -36,6 +36,16 @@ public class HashTableOpenAdressing<K,V> {
 		
 	}*/
 	
+	public V getValue(K key){
+		int pos=this.hash(key);
+		for(Entry<K,V> n=this.table[pos];n!=null;n=this.table[++pos%this.m]){
+			if(n.key.equals(key)){
+				return n.value;
+			}
+		}
+		return null;
+	}
+	
 	public V add(K key,V value){
 		if(this.n>=this.m-1 || this.n/this.m >= 0.75){
 			this.resize();
