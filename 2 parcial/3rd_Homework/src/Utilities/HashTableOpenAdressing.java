@@ -5,6 +5,10 @@ public class HashTableOpenAdressing<K,V> {
 				m;
 	private Entry<K,V>[] table;
 	
+	public HashTableOpenAdressing(){
+		this(101);
+	}
+	
 	public HashTableOpenAdressing(int capacity){
 		this.n=0;
 		this.m=capacity;
@@ -30,13 +34,29 @@ public class HashTableOpenAdressing<K,V> {
 	
 	/*public boolean contains(K key){
 		
-	}
+	}*/
 	
 	public V add(K key,V value){
-		
+		if(this.n>=this.m-1 || this.n/this.m >= 0.75){
+			this.resize();
+		}
+		int pos=this.hash(key);
+		for(int i=pos,contador=0; contador<this.m; i=++i%this.m,contador++){
+			if(this.table[i]==null){
+				this.table[i]=new Entry<K,V>(key,value);
+				this.n++;
+				break;
+			}
+			else if(this.table[i].equals(key)){
+				V toBeSaved=this.table[i].value;
+				this.table[i].value=value;
+				return toBeSaved;
+			}
+		}
+		return null;
 	}
 	
-	public remove(K key){
+	/*public remove(K key){
 		
 	}*/
 	
