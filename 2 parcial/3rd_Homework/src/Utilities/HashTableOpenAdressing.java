@@ -56,9 +56,25 @@ public class HashTableOpenAdressing<K,V> {
 		return null;
 	}
 	
-	/*public remove(K key){
-		
-	}*/
+	public V remove(K key){
+		int pos=this.hash(key);
+		int availableSpot=-1;
+		V toBeSaved=null;
+		for(int i=pos;this.table[i]!=null;i=++i%this.m){
+			if(this.table[i].key.equals(key)){
+				toBeSaved=this.table[i].value;
+				this.table[i]=null;
+				availableSpot=i;
+				this.n--;
+			}
+			else if(availableSpot!=-1 && this.hash(this.table[i].key)==pos){
+				this.table[availableSpot]=this.table[i];
+				this.table[i]=null;
+				availableSpot=i;
+			}
+		}
+		return toBeSaved;
+	}
 	
 	public int hash(K key){
 		return (key.hashCode()&0x7FFFFFFF)%m;
