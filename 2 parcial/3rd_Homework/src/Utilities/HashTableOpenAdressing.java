@@ -93,6 +93,14 @@ public class HashTableOpenAdressing<K,V> {
 		return (key.hashCode()&0x7FFFFFFF)%m;
 	}
 	
+	public Iterator<K> getKeyIterator(){
+		return new keyIterator<K>();
+	}
+	
+	public Iterator<V> getValueIterator(){
+		return new valueIterator<V>();
+	}
+	
 	private static class Entry<K,V>{
 		K key;
 		V value;
