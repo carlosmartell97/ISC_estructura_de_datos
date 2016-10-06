@@ -85,7 +85,7 @@ public class Evaluation {
 	}
 	
 	public static void main(String[] args) {
-		ChainLinearList<Character> chain=new ChainLinearList<Character>();
+		/*ChainLinearList<Character> chain=new ChainLinearList<Character>();
 		chain.add(0, '1');
 		chain.add(0, '2');
 		chain.add(0, '3');
@@ -94,6 +94,6 @@ public class Evaluation {
 		System.out.println(chain);
 		
 		System.out.println("Recursive: "+Recursive(chain));
-		System.out.println("Iterative:"+Iterative(chain));;
+		System.out.println("Iterative: "+Iterative(chain));*/
 	}
 }
