@@ -32,9 +32,9 @@ public class HashTableOpenAdressing<K,V> {
 		this.table=biggerTable;
 	}
 	
-	/*public boolean contains(K key){
-		
-	}*/
+	public boolean contains(K key){
+		return this.getValue(key)!=null;
+	}
 	
 	public V getValue(K key){
 		int pos=this.hash(key);
