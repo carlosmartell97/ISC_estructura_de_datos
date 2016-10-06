@@ -125,7 +125,33 @@ public class HashTableOpenAdressing<K,V> {
 			if(!this.hasNext()){
 				throw new NoSuchElementException("this is the last position of the table");
 			}
+			return (K) HashTableOpenAdressing.this.table[position].key;
+		}	
+	}
+	
+	private class valueIterator<V> implements Iterator<V>{
+		int position;
+		
+		public valueIterator(){
+			for(int i=0;i<HashTableOpenAdressing.this.m;i++){
+				if(HashTableOpenAdressing.this.table[i]!=null){
+					this.position=i;
+					break;
+				}
+			}
 		}
 		
+		@Override
+		public boolean hasNext() {
+			return this.position<HashTableOpenAdressing.this.m;
+		}
+
+		@Override
+		public V next() {
+			if(!this.hasNext()){
+				throw new NoSuchElementException("this is the last position of the table");
+			}
+			return (V) HashTableOpenAdressing.this.table[position].value;
+		}	
 	}
 }
