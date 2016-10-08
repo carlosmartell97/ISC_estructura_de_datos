@@ -6,9 +6,9 @@ public class practice1_1<T>{
 	
 	public void rightShift(int k){
 		T[] newElement = (T[]) new Object[this.element.length+k]; // O(1)
-		for(int i=0;i<k;i++){ // O(k)
+		/*for(int i=0;i<k;i++){ // O(k)
 			newElement[i]=null; // O(k-1)
-		}
+		}*/
 		System.arraycopy(this.element, 0, newElement, k, this.element.length); // O(1)
 		this.element=newElement; // O(1)
 	}
