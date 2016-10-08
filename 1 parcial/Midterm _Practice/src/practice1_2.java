@@ -1,4 +1,4 @@
-//no lo probé, pero estoy casi seguro que funciona
+//	ya lo probé y funciona
 public class practice1_2<T extends Comparable>{
 	private ChainNode<T> firstNode;
 	private int size;
@@ -48,5 +48,9 @@ public class practice1_2<T extends Comparable>{
 	
 	public static void main(String[] args) {
 		practice1_2 o = new practice1_2();
+		o.add(0, 8);
+		o.add(0, 7);
+		o.add(0, 5);
+		System.out.println(o.isSorted());
 	}
 }
