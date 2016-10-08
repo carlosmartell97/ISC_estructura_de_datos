@@ -2,7 +2,7 @@
 import java.util.Arrays;
 
 public class practice1_3<T>{
-	private int[][] sampleCompactElement={
+	private int[][] sampleMatrix={
 			{1,0,0,0,6},
 			{2,11,0,0,7},
 			{3,0,12,0,8},
