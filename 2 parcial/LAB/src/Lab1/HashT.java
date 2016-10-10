@@ -16,13 +16,15 @@ public class HashT<K,V> {
 	private int n;	// cantidad de datos en la tabla
 	private Node<K,V>[] tabla;
 	private final static int INITIAL_CAPACITY=11;
+	private final static double Charge=0.75;
 	
 	public HashT(){
 		this(INITIAL_CAPACITY);
 	}
 	public HashT(int newCapacity){
 		this.m=newCapacity;
-		//tabla=new Node<K,V>[50];
+		this.n=0;
+		this.tabla=new Node[50];
 	}
 	
 	public int hash(K key){
@@ -108,9 +110,16 @@ public class HashT<K,V> {
 		}
 	}
 	
-	private class ValueIterator extends HashIterator<K,V>{
-		Node<K,V> next;
-		//	...
+	private class ValueIterator extends HashIterator{
+		V nextValue;
+		
+		public ValueIterator(){
+			super();
+		}
+		
+		public V next(){
+			this.nextValue=this.next();
+		}
 	}
 	
 	private abstract class HashIterator<E> implements Iterator<E>{
