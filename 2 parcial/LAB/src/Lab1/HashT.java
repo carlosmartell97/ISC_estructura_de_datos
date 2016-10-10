@@ -174,18 +174,28 @@ public class HashT<K,V> {
 	}
 	
 	private abstract class HashIterator<E> implements Iterator<E>{
-		Node<K,V> next;
-		int index;
+		Queue<Node<K,V>> queue;
 		
 		public HashIterator(){
-			if(n>0){
-				
+			if(HashT.this.n>0){
+				this.queue=this.iter();
 			}
+		}
+		
+		public Queue<Node<K,V>> iter(){
+			Queue<Node<K,V>> queueReturned=new LinkedList<Node<K,V>>();
+			for(Node<K,V> node : HashT.this.tabla){
+				while(node!=null){
+					queueReturned.add(node);
+					node=node.next;
+				}
+			}
+			return queueReturned;
 		}
 		
 		@Override
 		public boolean hasNext() {
-			return this.next!=null;
+			return this.queue.peek()!=null;
 		}
 
 		/*@Override
@@ -197,7 +207,6 @@ public class HashT<K,V> {
 		public Node<K,V> nextNode(){
 			if(this.hasNext()){
 				return this.next;
-				//	...
 			}
 			throw new NoSuchElementException("there's no nextNode");
 		}
