@@ -41,7 +41,7 @@ public class HashT<K,V> {
 		return this.m==0;
 	}
 	
-	public V get(K key){
+	public V getValue(K key){
 		if(key==null){
 			throw new NullPointerException("llaves nulas no se aceptan");
 		}
@@ -55,10 +55,10 @@ public class HashT<K,V> {
 	}
 	
 	public boolean contains(K key){
-		return get(key)!=null;
+		return getValue(key)!=null;
 	}
 	
-	public void put(K key, V value){
+	public void add(K key, V value){
 		if(key==null || value==null){
 			throw new IllegalArgumentException("no se aceptan valores nulos");
 		}
@@ -98,6 +98,14 @@ public class HashT<K,V> {
 		return queue;
 	}
 	
+	public Iterator<V> getValueIterator(){
+		return new ValueIterator();
+	}
+	
+	public Iterator<K> getKeyIterator(){
+		return new KeyIterator();
+	}
+	
 	private static class Node<K,V>{
 		K key;
 		V value;
@@ -118,7 +126,21 @@ public class HashT<K,V> {
 		}
 		
 		public V next(){
-			this.nextValue=this.next();
+			this.nextValue=(V) this.next();
+			return this.nextValue;
+		}
+	}
+	
+	private class KeyIterator extends HashIterator{
+		K nextKey;
+		
+		public KeyIterator(){
+			super();
+		}
+		
+		public K next(){
+			this.nextKey=(K) this.next();
+			return this.nextKey;
 		}
 	}
 	
