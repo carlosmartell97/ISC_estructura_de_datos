@@ -34,7 +34,7 @@ public class HashT<K,V> {
 	}
 	
 	public int size(){
-		return this.m;
+		return this.n;
 	}
 	
 	public boolean isEmpty(){
@@ -213,6 +213,13 @@ public class HashT<K,V> {
 	}
 	
 	public static void main(String[] args) {
-		//	...
+		HashT<String,Integer> table=new HashT<String,Integer>();
+		
+		table.add("dos + dos", 4); System.out.println("size: "+table.size());
+		table.add("dos + cuatro", 6); System.out.println("size: "+table.size());
+		table.add("ocho - 1", 7); System.out.println("size: "+table.size());
+		table.add("cinco + 3", 8); System.out.println("size: "+table.size());
+		System.out.println("remove: "+table.remove("dos + dos")); System.out.println("size: "+table.size());
+		table.add("doez - cinco", 5); System.out.println("size: "+table.size());
 	}
 }
