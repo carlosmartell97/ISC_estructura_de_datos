@@ -227,5 +227,11 @@ public class HashT<K,V> {
 		if(key.hasNext()){
 			System.out.println(key.next());
 		}
+		
+		Iterator<Integer> value=table.getValueIterator();
+		System.out.println(value.next());
+		if(key.hasNext()){
+			System.out.println(value.next());
+		}
 	}
 }
