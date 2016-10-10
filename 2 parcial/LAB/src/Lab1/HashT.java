@@ -143,7 +143,7 @@ public class HashT<K,V> {
 		}
 		
 		public V next(){
-			this.nextValue=(V) this.next();
+			this.nextValue=(V) this.nextNode().value;
 			return this.nextValue;
 		}
 	}
@@ -156,7 +156,7 @@ public class HashT<K,V> {
 		}
 		
 		public K next(){
-			this.nextKey=(K) this.next();
+			this.nextKey=(K) this.nextNode().key;
 			return this.nextKey;
 		}
 	}
@@ -217,9 +217,15 @@ public class HashT<K,V> {
 		
 		table.add("dos + dos", 4); System.out.println("size: "+table.size());
 		table.add("dos + cuatro", 6); System.out.println("size: "+table.size());
-		table.add("ocho - 1", 7); System.out.println("size: "+table.size());
-		table.add("cinco + 3", 8); System.out.println("size: "+table.size());
+		table.add("ocho - uno", 7); System.out.println("size: "+table.size());
+		table.add("cinco + tres", 8); System.out.println("size: "+table.size());
 		System.out.println("remove: "+table.remove("dos + dos")); System.out.println("size: "+table.size());
-		table.add("doez - cinco", 5); System.out.println("size: "+table.size());
+		table.add("diez - cinco", 5); System.out.println("size: "+table.size());
+		
+		Iterator<String> key=table.getKeyIterator();
+		System.out.println(key.next());
+		if(key.hasNext()){
+			System.out.println(key.next());
+		}
 	}
 }
