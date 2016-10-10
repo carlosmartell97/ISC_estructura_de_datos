@@ -24,7 +24,7 @@ public class HashT<K,V> {
 	public HashT(int newCapacity){
 		this.m=newCapacity;
 		this.n=0;
-		this.tabla=new Node[50];
+		this.tabla=new Node[this.m];
 	}
 	
 	public int hash(K key){
@@ -37,7 +37,7 @@ public class HashT<K,V> {
 		return this.m;
 	}
 	
-	public boolean isEMpty(){
+	public boolean isEmpty(){
 		return this.m==0;
 	}
 	
@@ -86,6 +86,23 @@ public class HashT<K,V> {
 		this.n--;
 		
 		return returnedValue;
+	}
+	
+	public void clear(){
+		this.tabla=new Node[this.m];
+		this.n=0;
+	}
+	
+	public void rehash(){
+		this.n=0;
+		this.m*=2;
+		this.tabla=new Node[m];
+		Iterator<Node<K,V>> iter=new NodeIterator();
+	
+		while(iter.hasNext()){
+			Node<K,V> temp=iter.next();
+			this.add(temp.key, temp.value);
+		}
 	}
 	
 	public Iterable<K> keys(){
@@ -141,6 +158,18 @@ public class HashT<K,V> {
 		public K next(){
 			this.nextKey=(K) this.next();
 			return this.nextKey;
+		}
+	}
+	
+	private class NodeIterator extends HashIterator<Node<K,V>>{
+
+		public NodeIterator(){
+			super();
+		}
+		
+		@Override
+		public Node<K, V> next() {
+			return this.nextNode();
 		}
 	}
 	
