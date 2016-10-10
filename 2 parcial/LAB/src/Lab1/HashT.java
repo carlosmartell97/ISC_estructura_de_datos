@@ -206,7 +206,7 @@ public class HashT<K,V> {
 		
 		public Node<K,V> nextNode(){
 			if(this.hasNext()){
-				return this.next;
+				return this.queue.poll();
 			}
 			throw new NoSuchElementException("there's no nextNode");
 		}
