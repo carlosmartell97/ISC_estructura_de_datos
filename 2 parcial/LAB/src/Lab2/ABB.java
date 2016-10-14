@@ -62,7 +62,16 @@ public class ABB<K extends Comparable<K>,V> {
 			}
 		}
 		if(x==null){
-			this.root=new ABB(key,value);
+			this.root=new ABBNode(key,value);
+		}else{
+			if(compare==0){
+				x.value=x.value;
+			}
+			else if(temp.key<key){
+				temp.right=new ABBNode(key,value);
+			}else{
+				temp.left=new ABBNode(key,value);
+			}
 		}
 	}
 	
