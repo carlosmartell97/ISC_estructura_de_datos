@@ -28,20 +28,20 @@ public class ABB<K extends Comparable<K>,V> {
 	}
 	
 	public V get(K key){
-		return get(root,key);
-	}
-	
-	private V get(ABBNode root,K key){
-		if(root==null) return null;
-		int compare=key.compareTo(root.key);
-		if(compare<0){
-			return get(root.left,key);
+		ABBNode temp=root;
+		while(temp!=null){
+			int compare=key.compareTo(temp.key);
+			if(compare>0){
+				temp=temp.right;
+			}
+			else if(compare<0){
+				temp=temp.right;
+			}
+			else{
+				return temp.value;
+			}
 		}
-		else if(compare>0){
-			return get(root.right,key);
-		}else{
-			return root.value;
-		}
+		return null;
 	}
 	
 	public void put(K key,V value){
