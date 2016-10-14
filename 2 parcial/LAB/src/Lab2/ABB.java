@@ -28,7 +28,7 @@ public class ABB<K extends Comparable<K>,V> {
 	}
 	
 	public V get(K key){
-		ABBNode temp=root;
+		ABBNode temp=this.root;
 		while(temp!=null){
 			int compare=key.compareTo(temp.key);
 			if(compare>0){
@@ -45,7 +45,25 @@ public class ABB<K extends Comparable<K>,V> {
 	}
 	
 	public void put(K key,V value){
-		//...
+		ABBNode x=this.root;
+		ABBNode temp;
+		int compare;
+		while(x!=null){
+			temp=x;
+			compare=key.compareTo(x.key);
+			if(compare==0){
+				break;
+			}
+			else if(compare>0){
+				x=x.right;
+			}
+			else if(compare<0){
+				x=x.right;
+			}
+		}
+		if(x==null){
+			this.root=new ABB(key,value);
+		}
 	}
 	
 	private class ABBNode{
