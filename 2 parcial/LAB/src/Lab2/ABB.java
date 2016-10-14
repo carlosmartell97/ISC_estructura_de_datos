@@ -75,6 +75,22 @@ public class ABB<K extends Comparable<K>,V> {
 		}
 	}
 	
+	public String inOrder(){
+		if(this.root!=null){
+			inOrder(this.root);
+		}
+		else{
+			return "";
+		}
+	}
+	
+	private void inOrder(ABB<K, V>.ABBNode node) {
+		String output="";
+		if(node.left!=null){
+			output+=inOrder(node.left);
+		}
+	}
+
 	private class ABBNode{
 		K key;
 		V value;
