@@ -1,3 +1,4 @@
+//	ya debería de funcionar todo.
 public class practice2_1 {
 	public class BinaryTreeNode{
 		Object element;
