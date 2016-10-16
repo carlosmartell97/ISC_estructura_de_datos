@@ -1,6 +1,6 @@
 
 public class practice1_2 {
-	public class MinHeap{
+	public class MaxHeap{
 		Comparable[] heap;
 		int size;
 		
@@ -22,7 +22,13 @@ public class practice1_2 {
 				this.heap=newHeap;
 			}
 			
-			
+			int i=++this.size;
+			//	while "i" is not the root and child is bigger than parent
+			while(i!=1 && heap[i/2].compareTo(element)>0){
+				this.heap[i]=this.heap[i/2];
+				i=i/2;
+			}
+			heap[i]=element;
 		}
 	}
 }
