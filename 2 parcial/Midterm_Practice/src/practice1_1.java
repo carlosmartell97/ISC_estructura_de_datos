@@ -1,4 +1,4 @@
-
+//	ya debería de funcionar todo
 public class practice1_1 {
 	
 	public class BinaryTreeNode{
