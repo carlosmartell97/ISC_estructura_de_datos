@@ -1,4 +1,4 @@
-
+//	ya debería de funcionar todo.
 public class practice1_2 {
 	public class MaxHeap{
 		Comparable[] heap;
