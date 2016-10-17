@@ -1,6 +1,6 @@
-//	debería de funcionar
+//	debería de funcionar...
 public class practice3_1 {
-	private static int heightSoFar;
+	private static int maxDifferenceSoFar;
 	
 	public class BinaryTreeNode{
 		Object element;
@@ -12,23 +12,18 @@ public class practice3_1 {
 		BinaryTreeNode root;
 		
 		public int maxHeightDifference(){
-			heightSoFar=0;
-			maxHeightDifference(root.right,0);
-			int heightRight=heightSoFar;
-			
-			heightSoFar=0;
-			maxHeightDifference(root.left,0);
-			int heightLeft=heightSoFar;
-			
-			return Math.abs(heightRight-heightLeft);
+			maxDifferenceSoFar=0;
+			maxHeightDifference(root.right,1);
+			return maxDifferenceSoFar;
 		}
 		
-		private void maxHeightDifference(BinaryTreeNode root,int height){
+		private int maxHeightDifference(BinaryTreeNode root,int height){
 			if(root!=null){
-				maxHeightDifference(root.left,++height);
-				maxHeightDifference(root.right,++height);
-				heightSoFar=Math.max(heightSoFar, height);
+				int heightLeft=maxHeightDifference(root.left,++height);
+				int heightRight=maxHeightDifference(root.right,++height);
+				maxDifferenceSoFar=Math.max(maxDifferenceSoFar,Math.abs(heightLeft-heightRight));
 			}
+			return height;
 		}
 	}
 }
