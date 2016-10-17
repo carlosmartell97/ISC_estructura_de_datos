@@ -1,4 +1,4 @@
-//	debería ya de funcionar. Podría hacer testing cuando tenga tiempo...
+//	Ya funciona todo.
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -23,5 +23,17 @@ public class practice3_2 {
 		}
 		
 		return toBeReturned;
+	}
+	
+	public static void main(String[] args) {
+		Queue q=new LinkedList<Integer>();
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		q.add(4);
+		q.add(5);
+		q.add(6);
+		System.out.println(q);
+		System.out.println("2: "+reverseFirstK(2, q));
 	}
 }
