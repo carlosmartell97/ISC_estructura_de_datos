@@ -1,5 +1,7 @@
 package Lab2;
 
+import java.util.NoSuchElementException;
+
 public class ABB<K extends Comparable<K>,V> {
 	private ABBNode root;
 	
@@ -44,7 +46,7 @@ public class ABB<K extends Comparable<K>,V> {
 		return null;
 	}
 	
-	public void put(K key,V value){
+	public void add(K key,V value){
 		ABBNode x=this.root;
 		ABBNode temp;
 		int compare;
@@ -89,6 +91,23 @@ public class ABB<K extends Comparable<K>,V> {
 		if(node.left!=null){
 			output+=inOrder(node.left);
 		}
+	}
+	
+	public K min(){
+		if(isEmpty()){
+			throw new NoSuchElementException("your tree is empty...");
+		}
+		return min(this.root,this.root.key);
+	}
+	
+	private K min(ABBNode root,K minSoFar){
+		K smallest=minSoFar;
+		if(root!=null){
+			smallest=(root.key.compareTo(minSoFar)<0)?root.key:minSoFar;
+			min(root.left,smallest);
+			min(root.right,smallest);
+		}
+		return smallest;
 	}
 
 	private class ABBNode{
