@@ -134,6 +134,40 @@ public class ABB<K extends Comparable<K>,V> {
 		}
 		return smallest;
 	}
+	
+	public void delete(K key){
+		if(key==null){
+			throw new NullPointerException("the table is empty!")
+		}
+		root=delete(root, key);
+	}
+	
+	private ABBNode delete(ABBNode x, K key){
+		if(x==null){
+			return null;
+		}
+		int compare=key.compareTo(root.key);
+		if(compare<0){
+			x.left=delete(root.left,key);
+		}
+		else if(compare>0){
+			x.right=delete(root.right,key);
+		}
+		else{
+			if(root.right==null){
+				return root.left;
+			}
+			if(root.left==null){
+				return root.right;
+			}
+			ABBNode temp=root;
+			//root=min(temp.right);
+			//root.right=removeMin(temp.right);
+			//temp.temp=temp.left;
+		}
+		root.size=size(x.left)+size(root.right)+1;
+		return root;
+	}
 
 	private class ABBNode{
 		K key;
