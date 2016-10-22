@@ -32,7 +32,7 @@ public class ABB<K extends Comparable<K>,V> {
 		if(root==null){
 			return -1;
 		}
-		return 1+Math.max(height(root.left), height(root.right))
+		return 1+Math.max(height(root.left), height(root.right));
 	}
 	
 	public boolean contains(K key){
@@ -150,7 +150,7 @@ public class ABB<K extends Comparable<K>,V> {
 	
 	public void delete(K key){
 		if(key==null){
-			throw new NullPointerException("the table is empty!")
+			throw new NullPointerException("the table is empty!");
 		}
 		root=delete(root, key);
 	}
