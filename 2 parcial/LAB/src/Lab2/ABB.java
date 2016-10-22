@@ -2,6 +2,8 @@ package Lab2;
 
 import java.util.NoSuchElementException;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
 public class ABB<K extends Comparable<K>,V> {
 	private ABBNode root;
 	
@@ -20,6 +22,17 @@ public class ABB<K extends Comparable<K>,V> {
 	private int size(ABBNode root){
 		if(root==null) return 0;
 		return root.size;
+	}
+	
+	public int height(){
+		return height(this.root);
+	}
+	
+	private int height(ABBNode root){
+		if(root==null){
+			return -1;
+		}
+		return 1+Math.max(height(root.left), height(root.right))
 	}
 	
 	public boolean contains(K key){
