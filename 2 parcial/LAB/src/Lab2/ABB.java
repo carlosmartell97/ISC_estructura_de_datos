@@ -111,6 +111,13 @@ public class ABB<K extends Comparable<K>,V> {
 		return toBeReturned;
 	}
 	
+	public int leaves(){
+		if(this.root==null){
+			return 0;
+		}
+		return this.root.leaves();
+	}
+	
 	public K min(){
 		if(isEmpty()){
 			throw new NoSuchElementException("your tree is empty...");
@@ -142,6 +149,13 @@ public class ABB<K extends Comparable<K>,V> {
 		
 		public String toString(){
 			return "["+key+"-"+value+"]";
+		}
+		
+		public int leaves(){
+			if(this.left==null && this.right==null){
+				return 1;
+			}
+			return (this.left==null?0:this.left.leaves()) + (this.right==null?0:this.right.leaves());
 		}
 	}
 }
