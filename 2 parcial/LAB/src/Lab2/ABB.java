@@ -48,8 +48,8 @@ public class ABB<K extends Comparable<K>,V> {
 	
 	public void add(K key,V value){
 		ABBNode x=this.root;
-		ABBNode temp;
-		int compare;
+		ABBNode temp=null;
+		int compare = 0;
 		while(x!=null){
 			temp=x;
 			compare=key.compareTo(x.key);
@@ -69,7 +69,7 @@ public class ABB<K extends Comparable<K>,V> {
 			if(compare==0){
 				x.value=x.value;
 			}
-			else if(temp.key<key){
+			else if(temp.key.compareTo(key)<0){
 				temp.right=new ABBNode(key,value);
 			}else{
 				temp.left=new ABBNode(key,value);
@@ -79,18 +79,36 @@ public class ABB<K extends Comparable<K>,V> {
 	
 	public String inOrder(){
 		if(this.root!=null){
-			inOrder(this.root);
+			return this.inOrder(this.root);
 		}
-		else{
-			return "";
-		}
+		return "";
 	}
 	
-	private void inOrder(ABB<K, V>.ABBNode node) {
-		String output="";
-		if(node.left!=null){
-			output+=inOrder(node.left);
+	private String inOrder(ABBNode root) {
+		if(root==null){
+			return "";
 		}
+		String toBeReturned=this.inOrder(root.left);
+		toBeReturned+="["+root.key.toString()+","+root.value.toString()+"]";
+		toBeReturned+=this.inOrder(root.right);
+		return toBeReturned;
+	}
+	
+	public String postOrder(){
+		if(this.root!=null){
+			return this.postOrder(this.root);
+		}
+		return "";
+	}
+	
+	private String postOrder(ABBNode root){
+		if(root==null){
+			return "";
+		}
+		String toBeReturned=this.inOrder(root.left);
+		toBeReturned+=this.inOrder(root.right);
+		toBeReturned+="["+root.key.toString()+","+root.value.toString()+"]";
+		return toBeReturned;
 	}
 	
 	public K min(){
