@@ -1,6 +1,6 @@
 package Lab3;
-
-public class AVLTree<K,V> {
+//	pendiente todo lo de la práctica en PDF...
+public class AVLTree<K extends Comparable,V> {
 	private AVLNode root;
 	
 	public AVLNode rotateLeft(AVLNode root){
@@ -10,6 +10,29 @@ public class AVLTree<K,V> {
 		right.left=root;
 		return right;
 	}
+	
+	public V get(K key){
+		AVLNode temp=this.root;
+		while(temp!=null){
+			int compare=key.compareTo(temp.key);
+			if(compare>0){
+				temp=temp.right;
+			}
+			else if(compare<0){
+				temp=temp.right;
+			}
+			else{
+				return temp.value;
+			}
+		}
+		return null;
+	}
+	
+	/*private AVLNode insert(K key,V value){
+		if(key==null){
+			return new AVLNode(K,null,null);
+		}
+	}*/
 	
 	private class AVLNode{
 		K key;
