@@ -1,6 +1,5 @@
 //	debería de funcionar...
 public class practice3_1 {
-	private static int maxDifferenceSoFar;
 	
 	public class BinaryTreeNode{
 		Object element;
@@ -9,11 +8,12 @@ public class practice3_1 {
 	}
 	
 	public class LinkedBinaryTree{
+		private int maxDifferenceSoFar;
 		BinaryTreeNode root;
 		
 		public int maxHeightDifference(){
 			maxDifferenceSoFar=0;
-			maxHeightDifference(root.right,1);
+			maxHeightDifference(root,1);
 			return maxDifferenceSoFar;
 		}
 		
