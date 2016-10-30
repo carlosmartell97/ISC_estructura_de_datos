@@ -26,6 +26,16 @@ public class MyScratchStack<Item> {
 		return this.firstNode.element;
 	}
 	
+	public void push(Item item){
+		ChainNode<Item> temp=this.firstNode;
+		for(int i=0;i<this.size;i++){
+			temp=temp.next;
+		}
+		ChainNode<Item> newNode=new ChainNode(item,null);
+		temp.next=newNode;
+		this.size++;
+	}
+	
 	public String toString(){
 		String s="";
 		ChainNode<Item> temp=firstNode;
