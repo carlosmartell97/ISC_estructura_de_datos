@@ -24,7 +24,11 @@ public class MyScratchStack<Item> {
 	
 	public Item peek(){
 		if(isEmpty()) throw new EmptyStackException();
-		return this.firstNode.element;
+		ChainNode<Item> temp=this.firstNode;
+		for(int i=0;i<this.size-1;i++){
+			temp=temp.next;
+		}
+		return temp.element;
 	}
 	
 	public void push(Item item){
@@ -77,7 +81,7 @@ public class MyScratchStack<Item> {
 	}
 	
 	public static void main(String[] args) {
-		MyScratchStack o =new MyScratchStack();
+		/*MyScratchStack o =new MyScratchStack();
 		System.out.println("add: "+o);
 		o.push(5);
 		System.out.println("add: "+o);
@@ -101,6 +105,6 @@ public class MyScratchStack<Item> {
 		System.out.println("rem: "+o);
 		System.out.println("peak: "+o.peek());
 		o.pop();
-		System.out.println("rem: "+o);
+		System.out.println("rem: "+o);*/
 	}
 }
