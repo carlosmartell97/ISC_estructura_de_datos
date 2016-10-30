@@ -10,7 +10,7 @@ public class MyScratchStack<Item> {
 	
 	public MyScratchStack(){
 		this.size=0;
-		this.firstNode=new ChainNode<Item>();
+		this.firstNode=null;
 	}
 	
 	public boolean isEmpty() {
@@ -24,73 +24,6 @@ public class MyScratchStack<Item> {
 	public Item peek(){
 		if(isEmpty()) throw new EmptyStackException();
 		return this.firstNode.element;
-	}
-
-	public Item get(int index) {
-		if(index<0 || index>=this.size){
-			throw new IndexOutOfBoundsException("That index is out of bounds, dude...");
-		}
-		ChainNode<Item> temp = firstNode;
-		for(int i=0; i<index; i++){
-			temp=temp.next;
-		}
-		return temp.element;
-	}
-
-	public int indexOf(Item item) {
-		ChainNode<Item> temp = this.firstNode;
-		for(int i=0; i<this.size; i++){
-			if(item.equals(temp.element)){
-				return i;
-			}
-			temp=temp.next;
-		}
-		return -1;
-	}
-
-	public Item remove(int index) {
-		Item item;
-		if(index<0 || index>this.size){
-			throw new IndexOutOfBoundsException("that index is out of bounds, dude...");
-		}
-		else if(index==0){
-			//this.firstNode.next=firstNode.next.next;
-			item = this.firstNode.element;
-			this.firstNode=this.firstNode.next;
-			size--;
-		}
-		else{
-			ChainNode<Item> temp = this.firstNode;
-			for(int i=0; i<index-1; i++){
-				temp=temp.next;
-			}
-			item=temp.next.element;
-			temp.next=temp.next.next;
-			size--;
-		}
-		return item;
-	}
-
-	public void add(int index, Item item) {
-		ChainNode<Item> newNode=new ChainNode<Item> (item);
-		if(index<0 || index>this.size){
-			throw new IndexOutOfBoundsException("that index is out of bounds, dude...");
-		}
-		else if(index==0){
-			newNode.next=this.firstNode;
-			this.firstNode=newNode;
-		}
-		else{
-			ChainNode<Item> anterior= this.firstNode;
-			ChainNode<Item> siguiente;
-			for(int i=0; i<index-1; i++){
-				anterior=anterior.next;
-			}
-			siguiente=anterior.next;
-			newNode.next=siguiente;
-			anterior.next=newNode;
-		}
-		this.size++;
 	}
 	
 	public String toString(){
@@ -109,13 +42,6 @@ public class MyScratchStack<Item> {
 		protected Item element;
 		protected ChainNode<Item> next;
 		
-		public ChainNode(){
-			this.element=null;
-			this.next=null;
-		}
-		public ChainNode(Item element){
-			this(element,null);
-		}
 		public ChainNode(Item element, ChainNode next){
 			this.element=element;
 			this.next=next;
