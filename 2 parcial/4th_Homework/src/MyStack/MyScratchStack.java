@@ -1,3 +1,4 @@
+//	ya funciona todo.
 package MyStack;
 
 import java.util.EmptyStackException;
@@ -27,18 +28,24 @@ public class MyScratchStack<Item> {
 	}
 	
 	public void push(Item item){
+		if(isEmpty()){
+			this.firstNode=new ChainNode<Item>(item,null);
+			this.size++;
+			return;
+		};
 		ChainNode<Item> temp=this.firstNode;
-		for(int i=0;i<this.size;i++){
+		for(int i=0;i<this.size-1;i++){
 			temp=temp.next;
 		}
-		ChainNode<Item> newNode=new ChainNode(item,null);
+		ChainNode<Item> newNode=new ChainNode<Item>(item,null);
 		temp.next=newNode;
 		this.size++;
 	}
 	
 	public Item pop(){
+		if(isEmpty()) throw new EmptyStackException();
 		ChainNode<Item> temp=this.firstNode;
-		for(int i=0;i<this.size;i++){
+		for(int i=0;i<this.size-1;i++){
 			temp=temp.next;
 		}
 		Item toBeRemoved=temp.element;
@@ -67,5 +74,33 @@ public class MyScratchStack<Item> {
 			this.element=element;
 			this.next=next;
 		}
+	}
+	
+	public static void main(String[] args) {
+		MyScratchStack o =new MyScratchStack();
+		System.out.println("add: "+o);
+		o.push(5);
+		System.out.println("add: "+o);
+		System.out.println("peak: "+o.peek());
+		o.push(4);
+		System.out.println("add: "+o);
+		System.out.println("peak: "+o.peek());
+		o.push(3);
+		System.out.println("add: "+o);
+		System.out.println("peak: "+o.peek());
+		o.push(2);
+		System.out.println("add: "+o);
+		System.out.println("peak: "+o.peek());
+		o.pop();
+		System.out.println("rem: "+o);
+		System.out.println("peak: "+o.peek());
+		o.pop();
+		System.out.println("rem: "+o);
+		System.out.println("peak: "+o.peek());
+		o.pop();
+		System.out.println("rem: "+o);
+		System.out.println("peak: "+o.peek());
+		o.pop();
+		System.out.println("rem: "+o);
 	}
 }
