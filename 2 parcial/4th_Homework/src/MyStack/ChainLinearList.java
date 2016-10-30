@@ -57,12 +57,12 @@ public class ChainLinearList<Item> implements Stack<Item>{
 			size--;
 		}
 		else{
-			ChainNode<Item> anterior = this.firstNode;
+			ChainNode<Item> temp = this.firstNode;
 			for(int i=0; i<index-1; i++){
-				anterior=anterior.next;
+				temp=temp.next;
 			}
-			item=anterior.next.element;
-			anterior.next=anterior.next.next;
+			item=temp.next.element;
+			temp.next=temp.next.next;
 			size--;
 		}
 		return item;
@@ -77,7 +77,6 @@ public class ChainLinearList<Item> implements Stack<Item>{
 		else if(index==0){
 			newNode.next=this.firstNode;
 			this.firstNode=newNode;
-			this.size++;
 		}
 		else{
 			ChainNode<Item> anterior= this.firstNode;
@@ -88,32 +87,32 @@ public class ChainLinearList<Item> implements Stack<Item>{
 			siguiente=anterior.next;
 			newNode.next=siguiente;
 			anterior.next=newNode;
-			this.size++;
 		}
+		this.size++;
 	}
 	
 	public String toString(){
 		String s="";
-		ChainNode<Item> aux=firstNode;
+		ChainNode<Item> temp=firstNode;
 		int i=0;
 		while(i<this.size){
-			s=s+"["+aux.element.toString()+"]";
-			aux=aux.next;
+			s=s+"["+temp.element.toString()+"]";
+			temp=temp.next;
 			i++;
 		}
 		return s;
 	}
 	
 	static class ChainNode <Item>{
-		Item element;
-		ChainNode<Item> next;
+		protected Item element;
+		protected ChainNode<Item> next;
 		
 		public ChainNode(){
 			this.element=null;
 			this.next=null;
 		}
 		public ChainNode(Item element){
-			this.element=element;
+			this(element,null);
 		}
 		public ChainNode(Item element, ChainNode next){
 			this.element=element;
