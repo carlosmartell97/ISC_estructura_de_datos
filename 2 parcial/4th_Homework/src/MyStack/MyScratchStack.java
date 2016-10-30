@@ -36,6 +36,17 @@ public class MyScratchStack<Item> {
 		this.size++;
 	}
 	
+	public Item pop(){
+		ChainNode<Item> temp=this.firstNode;
+		for(int i=0;i<this.size;i++){
+			temp=temp.next;
+		}
+		Item toBeRemoved=temp.element;
+		temp=null;
+		this.size--;
+		return toBeRemoved;
+	}
+	
 	public String toString(){
 		String s="";
 		ChainNode<Item> temp=firstNode;
