@@ -1,5 +1,7 @@
 package MyStack;
 
+import java.util.EmptyStackException;
+
 import MyStack.ChainLinearList.ChainNode;
 
 public class MyScratchStack<Item> {
@@ -17,6 +19,11 @@ public class MyScratchStack<Item> {
 
 	public int size() {
 		return this.size;
+	}
+	
+	public Item peek(){
+		if(isEmpty()) throw new EmptyStackException();
+		return this.firstNode.element;
 	}
 
 	public Item get(int index) {
