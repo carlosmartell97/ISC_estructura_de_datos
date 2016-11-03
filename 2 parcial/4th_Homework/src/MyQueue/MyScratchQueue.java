@@ -1,6 +1,6 @@
+//	ya debería de funcionar todo.
 package MyQueue;
 
-import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 
 public class MyScratchQueue<Item> implements Queue<Item>{
@@ -54,16 +54,6 @@ public class MyScratchQueue<Item> implements Queue<Item>{
 		}
 		this.size--;
 		return toBeReturned.element;
-	}
-
-	public Item get(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int indexOf(Item item) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 	
 	private class ChainNode <Item>{
