@@ -1,57 +1,66 @@
 package MyQueue;
 
 import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 
 public class MyScratchQueue<Item> implements Queue<Item>{
 	private int size;
 	private ChainNode<Item> rear,
 							front;
 	
-	@Override
 	public boolean isEmpty() {
 		return this.size==0;
 	}
 
-	@Override
 	public int size() {
 		return this.size;
 	}
 
-	@Override
 	public Item front() {
-		if(this.isEmpty()){
-			return null;
-		}
+		if(this.isEmpty()) throw new NoSuchElementException("Queue is empty");
 		return this.front.element;
 	}
 
-	@Override
 	public Item rear() {
-		if(this.isEmpty()){
-			return null;
-		}
+		if(this.isEmpty()) throw new NoSuchElementException("Queue is empty");
 		return this.rear.element;
 	}
 
-	@Override
 	public void enqueue(Item item) {
-		// TODO Auto-generated method stub
-		
+		if(this.isEmpty()){
+			this.front=new ChainNode<Item>(item);
+			this.rear=new ChainNode<Item>(item);
+		}
+		else{
+			ChainNode<Item> newNode=new ChainNode<Item>(item);
+			this.rear.next=newNode;
+			this.rear=newNode;
+		}
+		this.size++;
 	}
 
-	@Override
 	public Item dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.isEmpty()){
+			return null;
+		}
+		ChainNode<Item> toBeReturned=this.front;
+		if(this.front.equals(this.rear)){
+			//size is 1
+			this.front=null;
+			this.rear=null;
+		}
+		else{
+			this.front=this.front.next;
+		}
+		this.size--;
+		return toBeReturned.element;
 	}
 
-	@Override
 	public Item get(int index) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public int indexOf(Item item) {
 		// TODO Auto-generated method stub
 		return 0;
