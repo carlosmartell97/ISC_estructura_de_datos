@@ -7,7 +7,5 @@ public interface Queue<Item> {
 	public Item rear();
 	public void enqueue(Item item);
 	public Item dequeue();
-	public Item get(int index);
-	public int indexOf(Item item);
 	public String toString();
 }
