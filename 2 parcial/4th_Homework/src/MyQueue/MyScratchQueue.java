@@ -1,5 +1,7 @@
 package MyQueue;
 
+import java.util.EmptyStackException;
+
 public class MyScratchQueue<Item> implements Queue<Item>{
 	private int size;
 	private ChainNode<Item> rear,
@@ -7,26 +9,28 @@ public class MyScratchQueue<Item> implements Queue<Item>{
 	
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.size==0;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.size;
 	}
 
 	@Override
 	public Item front() {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.isEmpty()){
+			return null;
+		}
+		return this.front.element;
 	}
 
 	@Override
 	public Item rear() {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.isEmpty()){
+			return null;
+		}
+		return this.rear.element;
 	}
 
 	@Override
