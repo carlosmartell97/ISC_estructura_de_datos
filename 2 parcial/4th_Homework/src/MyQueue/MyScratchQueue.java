@@ -1,7 +1,10 @@
 package MyQueue;
 
-public class MyScratchQueue implements Queue<Item>{
-
+public class MyScratchQueue<Item> implements Queue<Item>{
+	private int size;
+	private ChainNode<Item> rear,
+							front;
+	
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
@@ -50,4 +53,12 @@ public class MyScratchQueue implements Queue<Item>{
 		return 0;
 	}
 	
+	private class ChainNode <Item>{
+		Item element;
+		ChainNode<Item> next;
+		
+		public ChainNode(Item element){
+			this.element=element;
+		}
+	}
 }
