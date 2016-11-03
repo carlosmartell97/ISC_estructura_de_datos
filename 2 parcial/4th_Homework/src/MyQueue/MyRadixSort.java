@@ -1,4 +1,4 @@
-//	ya debería de funcionar todo
+//	ya debería de funcionar todo.
 package MyQueue;
 
 public class MyRadixSort {
@@ -24,5 +24,6 @@ public class MyRadixSort {
 			}
 			power*=10;
 		}
+		return nums;
 	}
 }
