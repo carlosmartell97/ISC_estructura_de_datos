@@ -1,7 +1,8 @@
 package Lab3;
 //	pendiente todo lo de la práctica en PDF...
-public class AVLTree<K extends Comparable,V> {
+public class AVLTree<Item extends Comparable> {
 	private AVLNode root;
+	private final int ALLOWED_IMBALANCE = 1;
 	
 	public AVLNode rotateLeft(AVLNode root){
 		//	al final, el nodo que regresa debería de ser el nuevo nodo en ese punto
@@ -11,7 +12,7 @@ public class AVLTree<K extends Comparable,V> {
 		return right;
 	}
 	
-	public V get(K key){
+	/*public V get(K key){
 		AVLNode temp=this.root;
 		while(temp!=null){
 			int compare=key.compareTo(temp.key);
@@ -26,6 +27,10 @@ public class AVLTree<K extends Comparable,V> {
 			}
 		}
 		return null;
+	}*/
+	
+	public void insert(){
+		
 	}
 	
 	/*private AVLNode insert(K key,V value){
@@ -35,8 +40,7 @@ public class AVLTree<K extends Comparable,V> {
 	}*/
 	
 	private class AVLNode{
-		K key;
-		V value;
+		Item content;
 		AVLNode right,
 				left;
 		int height;
