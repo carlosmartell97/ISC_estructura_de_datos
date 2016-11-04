@@ -4,12 +4,40 @@ public class AVLTree<Item extends Comparable> {
 	private AVLNode root;
 	private final int ALLOWED_IMBALANCE = 1;
 	
-	public AVLNode rotateLeft(AVLNode root){
-		//	al final, el nodo que regresa debería de ser el nuevo nodo en ese punto
-		AVLNode right=root.right;
-		root.right=right.left;
-		right.left=root;
+	private AVLNode leftRotate(AVLNode node) {
+		if(node == null){
+			return null;
+		}
+		//Save reference to the right child of the given node
+		//and the left child of the right child.
+		AVLNode right = node.right;
+		AVLNode futureRight = right.left;
+		//Make the right child the new root of the subtree.
+		right.left = node;
+		node.right = futureRight;
+		
+		//Change the height of the node.
+		node.height = Math.max(height(node.left),height(node.right))+1;
+		right.height = Math.max(height(right.left),height(right.right))+1;
 		return right;
+	}
+	
+	private AVLNode rightRotate(AVLNode node) {
+		if(node == null){
+			return null;
+		}
+		//Save reference to the left child of the given node
+		//and the right child of the left child.
+		AVLNode left = node.left;
+		AVLNode futureLeft = left.right;
+		//Make the left child the new root of the subtree.
+		left.right = node;
+		node.left = futureLeft;
+		
+		//Change the height of the node.
+		node.height = Math.max(height(node.left),height(node.right))+1;
+		left.height = Math.max(height(left.left),height(left.right))+1;
+		return left;
 	}
 	
 	private int height(AVLNode node){
@@ -42,6 +70,8 @@ public class AVLTree<Item extends Comparable> {
 		node.height = Math.max(height(node.left),height(node.right))+1;
 		return node;
 	}
+	
+	
 	
 	/*public V get(K key){
 		AVLNode temp=this.root;
