@@ -3,5 +3,5 @@ package database;
 import java.util.HashMap;
 
 public class Database {
-	HashMap<User,String> users;
+	HashMap<User,String> users;//tabla hash de usuarios
 }
