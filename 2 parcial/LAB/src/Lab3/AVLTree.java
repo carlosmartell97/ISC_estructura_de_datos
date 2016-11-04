@@ -40,6 +40,18 @@ public class AVLTree<Item extends Comparable> {
 		return left;
 	}
 	
+	private AVLNode rightLeftRotate(AVLNode t) {
+		//Fix the right reference first, then do a simple left rotation.
+		t.right = rightRotate(t.right);
+		return leftRotate(t);
+	}
+	
+	private AVLNode leftRightRotate(AVLNode t) {
+		//Fix the left reference first, then do a simple right rotation.
+		t.left = leftRotate(t.left);
+		return rightRotate(t);
+	}
+	
 	private int height(AVLNode node){
 		if(node == null)
 			return 0;
