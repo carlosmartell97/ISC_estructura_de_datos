@@ -102,8 +102,18 @@ public class AVLTree<Item extends Comparable> {
 		return null;
 	}*/
 	
-	public void insert(){
-		
+	public void insert(Item element){
+		this.root = insert(element,this.root);
+	}
+	private AVLNode insert(Item element,AVLNode node){
+		if(node == null)
+			return new AVLNode(element,null,null);
+		int compareResult = element.compareTo(node.content);
+		if(compareResult < 0)
+			node.left = insert(element,node.left);
+		else if (compareResult > 0)
+			node.right = insert(element,node.right);
+		return balance(node);
 	}
 	
 	/*private AVLNode insert(K key,V value){
@@ -117,6 +127,12 @@ public class AVLTree<Item extends Comparable> {
 		AVLNode right,
 				left;
 		int height;
+		
+		private AVLNode(Item content, AVLNode left, AVLNode right){
+			this.content = content;
+			this.left = this.right = null; 
+			this.height = 1;
+		}
 	}
 }
 
