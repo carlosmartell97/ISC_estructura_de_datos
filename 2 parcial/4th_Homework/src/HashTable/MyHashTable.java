@@ -39,7 +39,7 @@ public class MyHashTable<K,V> implements Dictionary<K,V>{
 	
 	public V getValue(K key){
 		int pos=this.hash(key);
-		for(Node<K,V> x=this.table[pos]; x!=null; x=x.next;){
+		for(Node<K,V> x=this.table[pos]; x!=null; x=x.next){
 			if(x.key.equals(key)){
 				return x.value;
 			}
@@ -49,6 +49,43 @@ public class MyHashTable<K,V> implements Dictionary<K,V>{
 	
 	public boolean contains(K key){
 		return this.getValue(key)!=null;
+	}
+	
+	public V add(K key, V item) {
+		if(this.size >= this.m-1 || (this.size+0.0)/(this.m) >= DEFAULT_CHARGE)
+			this.rehash();
+		int pos = this.hash(key);
+		for(Node<K,V> x=this.table[pos]; x!=null; x=x.next){
+			if(x.key.equals(key)){
+				V willReturn = x.value;
+				x.value = item;
+				return willReturn;
+			}
+		}
+		Node<K,V> added = new Node<K,V>(key,item,this.table[pos]);
+		this.table[pos] = added;
+		this.size++;
+		return null;
+	}
+
+	public V remove(K key) {
+		int pos = this.hash(key);
+		Node<K,V> first = this.table[pos];
+		if(first.key.equals(key)){
+			V willReturn = first.value;
+			this.table[pos] = first.next;
+			this.size--;
+			return willReturn;
+		}
+		for(Node<K,V> x=first; x.next!=null; x=x.next){
+			if(x.next.key.equals(key)){
+				V willReturn = x.next.value;
+				x.next = x.next.next;
+				this.size--;
+				return willReturn;
+			}
+		}
+		return null;
 	}
 	
 	public Iterator<K> getKeyIterator() {
