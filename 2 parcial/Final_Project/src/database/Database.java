@@ -10,9 +10,13 @@ public class Database {
 		users.put(newName,user);
 	}
 	
-	public void addInvoice(String name,Integer newInvoice,String newArticle,Integer newPrice){
-		Invoice invoice=new Invoice(newArticle,newPrice);
-		users.get(name).invoices.put(newInvoice, invoice);
+	public void addInvoice(String name,Integer invoice,String item,Integer price){
+		if(users.get(name).invoices.containsKey(invoice)){
+			users.get(name).invoices.get(invoice).addArticle(item, price);
+		}else{
+		Invoice a=new Invoice(item,price);
+		users.get(name).invoices.put(invoice, a);
+		}
 	}
 	
 	public boolean contains(String name){
