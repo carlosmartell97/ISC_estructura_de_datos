@@ -3,32 +3,29 @@ package database;
 import java.util.HashMap;
 
 public class Database {
-	protected static HashMap<User,String> users=new HashMap();
+	protected static HashMap<String,User> users=new HashMap();
 	
 	public String getAdress(String name){
-		User test=new User(name);
-		return users.get(name);
+		return users.get(name).address;
 	}
 	
 	public void add(String newName,String address){
-		User name=new User(newName);
-		users.put(name, address);
+		User user=new User(address);
+		users.put(newName,user);
 	}
 	
 	
-	public void contains(String key){
-		
+	public boolean contains(String key){
+		return users.containsKey(key);
 	}
 	
 	public static void main(String[] args) {
 		
 		Database database=new Database();
 		database.add("Juan","Bugambilias");
-		//System.out.println(database.getAdress("Juan"));
-		System.out.println(database.getAdress("Juan"));
 		
-		/*User uno = new User("s");
-		User dos = new User("a");
-		System.out.println(uno.equals(dos));*/
+		System.out.println(database.getAdress("Juan"));
+		System.out.println(database.contains("Juan"));
+		System.out.println(database.contains("John"));
 	}
 }
