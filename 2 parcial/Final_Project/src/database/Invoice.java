@@ -8,6 +8,10 @@ public class Invoice {
 	protected HashMap<String,Integer> articles=new HashMap();
 	
 	public Invoice(String newArticle,Integer newPrice){
+		this.addArticle(newArticle,newPrice);
+	}
+	
+	public void addArticle(String newArticle,Integer newPrice){
 		articles.put(newArticle,newPrice);
 	}
 	
