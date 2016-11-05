@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
-public class MyHashTable<K,V> {
+public class MyHashTable<K,V> implements Dictionary<K,V>{
 	private int m,
 				size;
 	private Node<K,V>[] table;
@@ -20,6 +20,33 @@ public class MyHashTable<K,V> {
 		this.m=m;
 		this.size=0;
 		this.table=new Node[m];
+	}
+	
+	public boolean isEmpty(){
+		return this.size==0;
+	}
+	
+	public int size(){
+		return this.size;
+	}
+	
+	public void clear(){
+		for(int i=0;i<this.size;i++){
+			this.table[i]=null;
+		}
+		this.size=0;
+	}
+	
+	private void rehash(){
+		Iterator<Node<K,V>> nodes=new NodeIterator();
+		this.m*=2;
+		this.table=new Node[m];
+		this.size=0;
+		
+		while(nodes.hasNext()){
+			Node<K,V> temp=nodes.next();
+			this.add(temp.key,temp.value);
+		}
 	}
 	
 	/**
