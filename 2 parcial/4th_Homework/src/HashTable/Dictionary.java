@@ -10,6 +10,6 @@ public interface Dictionary<K,V> {
 	public Iterator<K> getKeyIterator();
 	public Iterator<V> getValueIterator();
 	public boolean isEmpty();
-	public int getSize();
+	public int size();
 	public void clear();
 }
