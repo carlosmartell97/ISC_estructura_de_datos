@@ -1,6 +1,7 @@
 package database;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class Database {
 	protected static HashMap<String,User> users=new HashMap();
@@ -11,7 +12,13 @@ public class Database {
 	}
 	
 	public void addInvoice(String name,Integer invoice,String item,Integer price){
+		for(Entry<Integer,Invoice> search: users.get(name).invoices.entrySet()){
+			if(invoice.equals(search.getKey())){
+				throw new IllegalArgumentException("that invoice already exists");
+			}
+		}
 		if(users.get(name).invoices.containsKey(invoice)){
+			System.out.println("do");
 			users.get(name).invoices.get(invoice).addArticle(item, price);
 		}else{
 		Invoice a=new Invoice(item,price);
