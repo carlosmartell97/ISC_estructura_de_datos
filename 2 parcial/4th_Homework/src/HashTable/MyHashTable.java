@@ -37,6 +37,28 @@ public class MyHashTable<K,V> implements Dictionary<K,V>{
 		this.size=0;
 	}
 	
+	public V getValue(K key){
+		int pos=this.hash(key);
+		for(Node<K,V> x=this.table[pos]; x!=null; x=x.next;){
+			if(x.key.equals(key)){
+				return x.value;
+			}
+		}
+		return null;
+	}
+	
+	public boolean contains(K key){
+		return this.getValue(key)!=null;
+	}
+	
+	public Iterator<K> getKeyIterator() {
+		return new KeyIterator();
+	}
+
+	public Iterator<V> getValueIterator() {
+		return new ValueIterator();
+	}
+	
 	private void rehash(){
 		Iterator<Node<K,V>> nodes=new NodeIterator();
 		this.m*=2;
