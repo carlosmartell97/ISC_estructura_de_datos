@@ -3,10 +3,10 @@ package database;
 import java.util.HashMap;
 
 public class User {
-	String name;
+	String address;
 	
-	public User(String name){
-		this.name=name;
+	public User(String address){
+		this.address=address;
 	}
-	public HashMap<Invoice,Integer> invoices;
+	public HashMap<String,Invoice> invoices;
 }
