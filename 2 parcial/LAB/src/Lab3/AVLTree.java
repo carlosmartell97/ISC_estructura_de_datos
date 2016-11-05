@@ -102,6 +102,10 @@ public class AVLTree<Item extends Comparable> {
 		return null;
 	}*/
 	
+	/**
+	 * insert new Element. Will do all necessary rotations for balancing height
+	 * @param element
+	 */
 	public void insert(Item element){
 		this.root = insert(element,this.root);
 	}
