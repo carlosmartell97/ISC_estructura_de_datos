@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 
 public class MyHashTable<K,V> implements Dictionary<K,V>{
-	private int m,
-				size;
+	protected int	m,
+					size;
 	private Node<K,V>[] table;
 	private static final int MAX_CAPACITY=101;
 	private static final double DEFAULT_CHARGE=0.75;
@@ -96,7 +96,7 @@ public class MyHashTable<K,V> implements Dictionary<K,V>{
 		return new ValueIterator();
 	}
 	
-	private void rehash(){
+	protected void rehash(){
 		Iterator<Node<K,V>> nodes=new NodeIterator();
 		this.m*=2;
 		this.table=new Node[m];
@@ -119,7 +119,7 @@ public class MyHashTable<K,V> implements Dictionary<K,V>{
 		return key.hashCode()& 0x7FFFFFF5%m;
 	}
 	
-	private static class Node<K,V>{
+	static class Node<K,V>{
 		K key;
 		V value;
 		Node<K,V> next;
