@@ -8,9 +8,9 @@ import java.util.Queue;
 public class MyHashTable<K,V> implements Dictionary<K,V>{
 	protected int	m,
 					size;
-	private Node<K,V>[] table;
+	protected Node<K,V>[] table;
 	private static final int MAX_CAPACITY=101;
-	private static final double DEFAULT_CHARGE=0.75;
+	protected static final double DEFAULT_CHARGE=0.75;
 	
 	public MyHashTable(){
 		this(MAX_CAPACITY);
