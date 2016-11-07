@@ -1,35 +1,32 @@
 package TreePackage;
 
 public class BinaryNode implements BTNode{
-
+	private int key;
+	private BinaryNode 	left,
+						right;
+	
 	public int getKey() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.key;
 	}
 
 	public BTNode gLeft() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.left;
 	}
 
 	public BTNode gRight() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.right;
 	}
 
 	public void sKey(int AValue) {
-		// TODO Auto-generated method stub
-		
+		this.key=AValue;
 	}
 
 	public void sLeft(BTNode AValue) {
-		// TODO Auto-generated method stub
-		
+		this.left=(BinaryNode) AValue;
 	}
 
 	public void sRight(BTNode AValue) {
-		// TODO Auto-generated method stub
-		
+		this.right=(BinaryNode) AValue;
 	}
 
 }
