@@ -1,19 +1,23 @@
 package TreePackage;
 
 public class BinaryTree implements BTree{
-
+	private BinaryNode root;
+	
 	public boolean IsEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.root==null;
 	}
 
 	public BinaryNode gRoot() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.root;
 	}
 
 	public int Count() {
-		// TODO Auto-generated method stub
+		return this.Count(this.root);
+	}
+	
+	private int Count(BinaryNode root){
+		if(root==null) return 0;
+		if(root.gRight()==null && root.gLeft()==null) return 1;
 		return 0;
 	}
 
