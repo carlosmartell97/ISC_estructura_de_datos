@@ -18,22 +18,31 @@ public class BinaryTree implements BTree{
 	private int Count(BinaryNode root){
 		if(root==null) return 0;
 		if(root.gRight()==null && root.gLeft()==null) return 1;
-		return 0;
+		
+		int total=Count((BinaryNode) root.gRight());
+		total+=Count((BinaryNode) root.gLeft());
+		
+		return total;
 	}
 
 	public int Size(BinaryNode ATree) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(ATree==null) return 0;
+		
+		int right=Size((BinaryNode) ATree.gRight());
+		int left=Size((BinaryNode) ATree.gLeft());
+		
+		return left+right+1;
 	}
 
 	public int Height(BinaryNode ATree) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(ATree==null){
+			return 0;
+		}
+		return 1 + Math.max(Height((BinaryNode) ATree.gLeft()),Height((BinaryNode) ATree.gRight()));
 	}
 
 	public int Size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.Size(this.root);
 	}
 
 }
