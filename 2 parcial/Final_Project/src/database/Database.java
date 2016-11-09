@@ -21,9 +21,18 @@ public class Database {
 			System.out.println("do");
 			users.get(name).invoices.get(invoice).addArticle(item, price);
 		}else{
-		Invoice a=new Invoice(item,price);
-		users.get(name).invoices.put(invoice, a);
+			Invoice a=new Invoice(item,price);
+			users.get(name).invoices.put(invoice, a);
+			invoices.put(invoice, name);
 		}
+	}
+	
+	public void AddItem(Integer invoice,String item, Integer price){
+		String name=invoices.get(invoice);
+		if (name==null){
+			throw new IllegalArgumentException("that invoice already exists");
+		}
+		this.addInvoice(name,invoice,item,price);
 	}
 	
 	public boolean contains(String name){
