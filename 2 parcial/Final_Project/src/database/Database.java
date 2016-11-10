@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 public class Database {
 	protected static HashMap<String,User> users=new HashMap();
+	protected static HashMap<Integer,String> invoices_names=new HashMap();
 	
 	public void addUser(String newName,String address){
 		User user=new User(address);
@@ -23,12 +24,12 @@ public class Database {
 		}else{
 			Invoice a=new Invoice(item,price);
 			users.get(name).invoices.put(invoice, a);
-			invoices.put(invoice, name);
+			invoices_names.put(invoice, name);
 		}
 	}
 	
 	public void AddItem(Integer invoice,String item, Integer price){
-		String name=invoices.get(invoice);
+		String name=invoices_names.get(invoice);
 		if (name==null){
 			throw new IllegalArgumentException("that invoice already exists");
 		}
@@ -47,6 +48,11 @@ public class Database {
 		return users.get(name).invoices.get(invoice).total();
 	}
 	
+	public int getInvoiceTotal(Integer invoice){
+		String name=invoices_names.get(invoice);
+		return users.get(name).invoices.get(invoice).total();
+	}
+	
 	public static void main(String[] args) {
 		
 		Database database=new Database();
@@ -56,8 +62,9 @@ public class Database {
 		System.out.println("contains: "+database.contains("Juan"));
 		System.out.println("contains: "+database.contains("Pedro"));
 		
-		database.addInvoice("Juan", 0010, "Ketchup", 50);
+		//database.addInvoice("Juan", 0010, "Ketchup", 50);
 		database.addInvoice("Juan", 0010, "Ketchup", 80);
 		System.out.println("total: "+database.getInvoiceTotal("Juan",0010));
+		System.out.println("total: "+database.getInvoiceTotal(0010));
 	}
 }
