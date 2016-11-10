@@ -12,13 +12,11 @@ public class Invoice {
 	}
 	
 	public void addArticle(String newArticle,Integer newPrice){
+		total+=newPrice;
 		articles.put(newArticle,newPrice);
 	}
 	
 	public int total(){
-		for(Entry<String, Integer> article: articles.entrySet()){
-			total+=article.getValue();
-		}
 		return total;
 	}
 }
