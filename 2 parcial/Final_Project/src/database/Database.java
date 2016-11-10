@@ -13,9 +13,10 @@ public class Database {
 	}
 	
 	public void addInvoice(String name,Integer invoice,String item,Integer price){
-		for(Entry<Integer,Invoice> search: users.get(name).invoices.entrySet()){
+		for(Entry<Integer,String> search: invoices_names.entrySet()){
 			if(invoice.equals(search.getKey())){
-				throw new IllegalArgumentException("that invoice already exists");
+				System.out.println("that invoice already exists, you can try with: "+nextAvailableInvoice(invoice));
+				return;
 			}
 		}
 		if(users.get(name).invoices.containsKey(invoice)){
@@ -36,6 +37,12 @@ public class Database {
 		this.addInvoice(name,invoice,item,price);
 	}
 	
+	public void removeInvoice(int invoice){
+		String name=invoices_names.get(invoice);
+		users.get(name).invoices.remove(name);
+		invoices_names.remove(invoice);
+	}
+	
 	public boolean contains(String name){
 		return users.containsKey(name);
 	}
@@ -53,6 +60,19 @@ public class Database {
 		return users.get(name).invoices.get(invoice).total();
 	}
 	
+	// this method's not returning the actual next available Invoice ID
+	public int nextAvailableInvoice(int invoice){
+		for(Entry<Integer, String> search: invoices_names.entrySet()){
+			invoice++;
+			if(invoice!=search.getKey()){
+				return invoice;
+			}
+		}
+		
+		return -1;
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		Database database=new Database();
@@ -64,7 +84,11 @@ public class Database {
 		
 		//database.addInvoice("Juan", 0010, "Ketchup", 50);
 		database.addInvoice("Juan", 0010, "Ketchup", 80);
+		database.addInvoice("Juan", 9, "Ketchup", 80);
+		database.addInvoice("Juan", 0011, "Ketchup", 80);
 		System.out.println("total: "+database.getInvoiceTotal("Juan",0010));
+		//database.removeInvoice(0010);
 		System.out.println("total: "+database.getInvoiceTotal(0010));
+		System.out.println(database.nextAvailableInvoice(0010));
 	}
 }
