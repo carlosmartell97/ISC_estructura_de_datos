@@ -34,23 +34,21 @@ public class WinnerTree<Item extends Comparable<Item>> implements TournamentTree
 		for(i=2;i<=lowExt;i+=2){
 			play((i+offset)/2,i-1,i);
 		}
-		//	Fabiola dice: qué caso atiendo aquí?
-		if(n%2==1){	//	Fabiola dice: qué hace aquí?
+		if(n%2==1){	//	este caso es cuando voy a tener una match con solo un jugador
 			play(n/2,tree[n-1],lowExt++);
-			i=lowExt+3;	//	Fabiola dice: para qué hago esto?
+			i=lowExt+3;	//	tengo que avanar 3 lugares
 		}
-		else{	//	Fabiola dice: ¿Para qué, y en qué caso hago esto?
+		else{	//	lal cantidad de jugadores es par, y sí podré 2 lugares
 			i=lowExt+2;
 		}
-		//	Fabiola dice: ¿Qué hace aquí?
-		for(;i<=n;i+=2){
+		for(;i<=n;i+=2){ //	vas jugando de 2 en 2
 			play((i-lowExt+n-1)/2,i-1,i);
 		}
 	}
 	
 	public void play(int parent, int left, int right){
-		tree[parent] = (players[left].compareTo(players[right])<0)?left:right;
-		while(parent%2==1){
+		tree[parent] = (players[left].compareTo(players[right])<0)?left:right; //	que el padre sea el ganador, el más chico
+		while(parent%2==1){ //	seguir jugando
 			tree[parent/2] = (players[tree[parent-1]].compareTo(players[tree[parent]])<0)?parent-1:parent;
 		}
 	}
@@ -62,28 +60,29 @@ public class WinnerTree<Item extends Comparable<Item>> implements TournamentTree
 			throw new IndexOutOfBoundsException(thePlayer+": invalid player");
 		}
 		int matchNode, leftChild, rightChild;
-		if(thePlayer<=lowExt){
-			matchNode=(offset+thePlayer)/2;
+		if(thePlayer<=lowExt){ //	potencia de 2
+			matchNode=(offset+thePlayer)/2;	// lugar donde irá ganador de leftChild y rightChild
 			leftChild=2*(matchNode-offset);
 			rightChild=leftChild+1;
 		}
-		else{
-			matchNode=(thePlayer-lowExt+n-1)/2;
-			if(2*matchNode==n-1){
+		else{ //	no es potencia de 2
+			matchNode=(thePlayer-lowExt+n-1)/2;	// lugar donde irá ganador de leftChild y rightChild
+			if(2*matchNode==n-1){	// this is the last node of the tree
 				leftChild=tree[2*matchNode];
 				rightChild=thePlayer;
 			}
-			else{
+			else{	// even, not last node of the tree
 				leftChild=2*matchNode-n+1+lowExt;
 				rightChild=leftChild+1;
 			}
 		}
-		tree[matchNode]=(players[leftChild].compareTo(players[rightChild])<0)?leftChild:rightChild;
-		if(matchNode==n-1 && n%2==1){
+		//	all set up for first match
+		tree[matchNode]=(players[leftChild].compareTo(players[rightChild])<0)?leftChild:rightChild;	// que gane el más chico
+		if(matchNode==n-1 && n%2==1){	// if match will take place in last position of tree
 			matchNode/=2;
 			tree[matchNode]=(players[tree[n-1]].compareTo(players[lowExt+1])<0)?tree[n-1]:lowExt+1;
 		}
-		matchNode/=2;
+		matchNode/=2;	// you continue moving up, from match to match
 		for(; matchNode>=1; matchNode/=2){	
 			tree[matchNode]=players[tree[2*matchNode]].compareTo(players[tree[(2*matchNode)+1]])<0?
 					tree[2*matchNode]:tree[2*matchNode+1];
@@ -91,8 +90,8 @@ public class WinnerTree<Item extends Comparable<Item>> implements TournamentTree
 	}
 	
 	public void change(int thePlayer,Item value){
-		this.players[thePlayer]=value;
-		replay(thePlayer);
+		this.players[thePlayer]=value;	// asignar valor
+		replay(thePlayer);	// acomodar todo
 	}
 	
 	public Item[] sort(Item[] a){
@@ -101,7 +100,7 @@ public class WinnerTree<Item extends Comparable<Item>> implements TournamentTree
 		order[0]=null;
 		for(int i=1;i<players.length;i++){
 			order[i]=this.players[tree[i]];
-			//this.change(tree[1],999999999); secodn argument should be of 'Item' type
+			//this.change(tree[1],999999999); second argument should be of 'Item' type
 		}
 		return order;
 	}
