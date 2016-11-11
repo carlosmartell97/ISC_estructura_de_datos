@@ -12,15 +12,11 @@ public class Database {
 		users.put(newName,user);
 	}
 	
-	public void addInvoice(String name,Integer invoice,String item,Integer price){
-		for(Entry<Integer,String> search: invoices_names.entrySet()){
-			if(invoice.equals(search.getKey())){
-				System.out.println("that invoice already exists, you can try with: "+nextAvailableInvoice(invoice));
-				return;
-			}
-		}
+	public void addInvoice(String name,int invoice,String item,int price){
+		/*if(invoices_names.containsKey(invoice)){
+			throw new IllegalArgumentException("that invoice already exists, you can try with: "+nextAvailableInvoice(invoice));
+		}*/
 		if(users.get(name).invoices.containsKey(invoice)){
-			System.out.println("do");
 			users.get(name).invoices.get(invoice).addArticle(item, price);
 		}else{
 			Invoice a=new Invoice(item,price);
@@ -31,16 +27,20 @@ public class Database {
 	
 	public void AddItem(Integer invoice,String item, Integer price){
 		String name=invoices_names.get(invoice);
-		if (name==null){
-			throw new IllegalArgumentException("that invoice already exists");
+		if (!contains(name)){
+			throw new IllegalArgumentException("that name isn't in your database");
 		}
 		this.addInvoice(name,invoice,item,price);
 	}
 	
 	public void removeInvoice(int invoice){
 		String name=invoices_names.get(invoice);
-		users.get(name).invoices.remove(name);
-		invoices_names.remove(invoice);
+		if(invoices_names.containsKey(invoice)){
+			users.get(name).invoices.remove(name);
+			invoices_names.remove(invoice);
+			return;
+		}
+		throw new IllegalArgumentException("that invoice isn't in your database");
 	}
 	
 	public boolean contains(String name){
@@ -48,29 +48,53 @@ public class Database {
 	}
 	
 	public String getAdress(String name){
-		return users.get(name).address;
+		if(contains(name)){
+			return users.get(name).address;
+		}
+		throw new IllegalArgumentException("that name isn't in your database");
 	}
 	
 	public int getInvoiceTotal(String name,Integer invoice){
-		return users.get(name).invoices.get(invoice).total();
+		if(!invoices_names.containsKey(invoice)){
+			throw new IllegalArgumentException("that invoice doesn't exist, you can try with: "+nextTakenInvoice(invoice));
+		}
+		if(name==invoices_names.get(invoice)){
+			return users.get(name).invoices.get(invoice).total();
+		}
+		throw new IllegalArgumentException("that name doesn't belong to that invoice.");
 	}
 	
 	public int getInvoiceTotal(Integer invoice){
 		String name=invoices_names.get(invoice);
-		return users.get(name).invoices.get(invoice).total();
+		return getInvoiceTotal(name,invoice);
 	}
 	
 	// this method's not returning the actual next available Invoice ID
-	public int nextAvailableInvoice(int invoice){
-		for(Entry<Integer, String> search: invoices_names.entrySet()){
-			invoice++;
-			if(invoice!=search.getKey()){
-				return invoice;
+	private int nextAvailableInvoice(int invoice){
+		System.out.println("n:"+invoice);
+		if(!invoices_names.isEmpty()){
+			while(true){
+				if(!invoices_names.containsKey(invoice)){
+					return invoice;
+				}
+				invoice++;
 			}
 		}
-		
-		return -1;
-		
+		throw new IllegalArgumentException("database is empty");
+	}
+	
+	private int nextTakenInvoice(int invoice){
+		System.out.println("n:"+invoice);
+		if(!invoices_names.isEmpty()){
+			while(true){
+				if(invoices_names.containsKey(invoice)){
+					return invoice;
+				}
+				invoice++;
+			}
+		}
+		System.out.println("you haven't added any elements to the database");
+		return 0;
 	}
 	
 	public static void main(String[] args) {
@@ -80,15 +104,21 @@ public class Database {
 		
 		System.out.println("getAddress: "+database.getAdress("Juan"));
 		System.out.println("contains: "+database.contains("Juan"));
+		//System.out.println("getAddress: "+database.getAdress("Pedro"));
 		System.out.println("contains: "+database.contains("Pedro"));
 		
-		//database.addInvoice("Juan", 0010, "Ketchup", 50);
-		database.addInvoice("Juan", 0010, "Ketchup", 80);
-		database.addInvoice("Juan", 9, "Ketchup", 80);
-		database.addInvoice("Juan", 0011, "Ketchup", 80);
-		System.out.println("total: "+database.getInvoiceTotal("Juan",0010));
-		//database.removeInvoice(0010);
-		System.out.println("total: "+database.getInvoiceTotal(0010));
-		System.out.println(database.nextAvailableInvoice(0010));
+		database.addInvoice("Juan", 9, "Ketchup", 70); System.out.println("added 9");
+		database.addInvoice("Juan", 10, "Ketchup", 80); System.out.println("added 10");
+		database.addInvoice("Juan", 11, "Ketchup", 60); System.out.println("added 11");
+		database.addInvoice("Juan", 11, "Ketchup", 23); System.out.println("added 11");
+
+		database.addInvoice("Juan", 8, "Ketchup", 70); System.out.println("added 8");
+		//database.addInvoice("Juan", 8, "Ketchup", 70); System.out.println("tried adding 8");
+		
+		database.addInvoice("Juan", 12, "Ketchup", 70); System.out.println("added 12");
+		
+		database.removeInvoice(11);
+		//System.out.println("total: "+database.getInvoiceTotal("Johnny",123));
+		//System.out.println("total: "+database.getInvoiceTotal(11));
 	}
 }
