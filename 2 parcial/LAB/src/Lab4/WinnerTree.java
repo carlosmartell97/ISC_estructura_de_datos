@@ -5,27 +5,18 @@ package Lab4;
  * @author dell
  *
  */
-public class WinnerTree {
-	private int players[];
-	private int tree[];
+public class WinnerTree<Item extends Comparable<Item>> implements TournamentTree<Item>{
+	private Item[] players;
+	private int[] tree;
 	private int lowExt;
 	private int offset;
 	
-	public int getWinner(){
-		if(this.tree==null){
-			return 0;
-		}
-		return tree[0];
+	public Item getWinner(){
+		return (this.tree==null)?
+				players[tree[0]] : null;
 	}
 	
-	private void play(int parent, int left, int right){
-		tree[parent] = (players[left]<players[right])?left:right;
-		while(parent%2==1){
-			tree[parent/2] = (players[tree[parent-1]]<players[tree[parent]])?parent-1:parent;
-		}
-	}
-	
-	public void initiate(int[] a){
+	public void initialize(Item[] a){
 		int n=a.length-1;
 		if(n<2){
 			throw new IllegalArgumentException("there should be at least 2 players");
@@ -45,7 +36,7 @@ public class WinnerTree {
 		}
 		//	Fabiola dice: qué caso atiendo aquí?
 		if(n%2==1){	//	Fabiola dice: qué hace aquí?
-			play(n/2,tree[n-1],offset++);
+			play(n/2,tree[n-1],lowExt++);
 			i=lowExt+3;	//	Fabiola dice: para qué hago esto?
 		}
 		else{	//	Fabiola dice: ¿Para qué, y en qué caso hago esto?
@@ -54,6 +45,13 @@ public class WinnerTree {
 		//	Fabiola dice: ¿Qué hace aquí?
 		for(;i<=n;i+=2){
 			play((i-lowExt+n-1)/2,i-1,i);
+		}
+	}
+	
+	public void play(int parent, int left, int right){
+		tree[parent] = (players[left].compareTo(players[right])<0)?left:right;
+		while(parent%2==1){
+			tree[parent/2] = (players[tree[parent-1]].compareTo(players[tree[parent]])<0)?parent-1:parent;
 		}
 	}
 	
@@ -80,27 +78,41 @@ public class WinnerTree {
 				rightChild=leftChild+1;
 			}
 		}
-		tree[matchNode]=(players[leftChild]<players[rightChild])?leftChild:rightChild;
+		tree[matchNode]=(players[leftChild].compareTo(players[rightChild])<0)?leftChild:rightChild;
 		if(matchNode==n-1 && n%2==1){
 			matchNode/=2;
-			tree[matchNode]=(players[tree[n-1]]<players[lowExt+1])?tree[n-1]:lowExt+1;
+			tree[matchNode]=(players[tree[n-1]].compareTo(players[lowExt+1])<0)?tree[n-1]:lowExt+1;
 		}
 		matchNode/=2;
 		for(; matchNode>=1; matchNode/=2){	
-			tree[matchNode]=players[tree[2*matchNode]]<players[tree[(2*matchNode)+1]]?
+			tree[matchNode]=players[tree[2*matchNode]].compareTo(players[tree[(2*matchNode)+1]])<0?
 					tree[2*matchNode]:tree[2*matchNode+1];
 		}
 	}
 	
-	public void change(int thePlayer,int value){
-		//	...
+	public void change(int thePlayer,Item value){
+		this.players[thePlayer]=value;
+		replay(thePlayer);
 	}
 	
-	public void display(){
-		System.out.println("offset:"+this.offset+" lowExt:"+this.lowExt);
-		for(int i=0;i<this.tree.length;i++){
-			System.out.print("["+this.tree[i]+"]");
+	public Item[] sort(Item[] a){
+		this.initialize(a);
+		Item[] order=(Item[]) new Object[players.length];
+		order[0]=null;
+		for(int i=1;i<players.length;i++){
+			order[i]=this.players[tree[i]];
+			//this.change(tree[1],999999999); secodn argument should be of 'Item' type
 		}
+		return order;
+	}
+	
+	public String toString(){
+		System.out.println("Offset: "+this.offset+" LowExt: "+this.lowExt);;
+		String output = "";
+		int n = this.tree.length;
+		for(int i = 1; i < n; i++)
+			output += ("["+this.players[this.tree[i]]+"]");
+		return output;
 	}
 }
 
