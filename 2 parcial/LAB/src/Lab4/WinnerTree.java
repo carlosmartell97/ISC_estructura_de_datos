@@ -106,12 +106,26 @@ public class WinnerTree<Item extends Comparable<Item>> implements TournamentTree
 	}
 	
 	public String toString(){
-		System.out.println("Offset: "+this.offset+" LowExt: "+this.lowExt);;
+		System.out.println("Offset: "+this.offset+" LowExt: "+this.lowExt);
 		String output = "";
 		int n = this.tree.length;
 		for(int i = 1; i < n; i++)
 			output += ("["+this.players[this.tree[i]]+"]");
 		return output;
+	}
+	
+	public static void main(String[] args){
+		WinnerTree<Integer> tree = new WinnerTree();
+		Integer[] a={0,4,6,9,25,10,7,3,2};
+		tree.initialize(a);
+		System.out.println(tree);
+		tree.replay(2);
+		System.out.println(tree);
+		/*int[]b=tree.sort(a);
+		
+		for(int i=0;i<b.length;i++){
+			System.out.println(b[i]);
+		}*/
 	}
 }
 
