@@ -120,11 +120,25 @@ public class AVLTree<Item extends Comparable> {
 		return balance(node);
 	}
 	
-	/*private AVLNode insert(K key,V value){
-		if(key==null){
-			return new AVLNode(K,null,null);
-		}
-	}*/
+	public String preOrder(AVLNode node){
+		if(node == null)
+			return "";
+		String output = node.toString();
+		System.out.print(node.content+",");
+		output += this.preOrder(node.left);
+		output += this.preOrder(node.right);
+		return output;
+	}
+	
+	public String inOrder(AVLNode node){
+		if(node == null)
+			return "";
+		String output = this.inOrder(node.left);
+		output += node.toString();
+		System.out.print(node.content+",");
+		output += this.inOrder(node.right);
+		return output;
+	}
 	
 	private class AVLNode{
 		Item content;
@@ -137,6 +151,19 @@ public class AVLTree<Item extends Comparable> {
 			this.left = this.right = null; 
 			this.height = 1;
 		}
+	}
+	
+	public static void main(String[] args) {
+		AVLTree<Integer> tree = new AVLTree<Integer>();
+		tree.insert(10);
+		tree.insert(1);
+		tree.insert(20);
+		tree.insert(15);
+		tree.insert(17);
+		tree.insert(5);
+		tree.insert(3);
+		System.out.print("pre: ");tree.preOrder(tree.root);System.out.println();
+		System.out.print("in: ");tree.inOrder(tree.root);System.out.println();
 	}
 }
 
