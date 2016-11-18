@@ -17,4 +17,25 @@ public class Grafo {
 		this.vertices.put(nombre,newVertice);
 		return newVertice;
 	}
+	
+	public void addArista(String origen,String destino,double cost){
+		Vertice v=getVertice(origen);
+		Vertice w=getVertice(destino);
+		Arista newArista=new Arista(w, cost);
+		v.adyacentes.add(v.adyacentes.size(),newArista);
+	}
+	
+	public void reiniciaTodos(){
+		for(Vertice v: vertices.values()){
+			v.reinicia();
+		}
+	}
+	
+	public String breadthFirstSearch(String origen){
+		//	...
+	}
+	
+	public String DepthFirstSearch(String origen){
+		//	...
+	}
 }
