@@ -6,7 +6,7 @@ import java.util.List;
 public class Vertice {
 	String nombre;
 	List<Arista> adyacentes;
-	int marcado;	// 0,1 ó 2
+	short marcado;	// 0 (no visitado),1 (ya está en el Queue) ó 2 (ya está en mi recorrido)
 	double distancia;
 	Vertice anterior;
 	
@@ -15,7 +15,7 @@ public class Vertice {
 	}
 	
 	public Vertice(String nombre){
-		adyacentes=new LinkedList();
+		this.adyacentes=new LinkedList();
 		this.nombre=nombre;
 	}
 	
