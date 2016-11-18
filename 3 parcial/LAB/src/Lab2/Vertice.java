@@ -14,12 +14,9 @@ public class Vertice {
 		
 	}
 	
-	public Vertice(String nombre,int marcado,double distancia,Vertice anterior){
+	public Vertice(String nombre){
 		adyacentes=new LinkedList();
 		this.nombre=nombre;
-		this.marcado=marcado;
-		this.distancia=distancia;
-		this.anterior=anterior;
 	}
 	
 	public void reinicia(){
