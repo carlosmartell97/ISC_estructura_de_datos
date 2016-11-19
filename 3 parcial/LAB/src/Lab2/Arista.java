@@ -4,11 +4,11 @@ public class Arista {
 	private Vertice destino;
 	private double costo;
 	
-	private Vertice destino(){
+	public Vertice destino(){
 		return this.destino;
 	}
 	
-	private double costo(){
+	public double costo(){
 		return this.costo;
 	}
 	
