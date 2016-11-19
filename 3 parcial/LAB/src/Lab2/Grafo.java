@@ -1,7 +1,9 @@
 package Lab2;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 
 public class Grafo {
 	Map<String,Vertice> vertices;
@@ -13,7 +15,7 @@ public class Grafo {
 	
 	private Vertice getVertice(String nombre){
 		if(this.vertices.containsKey(nombre)) return this.vertices.get(nombre);
-		Vertice newVertice=new Vertice();
+		Vertice newVertice=new Vertice(nombre);
 		this.vertices.put(nombre,newVertice);
 		return newVertice;
 	}
@@ -32,10 +34,48 @@ public class Grafo {
 	}
 	
 	public String breadthFirstSearch(String origen){
-		//	...
+		String output="";
+		Vertice origin=this.vertices.get(origen);
+		for(Map.Entry<String,Vertice> v: this.vertices.entrySet()){
+			Vertice vertice=v.getValue();
+			vertice.marcado=0;
+			vertice.distancia=this.INFINITO;
+			vertice.anterior=null;
+		}
+		origin.marcado=1;
+		origin.distancia=0;
+		origin.anterior=null;
+		
+		Queue<Vertice> queue=new LinkedList<Vertice>();
+		queue.add(origin);
+		while(!queue.isEmpty()){
+			Vertice u = queue.remove();
+			output+=u.nombre;
+			int size = u.adyacentes.size();
+			for(int i = 0;i < size; i++){
+				Vertice v = u.adyacentes.get(i).destino();
+				if(v.marcado == 0){
+					v.marcado = 1;
+					v.distancia = u.distancia+1;
+					v.anterior = u;
+					queue.add(v);
+				}
+			}
+			u.marcado=2;
+		}
+		return output;
 	}
 	
 	public String DepthFirstSearch(String origen){
+		String output="";
 		//	...
+		Vertice start=this.vertices.get(origen);
+		start.marcado=1;
+		output+=start.nombre;
+		for(Vertice first=start; first!=null; first=first.adyacentes.get(0)){
+			if(start.) DepthFirstSearch(v.getKey());
+		}
+		//	...
+		return output;
 	}
 }
