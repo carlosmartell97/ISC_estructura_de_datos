@@ -68,14 +68,38 @@ public class Grafo {
 	
 	public String DepthFirstSearch(String origen){
 		String output="";
-		//	...
-		Vertice start=this.vertices.get(origen);
-		start.marcado=1;
-		output+=start.nombre;
-		for(Vertice first=start; first!=null; first=first.adyacentes.get(0)){
-			if(start.) DepthFirstSearch(v.getKey());
+		
+		Vertice origin = this.getVertice(origen);
+		for(Map.Entry<String, Vertice> u: this.vertices.entrySet()){
+			Vertice vertice = u.getValue();
+			vertice.marcado = 0;
+			vertice.distancia = this.INFINITO;
+			vertice.anterior = null;
 		}
-		//	...
+		int time = 0;
+		output+=DFSVisit(time,origin);
+		
+		return output;
+	}
+	
+	private String DFSVisit(int time,Vertice u){
+		String output = "";
+		
+		time = time+1;
+		u.distancia = time;
+		u.marcado = 1;
+		int size = u.adyacentes.size();
+		for(int i = 0;i < size; i++){
+			Vertice v = u.adyacentes.get(i).destino();
+			if(v.marcado==0){
+				v.anterior=u;
+				output+=DFSVisit(time,v);
+			}
+		}
+		u.marcado = 2;
+		time = time+1;
+		u.distancia = time;
+		output+=u.nombre;
 		return output;
 	}
 }
