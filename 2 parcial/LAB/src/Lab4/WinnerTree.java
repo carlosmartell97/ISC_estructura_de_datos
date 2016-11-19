@@ -1,5 +1,7 @@
 package Lab4;
 
+import java.util.Arrays;
+
 /**
  * implementation of MIN winner tree
  * @author dell
@@ -134,7 +136,7 @@ public class WinnerTree implements TournamentTree<Integer>{
 			tree.change(tree.winnerIndex(),0x7FFFFFFF); //
 			tree.replay(tree.winnerIndex());
 		}
-		//System.out.println(Arrays.toString(b));
+		System.out.println(Arrays.toString(b));
 	}
 }
 
