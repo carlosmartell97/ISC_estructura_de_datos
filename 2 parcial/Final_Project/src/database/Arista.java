@@ -2,7 +2,7 @@ package database;
 
 public class Arista {
 	private Vertice destino;
-	private double costo;
+	protected double costo;
 	
 	public Vertice destino(){
 		return this.destino;
