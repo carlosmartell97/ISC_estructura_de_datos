@@ -23,9 +23,9 @@ public class Grafo {
 	public void addArista(String origen,String destino,double cost){
 		Vertice v=getVertice(origen);
 		Vertice w=getVertice(destino);
-		Arista newArista=new Arista(w, cost);
-		v.adyacentes.add(v.adyacentes.size(),newArista);
-	}
+		v.adyacentes.add(new Arista(w, cost));
+		v.adyacentes.add(new Arista(v, cost));
+	}	
 	
 	public void reiniciaTodos(){
 		for(Vertice v: vertices.values()){
