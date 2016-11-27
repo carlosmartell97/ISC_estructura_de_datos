@@ -1,6 +1,6 @@
 package package;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vertice {
@@ -15,7 +15,7 @@ public class Vertice {
 	}
 	
 	public Vertice(String nombre){
-		this.adyacentes=new LinkedList();
+		this.adyacentes=new ArrayList<Arista>();
 		this.nombre=nombre;
 	}
 	
