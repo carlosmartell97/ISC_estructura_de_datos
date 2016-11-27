@@ -13,6 +13,7 @@ public class Database {
 	protected static HashMap<Integer,String> invoices_names=new HashMap();
 	protected static HashMap<Integer,ChainLinearList> warehouse=new HashMap();
 	private static int revenue,expenses;
+	protected static Grafo userDifference= new Grafo();
 	
 	public Database(){
 		updateWarehouse(153, "cake", 12, 26);
@@ -23,6 +24,11 @@ public class Database {
 	public void addUser(String newName,String address){
 		User user=new User(address);
 		users.put(newName,user);
+		for(Map.Entry<String, User> user: users.entrySet()){
+			String b=user.getKey()
+			userDifference.addArista(name,b,users.get(name).userExpense-users.get(b))
+		}
+	
 	}
 	
 	public void addInvoice(String name,int invoice,int productCode,int sellingPrice){
@@ -43,6 +49,9 @@ public class Database {
 					invoices_names.put(invoice, name);
 			}
 			this.revenue+=sellingPrice-realPrice;
+			users.get(name).userExpense+=sellingPrice;
+			
+			
 		}
 		else{
 			throw new IllegalArgumentException("that productCode doesn't belong to any product in your product warehouse");
