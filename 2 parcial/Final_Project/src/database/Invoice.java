@@ -8,19 +8,19 @@ public class Invoice {
 	protected int invoiceRevenue;
 	protected HashMap<Integer,AVLTree> articles=new HashMap();
 	
-	public Invoice(String newArticle,Integer newPrice){
+	public Invoice(int newArticle,Integer newPrice){
 		this.addArticle(newArticle,newPrice);
 	}
 	
-	public void addArticle(String article,Integer newPrice){
+	public void addArticle(int productCode,Integer newPrice){
 		total+=newPrice;
-		if(articles.containsKey(article)){
-			articles.get(article).insert(newPrice);
+		if(articles.containsKey(productCode)){
+			articles.get(productCode).insert(newPrice);
 		}
 		else{
 			AVLTree tree=new AVLTree();
 			tree.insert(newPrice);
-			articles.put(article,tree);
+			articles.put(productCode,tree);
 		}
 	}
 	
