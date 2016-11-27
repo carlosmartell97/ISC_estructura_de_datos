@@ -25,8 +25,8 @@ public class Database {
 		User user=new User(address);
 		users.put(newName,user);
 		for(Map.Entry<String, User> user: users.entrySet()){
-			String b=user.getKey()
-			userDifference.addArista(newName,b,users.get(name).userExpense-users.get(b).userExpense)
+			String b=user.getKey();
+			userDifference.addArista(newName,b,users.get(name).userExpense-users.get(b).userExpense);
 		}
 	
 	}
