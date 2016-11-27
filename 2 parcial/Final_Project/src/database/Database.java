@@ -27,7 +27,7 @@ public class Database {
 		if(warehouse.containsKey(productCode)){
 			
 			String productName=(String) warehouse.get(productCode).get(1);
-			//int sellingPrice=(int) warehouse.get(productCode).get(2);
+			int realPrice=(int) warehouse.get(productCode).get(2);
 			
 			if(users.get(name).invoices.containsKey(invoice)){
 				users.get(name).invoices.get(invoice).addArticle(productName, sellingPrice);
@@ -36,7 +36,7 @@ public class Database {
 					users.get(name).invoices.put(invoice, a);
 					invoices_names.put(invoice, name);
 			}
-			this.revenue+=sellingPrice;
+			this.revenue+=sellingPrice-realPrice;
 		}
 		else{
 			throw new IllegalArgumentException("that productCode doesn't belong to any product in your product warehouse");
