@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 public class Invoice {
 	private int total;
+	protected int invoiceRevenue;
 	protected HashMap<String,AVLTree> articles=new HashMap();
 	
 	public Invoice(String newArticle,Integer newPrice){
