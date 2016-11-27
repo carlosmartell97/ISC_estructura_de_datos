@@ -1,6 +1,7 @@
 package database;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class Database {
@@ -65,6 +66,14 @@ public class Database {
 		String name=invoices_names.get(invoice);
 		if(invoices_names.containsKey(invoice)){
 			revenue-=users.get(name).invoices.get(invoice).invoiceRevenue;
+			for(Map.Entry<Integer, AVLTree> article: users.get(name).invoices.get(invoice).articles.entrySet()){
+				int productCode=article.getKey();
+				String productName=(String) warehouse.get(productCode).get(1);
+				int realPrice=(int) warehouse.get(productCode).get(2);
+				int howManyProducts=(int) warehouse.get(productCode).get(3);
+				howManyProducts+=article.getValue().howManyPrices;
+				updateWarehouse(productCode, productName, realPrice, howManyProducts);
+			}
 			users.get(name).invoices.remove(invoice);
 			invoices_names.remove(invoice);
 			return;
