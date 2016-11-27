@@ -7,6 +7,7 @@ public class Database {
 	protected static HashMap<String,User> users=new HashMap();
 	protected static HashMap<Integer,String> invoices_names=new HashMap();
 	protected static HashMap<Integer,ChainLinearList> warehouse=new HashMap();
+	private int revenue,expenses;
 	
 	public Database(){
 		updateWarehouse(153, "cake", 12, 20, 26);
@@ -24,16 +25,18 @@ public class Database {
 			throw new IllegalArgumentException("that invoice already exists, you can try with: "+nextAvailableInvoice(invoice));
 		}*/
 		if(warehouse.containsKey(productCode)){
+			
 			String productName=(String) warehouse.get(productCode).get(1);
-			int sellingPrize=(int) warehouse.get(productCode).get(2);
+			int sellingPrice=(int) warehouse.get(productCode).get(2);
 			
 			if(users.get(name).invoices.containsKey(invoice)){
-				users.get(name).invoices.get(invoice).addArticle(productName, sellingPrize);
+				users.get(name).invoices.get(invoice).addArticle(productName, sellingPrice);
 			}else{
-					Invoice a=new Invoice(productName,sellingPrize);
+					Invoice a=new Invoice(productName,sellingPrice);
 					users.get(name).invoices.put(invoice, a);
 					invoices_names.put(invoice, name);
 			}
+			this.revenue+=sellingPrice;
 		}
 		else{
 			throw new IllegalArgumentException("that productCode doesn't belong to any product in your product warehouse");
@@ -48,11 +51,12 @@ public class Database {
 		this.addInvoice(name,invoice,productCode);
 	}
 	
-	public static void updateWarehouse(Integer productCode,String productName,int sellingPrize,int realPrize,int howManyProducts){
+	public static void updateWarehouse(Integer productCode,String productName,int sellingPrice,int realPrice,int howManyProducts){
 		ChainLinearList list=new ChainLinearList();
-		list.add(0, productCode);list.add(1, productName); list.add(2, sellingPrize);
-		list.add(3, realPrize); list.add(4, howManyProducts);
+		list.add(0, productCode);list.add(1, productName); list.add(2, sellingPrice);
+		list.add(3, realPrice); list.add(4, howManyProducts);
 		warehouse.put(productCode, list);
+		this.expenses+=realPrice*howManyProducts
 	}
 	
 	public void removeInvoice(int invoice){
