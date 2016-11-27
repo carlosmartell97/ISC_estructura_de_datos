@@ -1,5 +1,9 @@
 package database;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,8 +16,8 @@ public class Database {
 	
 	public Database(){
 		updateWarehouse(153, "cake", 12, 26);
-		updateWarehouse(275, "dehodorant", 7, 26);
-		updateWarehouse(641, "cake", 10, 26);
+		updateWarehouse(275, "dehodorant", 7, 20);
+		updateWarehouse(641, "cake", 10, 30);
 	}
 	
 	public void addUser(String newName,String address){
@@ -60,6 +64,14 @@ public class Database {
 		warehouse.put(productCode, list);
 		expenses+=realPrice*howManyProducts;
 		revenue-=realPrice*howManyProducts;
+		try{
+		    BufferedWriter write=new BufferedWriter(new FileWriter("initialWarehouse.txt",true));
+			write.write("Code:"+productCode+"\t"+"Name:"+productName+"\t"+"\t"+"realPrice:"+realPrice+"\t"+"Quantity:"+howManyProducts+"\t");
+			write.newLine();
+			write.close();
+		} catch (IOException e) {
+		   // do something
+		}
 	}
 	
 	public void removeInvoice(int invoice){
@@ -137,6 +149,7 @@ public class Database {
 	
 	public static void main(String[] args) {
 		System.out.println("Welcome! This is how to manage your database:");
+		System.out.println("A file 'initialWarehouse.txt' has been generated with the initial products each Database has :)");
 		System.out.println("Once a Database is instantiated, you can add users with addUser(name,address).");
 		System.out.println("You coud then check if someone is in your databse with contains(name), or get someone's address with getAdress(name).");
 		System.out.println("When someone buys something, you add invoices with addInvoice(customerName,invoiceNumber,productCode).");
