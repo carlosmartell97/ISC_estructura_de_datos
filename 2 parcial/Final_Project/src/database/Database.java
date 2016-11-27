@@ -30,7 +30,8 @@ public class Database {
 			int realPrice=(int) warehouse.get(productCode).get(2);
 			
 			if(users.get(name).invoices.containsKey(invoice)){
-				users.get(name).invoices.get(invoice).addArticle(productName, sellingPrice);
+				users.get(name).invoices.get(invoice).addArticle(productCode, sellingPrice);
+				users.get(name).invoices.get(invoice).invoiceRevenue+=sellingPrice-realPrice;
 			}else{
 					Invoice a=new Invoice(productName,sellingPrice);
 					users.get(name).invoices.put(invoice, a);
@@ -56,13 +57,15 @@ public class Database {
 		list.add(0, productCode); list.add(1, productName); list.add(2, realPrice);
 		list.add(3, howManyProducts);
 		warehouse.put(productCode, list);
-		expenses+=realPrice*howManyProducts;
+		this.expenses+=realPrice*howManyProducts;
+		this.revenue-=realPrice*howManyProducts;
 	}
 	
 	public void removeInvoice(int invoice){
 		String name=invoices_names.get(invoice);
 		if(invoices_names.containsKey(invoice)){
-			users.get(name).invoices.remove(name);
+			this.revenue-users.get(name).invoices.get(invoice).invoiceRevenue;
+			users.get(name).invoices.remove(invoice);
 			invoices_names.remove(invoice);
 			return;
 		}
