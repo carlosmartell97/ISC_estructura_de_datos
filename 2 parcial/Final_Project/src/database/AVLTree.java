@@ -2,6 +2,7 @@ package database;
 
 public class AVLTree{
 	private AVLNode root;
+	protected int howManyPrices;
 	private final int ALLOWED_IMBALANCE = 1;
 	
 	private AVLNode leftRotate(AVLNode node) {
@@ -112,6 +113,7 @@ public class AVLTree{
 	private AVLNode insert(Integer element,AVLNode node){
 		if(node == null)
 			return new AVLNode(element,null,null);
+		this.howManyPrices++;
 		int compareResult = element.compareTo(node.content);
 		if(compareResult == 0)
 			node.prices.add(0, element);
@@ -171,5 +173,3 @@ public class AVLTree{
 		System.out.print("in: ");tree.inOrder(tree.root);System.out.println();
 	}
 }
-
-
