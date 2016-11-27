@@ -9,7 +9,9 @@ public class Database {
 	protected static HashMap<Integer,ChainLinearList> warehouse=new HashMap();
 	
 	public Database(){
-		
+		updateWarehouse(153, "cake", 20, 26);
+		updateWarehouse(153, "cake", 15, 26);
+		updateWarehouse(153, "cake", 17, 26);
 	}
 	
 	public void addUser(String newName,String address){
@@ -17,31 +19,38 @@ public class Database {
 		users.put(newName,user);
 	}
 	
-	public void addInvoice(String name,int invoice,String item,int price){
+	public void addInvoice(String name,int invoice,int productCode){
 		/*if(invoices_names.containsKey(invoice)){
 			throw new IllegalArgumentException("that invoice already exists, you can try with: "+nextAvailableInvoice(invoice));
 		}*/
-		if(users.get(name).invoices.containsKey(invoice)){
-			users.get(name).invoices.get(invoice).addArticle(item, price);
-		}else{
-			Invoice a=new Invoice(item,price);
-			users.get(name).invoices.put(invoice, a);
-			invoices_names.put(invoice, name);
+		if(warehouse.containsKey(productCode)){
+			String productName=(String) warehouse.get(productCode).get(0);
+			int productPrize=(int) warehouse.get(productCode).get(1);
+			if(users.get(name).invoices.containsKey(invoice)){
+				users.get(name).invoices.get(invoice).addArticle(productName, productPrize);
+			}else{
+					Invoice a=new Invoice(productName,productPrize);
+					users.get(name).invoices.put(invoice, a);
+					invoices_names.put(invoice, name);
+			}
+		}
+		else{
+			throw new IllegalArgumentException("that productCode doesn't belong to any product in your product warehouse");
 		}
 	}
 	
-	public void AddItem(Integer invoice,String item, Integer price){
+	public void AddItem(int invoice,int productCode,String item, Integer price){
 		String name=invoices_names.get(invoice);
 		if (!contains(name)){
 			throw new IllegalArgumentException("that name isn't in your database");
 		}
-		this.addInvoice(name,invoice,item,price);
+		this.addInvoice(name,invoice,productCode);
 	}
 	
-	public void updateWarehouse(Integer productCode,String productName,int prize){
+	public static void updateWarehouse(Integer productCode,String productName,int howManyProducts,int prize){
 		ChainLinearList list=new ChainLinearList();
-		list.add(0, productName); list.add(1, prize);
-		this.warehouse.put(productCode, list);
+		list.add(0, productName); list.add(1, prize); list.add(2, howManyProducts);
+		warehouse.put(productCode, list);
 	}
 	
 	public void removeInvoice(int invoice){
@@ -125,15 +134,15 @@ public class Database {
 		//System.out.println("getAddress: "+database.getAdress("Pedro"));
 		System.out.println("contains: "+database.contains("Pedro"));
 		
-		database.addInvoice("Juan", 9, "Ketchup", 70); System.out.println("added 9");
-		database.addInvoice("Juan", 10, "Ketchup", 80); System.out.println("added 10");
-		database.addInvoice("Juan", 11, "Ketchup", 60); System.out.println("added 11");
-		database.addInvoice("Juan", 11, "Ketchup", 23); System.out.println("added 11");
+		database.addInvoice("Juan", 9, 153); System.out.println("added 9");
+		database.addInvoice("Juan", 10, 153); System.out.println("added 10");
+		database.addInvoice("Juan", 11, 153); System.out.println("added 11");
+		database.addInvoice("Juan", 11, 153); System.out.println("added 11");
 
-		database.addInvoice("Juan", 8, "Ketchup", 70); System.out.println("added 8");
+		database.addInvoice("Juan", 8, 153); System.out.println("added 8");
 		//database.addInvoice("Juan", 8, "Ketchup", 70); System.out.println("tried adding 8");
 		
-		database.addInvoice("Juan", 12, "Ketchup", 70); System.out.println("added 12");
+		database.addInvoice("Juan", 12, 153); System.out.println("added 12");
 		
 		database.removeInvoice(11);
 		
