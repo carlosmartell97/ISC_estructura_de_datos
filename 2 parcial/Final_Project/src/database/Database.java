@@ -39,7 +39,7 @@ public class Database {
 		}
 	}
 	
-	public void AddItem(int invoice,int productCode,String item, Integer price){
+	public void AddItem(int invoice,int productCode){
 		String name=invoices_names.get(invoice);
 		if (!contains(name)){
 			throw new IllegalArgumentException("that name isn't in your database");
