@@ -6,6 +6,11 @@ import java.util.Map.Entry;
 public class Database {
 	protected static HashMap<String,User> users=new HashMap();
 	protected static HashMap<Integer,String> invoices_names=new HashMap();
+	protected static HashMap<Integer,ChainLinearList> warehouse=new HashMap();
+	
+	public Database(){
+		
+	}
 	
 	public void addUser(String newName,String address){
 		User user=new User(address);
@@ -31,6 +36,12 @@ public class Database {
 			throw new IllegalArgumentException("that name isn't in your database");
 		}
 		this.addInvoice(name,invoice,item,price);
+	}
+	
+	public void updateWarehouse(Integer productCode,String productName,int prize){
+		ChainLinearList list=new ChainLinearList();
+		list.add(0, productName); list.add(1, prize);
+		this.warehouse.put(productCode, list);
 	}
 	
 	public void removeInvoice(int invoice){
@@ -98,7 +109,14 @@ public class Database {
 	}
 	
 	public static void main(String[] args) {
-		
+		System.out.println("Welcome! This is how to manage your database:");
+		System.out.println("Once a Database is instantiated, you can add users with addUser(name,address).");
+		System.out.println("You coud then check if someone is in your databse with contains(name), or get someone's address with getAdress(name).");
+		System.out.println("When someone buys something, you add invoices with addInvoice(customerName,invoiceNumber,productCode).");
+		System.out.println("If someone buys multiple things, you can just add products to the Invoice you just created with addItem(invoiceNumber,productCode)");
+		System.out.println("If someone wants to cancel their purchase, you use removeInvoice(invoiceNumber).");
+		System.out.println();
+		/////////////////////////////////////
 		Database database=new Database();
 		database.addUser("Juan","Bugambilias");
 		
@@ -118,6 +136,7 @@ public class Database {
 		database.addInvoice("Juan", 12, "Ketchup", 70); System.out.println("added 12");
 		
 		database.removeInvoice(11);
+		
 		//System.out.println("total: "+database.getInvoiceTotal("Johnny",123));
 		//System.out.println("total: "+database.getInvoiceTotal(11));
 	}
