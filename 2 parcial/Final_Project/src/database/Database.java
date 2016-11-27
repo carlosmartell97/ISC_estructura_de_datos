@@ -141,16 +141,18 @@ public class Database {
 		System.out.println("contains: "+database.contains("Pedro"));
 		
 		database.addInvoice("Juan", 9, 153, 62); System.out.println("added 9");
-		database.addInvoice("Juan", 10, 275, 45); System.out.println("added 10");
-		database.addInvoice("Juan", 11, 641, 50); System.out.println("added 11");
-		database.addInvoice("Juan", 11, 641, 42); System.out.println("added 11");
+		//database.addInvoice("Juan", 10, 275, 45); System.out.println("added 10");
+		//database.addInvoice("Juan", 11, 641, 50); System.out.println("added 11");
+		//database.addInvoice("Juan", 11, 641, 42); System.out.println("added 11");
 
-		database.addInvoice("Juan", 8, 153, 41); System.out.println("added 8");
+		//database.addInvoice("Juan", 8, 153, 41); System.out.println("added 8");
 		//database.addInvoice("Juan", 7, 153); System.out.println("tried adding 8");
 		
-		database.addInvoice("Juan", 12, 153, 40); System.out.println("added 12");
+		//database.addInvoice("Juan", 12, 153, 40); System.out.println("added 12");
 		
-		database.removeInvoice(11);
+		//database.removeInvoice(11);
+		System.out.println("expenses "+expenses);
+		System.out.println("revenue "+revenue);
 		
 		//System.out.println("total: "+database.getInvoiceTotal("Johnny",123));
 		//System.out.println("total: "+database.getInvoiceTotal(11));
