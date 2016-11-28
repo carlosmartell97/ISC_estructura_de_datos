@@ -1,7 +1,7 @@
 package database;
 
 public class Arista {
-	private Vertice destino;
+	protected Vertice destino;
 	protected double costo;
 	
 	public Vertice destino(){
