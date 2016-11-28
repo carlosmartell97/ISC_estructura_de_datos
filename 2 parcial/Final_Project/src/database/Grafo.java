@@ -33,6 +33,14 @@ public class Grafo {
 		}
 	}
 	
+	public int getCost(String origin,String destination){
+		for(Arista temp:vertices.get(origin).adyacentes){
+			if(temp.destino.nombre==destination){
+				return temp.costo;
+			}
+		}
+	}
+	
 	public String breadthFirstSearch(String origen){
 		String output="";
 		Vertice origin=this.vertices.get(origen);
