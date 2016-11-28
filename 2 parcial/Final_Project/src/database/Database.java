@@ -182,11 +182,16 @@ public class Database {
 	public static void main(String[] args) {
 		System.out.println("Welcome! This is how to manage your database:");
 		System.out.println("A file 'initialWarehouse.txt' has been generated with the initial products each Database has :)");
+		System.out.println("You had to pay your suppliers for all these products. You can check your expenses with getTotalExpenses()");
 		System.out.println("Once a Database is instantiated, you can add users with addUser(name,address).");
 		System.out.println("You coud then check if someone is in your databse with contains(name), or get someone's address with getAdress(name).");
 		System.out.println("When someone buys something, you add invoices with addInvoice(customerName,invoiceNumber,productCode).");
 		System.out.println("If someone buys multiple things, you can just add products to the Invoice you just created with addItem(invoiceNumber,productCode)");
 		System.out.println("If someone wants to cancel their purchase, you use removeInvoice(invoiceNumber).");
+		System.out.println("At any time, you can see how much someone has spent on your store with getUserTotal(userName)");
+		System.out.println("Or, get the total of just one Invoice with getInvoiceTotal(userName,invoiceNumber)");
+		System.out.println("At any time, you can check how much earnings you have with getTotalEarnings()");
+		System.out.println();
 		System.out.println();
 		/////////////////////////////////////
 		Database database=new Database();
