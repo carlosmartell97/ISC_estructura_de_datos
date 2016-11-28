@@ -137,6 +137,15 @@ public class Database {
 		throw new IllegalArgumentException("that name doesn't belong to that invoice.");
 	}
 	
+	public int getUserDifference(String name1,String name2){
+		updateGraph();
+		int cost=userDifference.getCost(name1, name2);
+		if(cost==-1){
+			throw new IllegalArgumentException("please enter valid user names");
+		}
+		return cost;
+	}
+	
 	public int getInvoiceTotal(Integer invoice){
 		String name=invoices_names.get(invoice);
 		return getInvoiceTotal(name,invoice);
