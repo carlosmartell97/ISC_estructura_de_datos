@@ -44,14 +44,12 @@ public class Database {
 					users.get(name).invoices.put(invoice, a);
 					invoices_names.put(invoice, name);
 			}
-			this.revenue+=sellingPrice-realPrice;
-			users.get(name).userExpense+=sellingPrice;
-			
-			
+			this.revenue+=sellingPrice-realPrice;		
 		}
 		else{
 			throw new IllegalArgumentException("that productCode doesn't belong to any product in your product warehouse");
 		}
+		
 	}
 	
 	public void AddItem(int invoice,int productCode,int sellingPrice){
@@ -62,13 +60,13 @@ public class Database {
 		this.addInvoice(name,invoice,productCode,sellingPrice);
 	}
 	
-	public void getGraph(){
+	public void updateGraph(){
 		userDifference= new Grafo();
 		for(Map.Entry<String, User> userA: users.entrySet()){
 			String a=userA.getKey();
 			for(Map.Entry<String, User> userB: users.entrySet()){
 				String b=userB.getKey();
-				userDifference.addArista(a,b,users.get(a).userExpense-users.get(b).userExpense);
+				userDifference.addArista(a,b,Math.abs(getUserTotal(a)-getUserTotal(b)));
 			}
 		}
 	}
@@ -119,6 +117,14 @@ public class Database {
 			return users.get(name).address;
 		}
 		throw new IllegalArgumentException("that name isn't in your database");
+	}
+	
+	public int getUserTotal(String name){
+		int userTotal=0;
+		for(Map.Entry<Integer, Invoice> invoice: users.get(name).invoices.entrySet()){
+			userTotal+=getInvoiceTotal(name,invoice.getKey());
+		}
+		return userTotal;
 	}
 	
 	public int getInvoiceTotal(String name,Integer invoice){
