@@ -34,11 +34,14 @@ public class Grafo {
 	}
 	
 	public int getCost(String origin,String destination){
-		for(Arista temp:vertices.get(origin).adyacentes){
-			if(temp.destino.nombre==destination){
-				return temp.costo;
+		if(Database.users.containsKey(origin)&&Database.users.containsKey(destination)){
+			for(Arista temp:vertices.get(origin).adyacentes){
+				if(temp.destino.nombre==destination){
+					return (int) temp.costo;
+				}
 			}
 		}
+		return -1;
 	}
 	
 	public String breadthFirstSearch(String origen){
