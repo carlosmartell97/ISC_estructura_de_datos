@@ -13,7 +13,7 @@ public class Database {
 	protected static HashMap<Integer,String> invoices_names=new HashMap();
 	protected static HashMap<Integer,ChainLinearList> warehouse=new HashMap();
 	private static int revenue,expenses;
-	protected static Grafo userDifference= new Grafo();
+	protected static Grafo userDifference;
 	
 	public Database(){
 		updateWarehouse(153, "cake", 12, 26);
@@ -24,11 +24,7 @@ public class Database {
 	public void addUser(String newName,String address){
 		User user=new User(address);
 		users.put(newName,user);
-		for(Map.Entry<String, User> user: users.entrySet()){
-			String b=user.getKey();
-			userDifference.addArista(newName,b,users.get(name).userExpense-users.get(b).userExpense);
-		}
-	
+		
 	}
 	
 	public void addInvoice(String name,int invoice,int productCode,int sellingPrice){
@@ -66,6 +62,17 @@ public class Database {
 		this.addInvoice(name,invoice,productCode,sellingPrice);
 	}
 	
+	public void getGraph(){
+		userDifference= new Grafo();
+		for(Map.Entry<String, User> userA: users.entrySet()){
+			String a=userA.getKey();
+			for(Map.Entry<String, User> userB: users.entrySet()){
+				String b=userB.getKey();
+				userDifference.addArista(a,b,users.get(a).userExpense-users.get(b).userExpense);
+			}
+		}
+	}
+	
 	public static void updateWarehouse(Integer productCode,String productName,int realPrice,int howManyProducts){
 		ChainLinearList list=new ChainLinearList();
 		list.add(0, productCode); list.add(1, productName); list.add(2, realPrice);
@@ -82,6 +89,7 @@ public class Database {
 		   // do something
 		}
 	}
+	
 	
 	public void removeInvoice(int invoice){
 		String name=invoices_names.get(invoice);
