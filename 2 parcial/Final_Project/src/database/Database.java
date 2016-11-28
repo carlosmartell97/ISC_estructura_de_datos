@@ -98,7 +98,7 @@ public class Database {
 				String productName=(String) warehouse.get(productCode).get(1);
 				int realPrice=(int) warehouse.get(productCode).get(2);
 				int howManyProducts=(int) warehouse.get(productCode).get(3);
-				howManyProducts+=article.getValue().howManyPrices;
+				howManyProducts+=article.getValue().size;
 				updateWarehouse(productCode, productName, realPrice, howManyProducts);
 			}
 			users.get(name).invoices.remove(invoice);
