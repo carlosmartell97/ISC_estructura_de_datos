@@ -28,9 +28,10 @@ public class Database {
 	}
 	
 	public void addInvoice(String name,int invoice,int productCode,int sellingPrice){
-		/*if(invoices_names.containsKey(invoice)){
-			throw new IllegalArgumentException("that invoice already exists, you can try with: "+nextAvailableInvoice(invoice));
-		}*/
+			//throw new IllegalArgumentException("that invoice already exists, you can try with: "+nextAvailableInvoice(invoice));
+		if(!users.containsKey(name)){
+			throw new IllegalArgumentException("that name doesn't exist");
+		}
 		if(warehouse.containsKey(productCode)){
 			
 			String productName=(String) warehouse.get(productCode).get(1);
@@ -205,6 +206,7 @@ public class Database {
 		/////////////////////////////////////
 		Database database=new Database();
 		database.addUser("Juan","Bugambilias");
+		database.addUser("Gerardo", "Puebla");
 		
 		System.out.println("getAddress: "+database.getAdress("Juan"));
 		System.out.println("contains: "+database.contains("Juan"));
@@ -212,7 +214,11 @@ public class Database {
 		System.out.println("contains: "+database.contains("Pedro"));
 		
 		database.addInvoice("Juan", 9, 153, 62); System.out.println("added 9");
-		database.addInvoice("Juan", 10, 275, 9); System.out.println("added 10");
+		database.addInvoice("Juan", 13, 275, 10);
+		database.removeInvoice(13);
+		System.out.println(database.getInvoiceTotal(13));
+		database.addInvoice("Gerardo", 10, 275, 9); System.out.println("added 10");
+		System.out.println("difference: "+database.getUserDifference("Juan", "Gerardo"));
 		//database.addInvoice("Juan", 11, 641, 50); System.out.println("added 11");
 		//database.addInvoice("Juan", 11, 641, 42); System.out.println("added 11");
 
@@ -224,7 +230,6 @@ public class Database {
 		//database.removeInvoice(11);
 		System.out.println("expenses: "+database.getTotalExpenses());
 		System.out.println("earnings: "+database.getTotalEarnings());
-		
 		//System.out.println("total: "+database.getInvoiceTotal("Johnny",123));
 		//System.out.println("total: "+database.getInvoiceTotal(11));
 	}
