@@ -28,6 +28,10 @@ public class ChainLinearList<Item extends Comparable> implements Stack<Item>{
 		}
 		return temp.element;
 	}
+	
+	public void changeQuantity(Item value){
+		this.firstNode.next.next.next.element=value;
+	}
 
 	public int indexOf(Item item) {
 		ChainNode<Item> temp = this.firstNode;
