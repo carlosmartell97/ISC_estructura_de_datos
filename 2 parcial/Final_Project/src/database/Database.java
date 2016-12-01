@@ -9,53 +9,55 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Database {
-	protected static HashMap<String,User> users=new HashMap();			//Hash map storing user´s name and object user
-	protected HashMap<Integer,String> invoices_names=new HashMap();			//Hash map with all the invoices and who they belong to
-	protected static HashMap<Integer,ChainLinearList> warehouse=new HashMap();	//Hash map storing the default stock and prices
-	private static int revenue,expenses;						//Attributes to keep track of warehouse 
-	protected Grafo userDifference;							//Graph with user difference realtion
+	protected static HashMap<String,User> users=new HashMap();			//Hash map storing user's name and an User object
+	protected HashMap<Integer,String> invoices_names=new HashMap();			//Hash map with all the invoice numbers and who they belong to
+	protected static HashMap<Integer,ChainLinearList> warehouse=new HashMap();	//Hash map with product codes and ChainLinearList with product information
+	private static int revenue,expenses;						//Attributes to keep track of total revenue and expenses. Expenses=inversion made to buy products in warehouse. Revenue=total earnings after some sells have been made.
+	protected Grafo userDifference;							//Graph with all users. All users are connected, and each link is the difference in expenses between 2 users.
 	
-	//Default constructor intializes our warehouse
+	//Default constructor intializes our warehouse with predefined products
 	public Database(){
-		updateWarehouse(153, "cake", 12, 26);
-		updateWarehouse(275, "dehodorant", 7, 20);
-		updateWarehouse(641, "cake", 10, 30);
+		updateWarehouse(153, "cake", 12, 15);
+		updateWarehouse(275, "dehodorant", 7, 11);
+		updateWarehouse(641, "soda", 10, 12);
+		updateWarehouse(831, "shoe", 22, 41);
+		updateWarehouse(418, "laptop", 200, 5);
+		updateWarehouse(796, "speakers", 50, 6);
+		updateWarehouse(304, "ketchup", 10, 27);
+		updateWarehouse(612, "bread", 14, 11);
+		updateWarehouse(289, "backpack", 26, 29);
+		updateWarehouse(491, "yoghurt", 4, 15);
+		updateWarehouse(189, "milk", 20, 13);
 	}
 	
-	//adds user to user´s Hash map
+	//adds user to user's Hash map
 	public void addUser(String newName,String address){
 		User user=new User(address);
 		users.put(newName,user);
-		
 	}
 	
-	public void addInvoice(String name,int invoice,int productCode,int sellingPrice){
-			//throw new IllegalArgumentException("that invoice already exists, you can try with: "+nextAvailableInvoice(invoice));
+	public void addInvoice(String name,int invoice,int productCode,int sellingPrice){	//products can be sold for any price. Ideally, they would be sold at a higher price than their real price.
 		if(!users.containsKey(name)){
-			throw new IllegalArgumentException("that name doesn't exist"); //if user doesnt exist throws exception
+			throw new IllegalArgumentException("that name doesn't exist"); //if user doesn't exist, throws exception
 		}
 		if(warehouse.containsKey(productCode)){
-			
-			String productName=(String) warehouse.get(productCode).get(1); 
 			int realPrice=(int) warehouse.get(productCode).get(2); //get data from warehouse
-			
 			if(users.get(name).invoices.containsKey(invoice)){
 				users.get(name).invoices.get(invoice).addArticle(productCode, sellingPrice); //adds charge to selected invoice
 				users.get(name).invoices.get(invoice).invoiceRevenue+=sellingPrice-realPrice; //sets revenue for particular invoice
 			}else{
 					Invoice a=new Invoice(productCode,sellingPrice); //create new invoice
-					users.get(name).invoices.put(invoice, a);	 //add invoice to user´s invoice Hash map
+					users.get(name).invoices.put(invoice, a);	 //add invoice to user's invoice Hash map
 					invoices_names.put(invoice, name);		 //add invoice to invoice-user relation
 			}
-			this.revenue+=sellingPrice-realPrice;				 //actualize revenue
+			this.revenue+=sellingPrice-realPrice;		//update revenue
 		}
 		else{
 			throw new IllegalArgumentException("that productCode doesn't belong to any product in your product warehouse");
 		}
-		
 	}
 	
-	//alternate method for adding somthing to an invoice
+	//alternate method for adding products to an invoice
 	public void AddItem(int invoice,int productCode,int sellingPrice){
 		String name=invoices_names.get(invoice);
 		if (!contains(name)){
@@ -64,7 +66,7 @@ public class Database {
 		this.addInvoice(name,invoice,productCode,sellingPrice);
 	}
 	
-	//method that creates graph based on user difference for weights
+	//method that creates graph based on user differences for weights
 	private void updateGraph(){
 		userDifference= new Grafo();
 		for(Map.Entry<String, User> userA: users.entrySet()){
@@ -76,37 +78,40 @@ public class Database {
 		}
 	}
 	
-	
+	// updates the warehouse
 	public static void updateWarehouse(Integer productCode,String productName,int realPrice,int howManyProducts){
 		ChainLinearList list=new ChainLinearList(); 
 		list.add(0, productCode); list.add(1, productName); list.add(2, realPrice); //sets linear list with product information
-		list.add(3, howManyProducts);
+		list.add(3, howManyProducts);	//sets linear list with product information
 		warehouse.put(productCode, list);	//adds item to warehouse
-		expenses+=realPrice*howManyProducts;	//update expenses and revenue from database
-		revenue-=realPrice*howManyProducts;
-		try{	//adds new item to warehouse.txt
+		expenses+=realPrice*howManyProducts;	//update expenses from database
+		revenue-=realPrice*howManyProducts;		//update expenses from database
+		try{	//adds new item to initialWarehouse.txt
 		    BufferedWriter write=new BufferedWriter(new FileWriter("initialWarehouse.txt",true));
 			write.write("Code:"+productCode+"\t"+"Name:"+productName+"\t"+"\t"+"realPrice:"+realPrice+"\t"+"Quantity:"+howManyProducts+"\t");
 			write.newLine();
 			write.close();
 		} catch (IOException e) {
-		   // do something
+		   
 		}
 	}
 	
-	
+	//if some users cancels their purchase and returns the products.
 	public void removeInvoice(int invoice){
-		String name=invoices_names.get(invoice);
+		String name=invoices_names.get(invoice);	// we retrieve the user's name
 		if(invoices_names.containsKey(invoice)){
-			revenue-=users.get(name).invoices.get(invoice).invoiceRevenue;
-			for(Map.Entry<Integer, AVLTree> article: users.get(name).invoices.get(invoice).articles.entrySet()){
+			revenue-=users.get(name).invoices.get(invoice).invoiceRevenue;	// update revenue
+			for(Map.Entry<Integer, AVLTree> article: users.get(name).invoices.get(invoice).articles.entrySet()){	// we go through all products in the invoice
+				//	retrieve information from each product
 				int productCode=article.getKey();
 				String productName=(String) warehouse.get(productCode).get(1);
 				int realPrice=(int) warehouse.get(productCode).get(2);
 				int howManyProducts=(int) warehouse.get(productCode).get(3);
+				//	we add all products user bought back to our warehouse
 				howManyProducts+=article.getValue().size;
 				updateWarehouse(productCode, productName, realPrice, howManyProducts);
 			}
+			//	and finally, invoice is removed
 			users.get(name).invoices.remove(invoice);
 			invoices_names.remove(invoice);
 			return;
@@ -127,7 +132,7 @@ public class Database {
 		throw new IllegalArgumentException("that name isn't in your database");
 	}
 	
-	//method to get user total based on each invoice´s total
+	//method to get user total based on each user's total expenses
 	public int getUserTotal(String name){
 		int userTotal=0;
 		for(Map.Entry<Integer, Invoice> invoice: users.get(name).invoices.entrySet()){
@@ -147,8 +152,9 @@ public class Database {
 		throw new IllegalArgumentException("that name doesn't belong to that invoice.");
 	}
 	
-	//Create graph and get weight of a certain edge
+	//	get weight of a certain edge from the Graph
 	public int getUserDifference(String name1,String name2){
+		//	rebuild graph
 		updateGraph();
 		int cost=userDifference.getCost(name1, name2);
 		if(cost==-1){
