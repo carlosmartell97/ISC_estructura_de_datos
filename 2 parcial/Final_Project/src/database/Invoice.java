@@ -1,7 +1,6 @@
 package database;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 public class Invoice {
 	private int total;
