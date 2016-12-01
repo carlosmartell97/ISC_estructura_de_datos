@@ -4,8 +4,9 @@ import java.util.HashMap;
 
 public class User {
 	protected String address;
-	protected HashMap<Integer,Invoice> invoices=new HashMap();
+	protected HashMap<Integer,Invoice> invoices=new HashMap(); //Hash map that stores invoices belonging to a particular user
 	
+	//constructor, sets user address
 	public User(String address){
 		this.address=address;
 	}
