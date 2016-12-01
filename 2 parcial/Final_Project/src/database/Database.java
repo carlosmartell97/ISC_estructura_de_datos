@@ -37,7 +37,7 @@ public class Database {
 	}
 	
 	public void addInvoice(String name,int invoice,int productCode,int sellingPrice){	//products can be sold for any price. Ideally, they would be sold at a higher price than their real price.
-		if(invoices_names.containsKey(invoice)&&(invoices_names.get(invoice).equals(name))){
+		if(invoices_names.containsKey(invoice)&&!(invoices_names.get(invoice).equals(name))){
 			throw new IllegalArgumentException("that invoice already exists");
 		}
 		if(!users.containsKey(name)){
@@ -59,9 +59,8 @@ public class Database {
 			this.revenue+=sellingPrice-realPrice;		//update revenue
 			
 			//update warehouse to have 1 less product than before
-			int howManyProducts=(int) warehouse.get(productCode).get(3)-1;
-			String productName=(String) warehouse.get(productCode).get(1);
-			updateWarehouse(productCode, productName, realPrice, howManyProducts);
+			int howManyProducts=(int) warehouse.get(productCode).get(3) -1;
+			warehouse.get(productCode).changeQuantity(howManyProducts);
 		}
 		else{
 			throw new IllegalArgumentException("that productCode doesn't belong to any product in your product warehouse");
@@ -120,7 +119,7 @@ public class Database {
 				int howManyProducts=(int) warehouse.get(productCode).get(3);
 				//	we add all products user bought back to our warehouse
 				howManyProducts+=article.getValue().size;
-				updateWarehouse(productCode, productName, realPrice, howManyProducts);
+				warehouse.get(productCode).changeQuantity(howManyProducts);
 			}
 			//	and finally, invoice is removed
 			users.get(name).invoices.remove(invoice);
@@ -205,6 +204,8 @@ public class Database {
 		System.out.println("To start this program all over again, remember to first delete initialWarehouse.txt");
 		System.out.println();
 		/////////////////////////////////////
+		
+		
 		Database database=new Database();
 		database.addUser("Juan","Bugambilias");
 		database.addUser("Gerardo", "Puebla");
@@ -214,8 +215,11 @@ public class Database {
 		//System.out.println("getAddress: "+database.getAdress("Pedro"));
 		System.out.println("contains: "+database.contains("Pedro"));
 		
-		//database.addInvoice("Juan", 9, 153, 62); System.out.println("added 9");
-		//database.addInvoice("Juan", 13, 275, 10);
+		database.addInvoice("Juan", 9, 153, 62); System.out.println("added 9");
+		database.addInvoice("Juan", 13, 275, 10);
+		database.addInvoice("Juan", 13, 275, 8000);
+		
+		database.addInvoice("Juan", 13, 418, 8000);
 		//database.removeInvoice(13);
 		//System.out.println(database.getInvoiceTotal(13));
 		//database.addInvoice("Gerardo", 10, 275, 9); System.out.println("added 10");
