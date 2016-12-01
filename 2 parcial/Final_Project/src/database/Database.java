@@ -37,10 +37,16 @@ public class Database {
 	}
 	
 	public void addInvoice(String name,int invoice,int productCode,int sellingPrice){	//products can be sold for any price. Ideally, they would be sold at a higher price than their real price.
+		if(invoices_names.containsKey(invoice)){
+			throw new IllegalArgumentException("that invoice already exists");
+		}
 		if(!users.containsKey(name)){
 			throw new IllegalArgumentException("that name doesn't exist"); //if user doesn't exist, throws exception
 		}
 		if(warehouse.containsKey(productCode)){
+			if(warehouse.get(invoice).get(3).compareTo(new Integer(0))<=0){	// if that particular has been sold out
+				throw new IllegalArgumentException("that product has been sold out");
+			}
 			int realPrice=(int) warehouse.get(productCode).get(2); //get data from warehouse
 			if(users.get(name).invoices.containsKey(invoice)){
 				users.get(name).invoices.get(invoice).addArticle(productCode, sellingPrice); //adds charge to selected invoice
@@ -48,9 +54,14 @@ public class Database {
 			}else{
 					Invoice a=new Invoice(productCode,sellingPrice); //create new invoice
 					users.get(name).invoices.put(invoice, a);	 //add invoice to user's invoice Hash map
-					invoices_names.put(invoice, name);		 //add invoice to invoice-user relation
+					invoices_names.put(invoice, name);		//add invoice to invoice-user relation
 			}
 			this.revenue+=sellingPrice-realPrice;		//update revenue
+			
+			//update warehouse to have 1 less product than before
+			int howManyProducts=(int) warehouse.get(productCode).get(3)-1;
+			String productName=(String) warehouse.get(productCode).get(1);
+			updateWarehouse(productCode, productName, realPrice, howManyProducts);
 		}
 		else{
 			throw new IllegalArgumentException("that productCode doesn't belong to any product in your product warehouse");
