@@ -37,14 +37,14 @@ public class Database {
 	}
 	
 	public void addInvoice(String name,int invoice,int productCode,int sellingPrice){	//products can be sold for any price. Ideally, they would be sold at a higher price than their real price.
-		if(invoices_names.containsKey(invoice)){
+		if(invoices_names.containsKey(invoice)&&(invoices_names.get(invoice).equals(name))){
 			throw new IllegalArgumentException("that invoice already exists");
 		}
 		if(!users.containsKey(name)){
 			throw new IllegalArgumentException("that name doesn't exist"); //if user doesn't exist, throws exception
 		}
 		if(warehouse.containsKey(productCode)){
-			if(warehouse.get(invoice).get(3).compareTo(new Integer(0))<=0){	// if that particular has been sold out
+			if(warehouse.get(productCode).get(3).compareTo(new Integer(0))<=0){	// if that particular has been sold out
 				throw new IllegalArgumentException("that product has been sold out");
 			}
 			int realPrice=(int) warehouse.get(productCode).get(2); //get data from warehouse
@@ -214,12 +214,12 @@ public class Database {
 		//System.out.println("getAddress: "+database.getAdress("Pedro"));
 		System.out.println("contains: "+database.contains("Pedro"));
 		
-		database.addInvoice("Juan", 9, 153, 62); System.out.println("added 9");
-		database.addInvoice("Juan", 13, 275, 10);
-		database.removeInvoice(13);
-		System.out.println(database.getInvoiceTotal(13));
-		database.addInvoice("Gerardo", 10, 275, 9); System.out.println("added 10");
-		System.out.println("difference: "+database.getUserDifference("Juan", "Gerardo"));
+		//database.addInvoice("Juan", 9, 153, 62); System.out.println("added 9");
+		//database.addInvoice("Juan", 13, 275, 10);
+		//database.removeInvoice(13);
+		//System.out.println(database.getInvoiceTotal(13));
+		//database.addInvoice("Gerardo", 10, 275, 9); System.out.println("added 10");
+		//System.out.println("difference: "+database.getUserDifference("Juan", "Gerardo"));
 		//database.addInvoice("Juan", 11, 641, 50); System.out.println("added 11");
 		//database.addInvoice("Juan", 11, 641, 42); System.out.println("added 11");
 
