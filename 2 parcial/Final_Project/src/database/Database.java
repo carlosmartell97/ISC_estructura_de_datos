@@ -155,7 +155,7 @@ public class Database {
 	//get specific invoice total
 	public int getInvoiceTotal(String name,Integer invoice){
 		if(!invoices_names.containsKey(invoice)){
-			throw new IllegalArgumentException("that invoice doesn't exist, you can try with: "+nextTakenInvoice(invoice));
+			throw new IllegalArgumentException("that invoice doesn't exist");
 		}
 		if(name==invoices_names.get(invoice)){
 			return users.get(name).invoices.get(invoice).total();
@@ -188,34 +188,6 @@ public class Database {
 		return revenue;
 	}
 	
-	// this method's not returning the actual next available Invoice ID
-	private int nextAvailableInvoice(int invoice){
-		System.out.println("n:"+invoice);
-		if(!invoices_names.isEmpty()){
-			while(true){
-				if(!invoices_names.containsKey(invoice)){
-					return invoice;
-				}
-				invoice++;
-			}
-		}
-		throw new IllegalArgumentException("database is empty");
-	}
-	
-	private int nextTakenInvoice(int invoice){
-		System.out.println("n:"+invoice);
-		if(!invoices_names.isEmpty()){
-			while(true){
-				if(invoices_names.containsKey(invoice)){
-					return invoice;
-				}
-				invoice++;
-			}
-		}
-		System.out.println("you haven't added any elements to the database");
-		return 0;
-	}
-	
 	public static void main(String[] args) {
 		System.out.println("Welcome! This is how to manage your database:");
 		System.out.println("A file 'initialWarehouse.txt' has been generated with the initial products each Database has :)");
@@ -223,8 +195,9 @@ public class Database {
 		System.out.println("You had to pay your suppliers for all products in initialWarehouse.txt, you can check your expenses with getTotalExpenses()");
 		System.out.println("You can add users with addUser(name,address)");
 		System.out.println("You coud then check if someone is in your databse with contains(name), or get someone's address with getAdress(name)");
-		System.out.println("When someone buys something, you add invoices with addInvoice(customerName,invoiceNumber,productCode)");
-		System.out.println("If someone buys multiple things, you can just add products to the Invoice you just created with addItem(invoiceNumber,productCode)");
+		System.out.println("When someone buys something, you add invoices with addInvoice(customerName,invoiceNumber,productCode,sellingPrice)");
+		System.out.println("If someone buys multiple things, you can just add products to the Invoice you just created with addItem(invoiceNumber,productCode,sellingPrice)");
+		System.out.println("You can sell products at any price you desire. Ideally, you would want to sell them at a higher price than their real price, to get some revenue.");
 		System.out.println("If someone wants to cancel their purchase, you use removeInvoice(invoiceNumber)");
 		System.out.println("At any time, you can see how much someone has spent on your store with getUserTotal(userName)");
 		System.out.println("Or, get the total of just one Invoice with getInvoiceTotal(userName,invoiceNumber)");

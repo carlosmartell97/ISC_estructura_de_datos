@@ -1,6 +1,6 @@
 package database;
 
-public class ChainLinearList<Item> implements Stack<Item>{
+public class ChainLinearList<Item extends Comparable> implements Stack<Item>{
 	
 	protected ChainNode<Item> firstNode;
 	protected int size;
