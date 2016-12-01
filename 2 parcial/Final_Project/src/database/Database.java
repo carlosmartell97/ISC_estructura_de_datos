@@ -1,12 +1,10 @@
 package database;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class Database {
 	protected static HashMap<String,User> users=new HashMap();			//Hash map storing user's name and an User object
@@ -203,39 +201,23 @@ public class Database {
 		System.out.println("At any time, you can check how much earnings you have with getTotalEarnings()");
 		System.out.println("To start this program all over again, remember to first delete initialWarehouse.txt");
 		System.out.println();
-		/////////////////////////////////////
 		
+		///////////////////////////////////////////////////////////////////////////////////
 		
-		Database database=new Database();
+		// Here's an example of how you could use this program:
+		/*Database database=new Database();
 		database.addUser("Juan","Bugambilias");
 		database.addUser("Gerardo", "Puebla");
-		
-		System.out.println("getAddress: "+database.getAdress("Juan"));
-		System.out.println("contains: "+database.contains("Juan"));
-		//System.out.println("getAddress: "+database.getAdress("Pedro"));
-		System.out.println("contains: "+database.contains("Pedro"));
-		
-		database.addInvoice("Juan", 9, 153, 62); System.out.println("added 9");
+			System.out.println("contains Juan: "+database.contains("Juan"));
+			System.out.println("getAddress Juan: "+database.getAdress("Juan"));
+		database.addInvoice("Juan", 9, 153, 62);
 		database.addInvoice("Juan", 13, 275, 10);
-		database.addInvoice("Juan", 13, 275, 8000);
-		
 		database.addInvoice("Juan", 13, 418, 8000);
-		//database.removeInvoice(13);
-		//System.out.println(database.getInvoiceTotal(13));
-		//database.addInvoice("Gerardo", 10, 275, 9); System.out.println("added 10");
-		//System.out.println("difference: "+database.getUserDifference("Juan", "Gerardo"));
-		//database.addInvoice("Juan", 11, 641, 50); System.out.println("added 11");
-		//database.addInvoice("Juan", 11, 641, 42); System.out.println("added 11");
-
-		//database.addInvoice("Juan", 8, 153, 41); System.out.println("added 8");
-		//database.addInvoice("Juan", 7, 153); System.out.println("tried adding 8");
-		
-		//database.addInvoice("Juan", 12, 153, 40); System.out.println("added 12");
-		
-		//database.removeInvoice(11);
-		System.out.println("expenses: "+database.getTotalExpenses());
-		System.out.println("earnings: "+database.getTotalEarnings());
-		//System.out.println("total: "+database.getInvoiceTotal("Johnny",123));
-		//System.out.println("total: "+database.getInvoiceTotal(11));
+		database.removeInvoice(13);
+			System.out.println("total Juan: "+database.getUserTotal("Juan"));
+		database.addInvoice("Gerardo", 10, 275, 9);
+			System.out.println("difference: "+database.getUserDifference("Juan", "Gerardo"));
+			System.out.println("expenses: "+database.getTotalExpenses());
+			System.out.println("earnings: "+database.getTotalEarnings());*/
 	}
 }
