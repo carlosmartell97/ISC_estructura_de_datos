@@ -187,8 +187,8 @@ public class Database {
 	
 	public static void main(String[] args) {
 		System.out.println("Welcome! This is how to manage your database:");
-		System.out.println("A file 'initialWarehouse.txt' has been generated with the initial products each Database has :)");
 		System.out.println("First, go ahead and instantiate your Database");
+		System.out.println("A file 'initialWarehouse.txt' will be generated with the initial products each Database has :)");
 		System.out.println("You had to pay your suppliers for all products in initialWarehouse.txt, you can check your expenses with getTotalExpenses()");
 		System.out.println("You can add users with addUser(name,address)");
 		System.out.println("You coud then check if someone is in your databse with contains(name), or get someone's address with getAdress(name)");
