@@ -1,3 +1,7 @@
+/**
+ *	Carlos Emmanuel Martell Aviña A01225920
+ *	Jesús Alberto Alvarez Gomez A01039332
+ */
 package database;
 
 import java.io.BufferedWriter;
@@ -194,7 +198,7 @@ public class Database {
 		System.out.println("You coud then check if someone is in your databse with contains(name), or get someone's address with getAdress(name)");
 		System.out.println("When someone buys something, you add invoices with addInvoice(customerName,invoiceNumber,productCode,sellingPrice)");
 		System.out.println("If someone buys multiple things, you can just add products to the Invoice you just created with addItem(invoiceNumber,productCode,sellingPrice)");
-		System.out.println("You can sell products at any price you desire. Ideally, you would want to sell them at a higher price than their real price, to get some revenue.");
+		System.out.println("You can sell products at any price you desire. Ideally, you would want to sell them at a higher price than their real price, to get some revenue");
 		System.out.println("If someone wants to cancel their purchase, you use removeInvoice(invoiceNumber)");
 		System.out.println("At any time, you can see how much someone has spent on your store with getUserTotal(userName)");
 		System.out.println("Or, get the total of just one Invoice with getInvoiceTotal(userName,invoiceNumber)");

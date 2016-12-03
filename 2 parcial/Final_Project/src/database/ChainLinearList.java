@@ -1,3 +1,7 @@
+/**
+ *	Carlos Emmanuel Martell Aviña A01225920
+ *	Jesús Alberto Alvarez Gomez A01039332
+ */
 package database;
 
 public class ChainLinearList<Item extends Comparable> implements Stack<Item>{
